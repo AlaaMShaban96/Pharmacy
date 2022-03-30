@@ -23,3 +23,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('items', App\Http\Controllers\ItemController::class);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+
+Route::resource('stores', App\Http\Controllers\StoreController::class);
+
+
+Route::resource('drugDosages', App\Http\Controllers\DrugDosageController::class);
