@@ -23,3 +23,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
+
+
+Route::resource('companies', App\Http\Controllers\CompanyController::class);
+
+
+Route::resource('drugDosages', App\Http\Controllers\DrugDosageController::class);
+
+
+Route::resource('drugs', App\Http\Controllers\DrugController::class);
