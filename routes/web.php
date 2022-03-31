@@ -33,3 +33,9 @@ Route::resource('stores', App\Http\Controllers\StoreController::class);
 
 
 Route::resource('drugDosages', App\Http\Controllers\DrugDosageController::class);
+
+
+Route::resource('companies', App\Http\Controllers\CompanyController::class);
+
+
+Route::resource('drugs', App\Http\Controllers\DrugController::class);
