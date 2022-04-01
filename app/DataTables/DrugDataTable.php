@@ -38,7 +38,36 @@ class DrugDataTable extends DataTable
      */
     public function query(Drug $model)
     {
-        return $model->newQuery();
+
+        $query=$model->newQuery();
+
+
+        if (request()->filled('atc')) {
+            $query->where('atc',  request('atc'));
+        }
+        if (request()->filled('name')) {
+            $query->where('name', 'like',  '%'.request('name').'%');
+
+        }
+        if (request()->filled('b_g')) {
+            $query->where('b_g', request('b_g'));
+        }
+        if (request()->filled('ingredients')) {
+            $query->where('ingredients', 'like',  '%'.request('ingredients').'%');
+
+        }
+        if (request()->filled('company_id')) {
+            $query->whereHas('company', function($q){
+                $q->where('id',request('company_id'));
+            });
+        }
+        if (request()->filled('drug_dosage_id')) {
+            $query->whereHas('drugDosage', function($q){
+                $q->where('id',  request('drug_dosage_id'));
+            });
+        }
+        return $query
+        ->orderByDesc('id');
     }
 
     /**
@@ -76,6 +105,8 @@ class DrugDataTable extends DataTable
         return [
             'atc',
             'name',
+            'code',
+            'package',
             'b_g',
             'ingredients',
             'drug_dosage.name',

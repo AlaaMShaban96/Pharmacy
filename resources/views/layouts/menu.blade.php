@@ -1,3 +1,9 @@
+<li class="nav-item {{ Request::is('currencies*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('currencies.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Currencies</span>
+    </a>
+</li>
 <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('companies.index') }}">
         <i class="nav-icon icon-cursor"></i>

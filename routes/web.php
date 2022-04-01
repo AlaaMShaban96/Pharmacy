@@ -32,3 +32,6 @@ Route::resource('drugDosages', App\Http\Controllers\DrugDosageController::class)
 
 
 Route::resource('drugs', App\Http\Controllers\DrugController::class);
+
+
+Route::resource('currencies', App\Http\Controllers\CurrencyController::class);

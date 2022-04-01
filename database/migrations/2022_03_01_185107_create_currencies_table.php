@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDrugsTable extends Migration
+class CreateCurrenciesTable extends Migration
 {
 
     /**
@@ -14,17 +14,9 @@ class CreateDrugsTable extends Migration
      */
     public function up()
     {
-        Schema::create('drugs', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id('id');
-            $table->string('atc');
-            $table->string('code')->nullable();
-            $table->string('package')->nullable();;
             $table->string('name');
-            $table->string('b_g');
-            $table->string('ingredients');
-            $table->foreignId('currency_id')->constrained();;
-            $table->foreignId('drug_dosage_id')->constrained();;
-            $table->foreignId('company_id')->constrained();;
             $table->float('price');
             $table->timestamps();
             $table->softDeletes();
@@ -38,6 +30,6 @@ class CreateDrugsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('drugs');
+        Schema::drop('currencies');
     }
 }

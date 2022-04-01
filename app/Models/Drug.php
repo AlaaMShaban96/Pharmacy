@@ -53,12 +53,16 @@ class Drug extends Model
     protected $casts = [
         'atc' => 'string',
         'name' => 'string',
+        'code' => 'string',
+        'package' => 'string',
         'b_g' => 'string',
         'Ingredients' => 'string',
-        'price' => 'float'
+        'price' => 'float',
     ];
 
     /**
+
+
      * Validation rules
      *
      * @var array
@@ -66,6 +70,9 @@ class Drug extends Model
     public static $rules = [
         'atc' => 'required',
         'name' => 'required',
+        'code' => 'required',
+        'package' => 'required',
+
         'b_g' => 'required',
         'ingredients' => 'required',
         'drug_dosage_id' => 'required',

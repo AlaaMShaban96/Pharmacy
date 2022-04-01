@@ -6,21 +6,30 @@ use Flash;
 use Response;
 use App\Http\Requests;
 use App\Models\Company;
+use App\Models\Currency;
 use App\Models\DrugDosage;
 use App\DataTables\DrugDataTable;
 use App\Repositories\DrugRepository;
 use App\Http\Requests\CreateDrugRequest;
 use App\Http\Requests\UpdateDrugRequest;
+use App\Repositories\CurrencyRepository;
+use App\Repositories\DrugDosageRepository;
 use App\Http\Controllers\AppBaseController;
 
 class DrugController extends AppBaseController
 {
     /** @var DrugRepository $drugRepository*/
     private $drugRepository;
-
-    public function __construct(DrugRepository $drugRepo)
+    /** @var DrugDosageRepository $drugDosageRepository*/
+    private $drugDosageRepository;
+    /** @var CurrencyRepository $currencyRepository*/
+    private $currencyRepository;
+    public function __construct(CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
     {
+        $this->currencyRepository = $currencyRepo;
         $this->drugRepository = $drugRepo;
+        $this->drugDosageRepository = $drugDosageRepo;
+
     }
 
     /**
@@ -32,7 +41,10 @@ class DrugController extends AppBaseController
      */
     public function index(DrugDataTable $drugDataTable)
     {
-        return $drugDataTable->render('drugs.index');
+        $companies=$this->drugRepository->all();
+        $drugDosages=$this->drugDosageRepository->all();
+        $currencies=$this->currencyRepository->all();
+        return $drugDataTable->render('drugs.index',compact('companies','drugDosages','currencies'));
     }
 
     /**
@@ -44,7 +56,9 @@ class DrugController extends AppBaseController
     {
         $companies=Company::pluck('name','id');
         $drugDosage=DrugDosage::pluck('name','id');
-        return view('drugs.create',compact('companies','drugDosage'));
+        $currencies=Currency::pluck('name','id');
+
+        return view('drugs.create',compact('companies','drugDosage','currencies'));
     }
 
     /**
