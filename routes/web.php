@@ -33,5 +33,24 @@ Route::resource('drugDosages', App\Http\Controllers\DrugDosageController::class)
 
 Route::resource('drugs', App\Http\Controllers\DrugController::class);
 
+Route::get('currencies/{id}/setDefault',[App\Http\Controllers\CurrencyController::class, 'setDefault'])->name('currencies.setDefault');
 
 Route::resource('currencies', App\Http\Controllers\CurrencyController::class);
+
+
+Route::resource('packages', App\Http\Controllers\PackageController::class);
+
+
+Route::resource('tests', App\Http\Controllers\TestController::class);
+
+
+Route::resource('countries', App\Http\Controllers\CountryController::class);
+
+
+Route::resource('strata', App\Http\Controllers\StratumController::class);
+
+
+Route::resource('routes', App\Http\Controllers\RouteController::class);
+
+
+Route::resource('laboratories', App\Http\Controllers\LaboratoryController::class);

@@ -3,11 +3,19 @@
 namespace App\DataTables;
 
 use App\Models\Drug;
-use Yajra\DataTables\Services\DataTable;
+use App\Models\Currency;
 use Yajra\DataTables\EloquentDataTable;
+use App\Repositories\CurrencyRepository;
+use Yajra\DataTables\Services\DataTable;
 
 class DrugDataTable extends DataTable
 {
+    /** @var CurrencyRepository $currencyRepository*/
+    private $currencyRepository;
+    public function __construct(CurrencyRepository $currencyRepo)
+    {
+        $this->currencyRepository = $currencyRepo;
+    }
     /**
      * Build DataTable class.
      *
@@ -19,15 +27,24 @@ class DrugDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
+        ->editColumn('ingredients', function ($drug) {
+            return $drug->getAbbreviatedIngredientsAttribute();
+        })
+        ->editColumn('package.name', function ($drug) {
+            return $drug->package->name;
+        })
         ->editColumn('drug_dosage.name', function ($drug) {
             return $drug->drugDosage->name;
-            return getLinksColumnByRouteName([$drug->drugDosage], 'drugDosages.edit', 'id', 'name');
+        })
+        ->editColumn('currency.name', function ($drug) {
+            $x=$this->getCurrencyPrice($drug);;
+            return "<a href='#' id='price_list' data-toggle='modal'  data-target='#exampleModalCenter' data-x='$x'>".$drug->currency->name."</a>";
         })
         ->editColumn('company.name', function ($drug) {
             return $drug->company->name;
-            return getLinksColumnByRouteName([$drug->company], 'company.edit', 'id', 'name');
         })
-        ->addColumn('action', 'drugs.datatables_actions');
+        ->addColumn('action', 'drugs.datatables_actions')
+        ->rawColumns(['action', 'ingredients','drug_dosage.name','currency.name','company.name']);;
     }
 
     /**
@@ -45,6 +62,9 @@ class DrugDataTable extends DataTable
         if (request()->filled('atc')) {
             $query->where('atc',  request('atc'));
         }
+        if (request()->filled('code')) {
+            $query->where('code',  request('code'));
+        }
         if (request()->filled('name')) {
             $query->where('name', 'like',  '%'.request('name').'%');
 
@@ -61,13 +81,23 @@ class DrugDataTable extends DataTable
                 $q->where('id',request('company_id'));
             });
         }
+        if (request()->filled('currency_id')) {
+            $query->whereHas('currency', function($q){
+                $q->where('id',request('currency_id'));
+            });
+        }
         if (request()->filled('drug_dosage_id')) {
             $query->whereHas('drugDosage', function($q){
                 $q->where('id',  request('drug_dosage_id'));
             });
         }
+        if (request()->filled('package_id')) {
+            $query->whereHas('package', function($q){
+                $q->where('id',  request('package_id'));
+            });
+        }
         return $query
-        ->orderByDesc('id');
+        ->orderByDesc('id')->with('package','drugDosage','currency','company');
     }
 
     /**
@@ -106,11 +136,12 @@ class DrugDataTable extends DataTable
             'atc',
             'name',
             'code',
-            'package',
+            'package.name',
             'b_g',
             'ingredients',
             'drug_dosage.name',
             'company.name',
+            'currency.name',
             'price'
         ];
     }
@@ -123,5 +154,19 @@ class DrugDataTable extends DataTable
     protected function filename()
     {
         return 'drugs_datatable_' . time();
+    }
+    public function getCurrencyPrice($drug)
+    {
+        $li="";
+        $defaultCurrency=Currency::where('default',1)->first();
+        $currencies=$this->currencyRepository->all();
+       foreach ($currencies as $currency) {
+           if ($currency->name==$drug->currency->name) {
+            $li=$li.'<li class="list-group-item">'.$currency->name.' :'.$drug->price.'</li>';
+           }else {
+            $li=$li.'<li class="list-group-item">'.$currency->name.' :'.(($drug->currency->price * $drug->price)/$currency->price).'</li>';
+           }
+       }
+       return $li;
     }
 }

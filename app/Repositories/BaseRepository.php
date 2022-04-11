@@ -190,4 +190,10 @@ abstract class BaseRepository
 
         return $model->delete();
     }
+    public function pluck($needThis, $needThisToo,$columns = ['*'])
+    {
+        $query = $this->model->newQuery();
+
+        return $query->pluck($needThis, $needThisToo);
+    }
 }

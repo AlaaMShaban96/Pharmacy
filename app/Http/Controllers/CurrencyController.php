@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\CurrencyDataTable;
+use Flash;
+use Response;
 use App\Http\Requests;
+use App\Models\Currency;
+use App\DataTables\CurrencyDataTable;
+use App\Repositories\CurrencyRepository;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateCurrencyRequest;
 use App\Http\Requests\UpdateCurrencyRequest;
-use App\Repositories\CurrencyRepository;
-use Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class CurrencyController extends AppBaseController
 {
@@ -147,6 +148,17 @@ class CurrencyController extends AppBaseController
 
         Flash::success('Currency deleted successfully.');
 
+        return redirect(route('currencies.index'));
+    }
+    public function setDefault($id)
+    {
+        Currency::whereNotIn('id',[$id])->update([
+            'default'=>0,
+        ]);
+        $currency = $this->currencyRepository->find($id);
+        $currency->default=1;
+        $currency->save();
+        Flash::success('Currency set default successfully.');
         return redirect(route('currencies.index'));
     }
 }

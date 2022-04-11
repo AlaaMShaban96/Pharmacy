@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use App\Models\Drug;
 use App\Http\Requests;
 use App\Models\Company;
+use App\Models\Package;
 use App\Models\Currency;
 use App\Models\DrugDosage;
 use App\DataTables\DrugDataTable;
 use App\Repositories\DrugRepository;
+use App\Repositories\RouteRepository;
+use App\DataTables\DrugsViewDatatable;
+use App\Repositories\CompanyRepository;
+use App\Repositories\CountryRepository;
+use App\Repositories\PackageRepository;
+use App\Repositories\StratumRepository;
 use App\Http\Requests\CreateDrugRequest;
 use App\Http\Requests\UpdateDrugRequest;
 use App\Repositories\CurrencyRepository;
 use App\Repositories\DrugDosageRepository;
+use App\Repositories\LaboratoryRepository;
 use App\Http\Controllers\AppBaseController;
 
 class DrugController extends AppBaseController
@@ -24,11 +33,30 @@ class DrugController extends AppBaseController
     private $drugDosageRepository;
     /** @var CurrencyRepository $currencyRepository*/
     private $currencyRepository;
-    public function __construct(CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
+    /** @var PackageRepository $currencyRepository*/
+    private $packageRepository;
+    /** @var StratumRepository $stratumRepository*/
+    private $stratumRepository;
+    /** @var RouteRepository $routeRepository*/
+    private $routeRepository;
+    /** @var CompanyRepository $companyRepository*/
+    private $companyRepository;
+    /** @var CountryRepository $countryRepository*/
+    private $countryRepository;
+/** @var LaboratoryRepository $laboratoryRepository*/
+    private $laboratoryRepository;
+    public function __construct(LaboratoryRepository $laboratoryRepo,CountryRepository $countryRepo,CompanyRepository $companyRepo,RouteRepository $routeRepo,StratumRepository $stratumRepo,PackageRepository $packageRepo,CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
     {
+        $this->laboratoryRepository = $laboratoryRepo;
+        $this->countryRepository = $countryRepo;
+        $this->companyRepository = $companyRepo;
+        $this->routeRepository = $routeRepo;
+        $this->stratumRepository = $stratumRepo;
         $this->currencyRepository = $currencyRepo;
         $this->drugRepository = $drugRepo;
         $this->drugDosageRepository = $drugDosageRepo;
+        $this->packageRepository = $packageRepo;
+
 
     }
 
@@ -44,7 +72,9 @@ class DrugController extends AppBaseController
         $companies=$this->drugRepository->all();
         $drugDosages=$this->drugDosageRepository->all();
         $currencies=$this->currencyRepository->all();
-        return $drugDataTable->render('drugs.index',compact('companies','drugDosages','currencies'));
+        $packages=$this->packageRepository->all();
+
+        return $drugDataTable->render('drugs.index',compact('companies','drugDosages','currencies','packages'));
     }
 
     /**
@@ -54,11 +84,18 @@ class DrugController extends AppBaseController
      */
     public function create()
     {
-        $companies=Company::pluck('name','id');
-        $drugDosage=DrugDosage::pluck('name','id');
-        $currencies=Currency::pluck('name','id');
 
-        return view('drugs.create',compact('companies','drugDosage','currencies'));
+        $companies=$this->companyRepository->pluck('name','id');
+        $drugDosages=$this->drugDosageRepository->pluck('name','id');
+        $currencies=$this->currencyRepository->pluck('name','id');
+        $packages=$this->packageRepository->pluck('name','id');
+        $routes=$this->routeRepository->pluck('name','id');
+        $stratums=$this->stratumRepository->pluck('name','id');
+        $countries=$this->countryRepository->pluck('name','id');
+        $laboratories=$this->laboratoryRepository->pluck('name','id');
+
+
+        return view('drugs.create',compact('companies','drugDosages','currencies','packages','routes','stratums','countries','laboratories'));
     }
 
     /**
@@ -71,7 +108,6 @@ class DrugController extends AppBaseController
     public function store(CreateDrugRequest $request)
     {
         $input = $request->all();
-
         $drug = $this->drugRepository->create($input);
 
         Flash::success('Drug saved successfully.');
@@ -86,15 +122,23 @@ class DrugController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(DrugsViewDatatable $drugDataTable,$id)
     {
         $drug = $this->drugRepository->find($id);
-
+        $companies=$this->companyRepository->pluck('name','id');
+        $drugDosages=$this->drugDosageRepository->pluck('name','id');
+        $currencies=$this->currencyRepository->pluck('name','id');
+        $packages=$this->packageRepository->pluck('name','id');
+        $routes=$this->routeRepository->pluck('name','id');
+        $stratums=$this->stratumRepository->pluck('name','id');
+        $countries=$this->countryRepository->pluck('name','id');
+        $laboratories=$this->laboratoryRepository->pluck('name','id');
         if (empty($drug)) {
             Flash::error('Drug not found');
 
             return redirect(route('drugs.index'));
         }
+        return $drugDataTable->with('drug',$drug)->render('drugs.show',compact('drug','companies','drugDosages','currencies','packages','routes','stratums','countries','laboratories'));
 
         return view('drugs.show')->with('drug', $drug);
     }
@@ -106,9 +150,16 @@ class DrugController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(Drug $drug)
     {
-        $drug = $this->drugRepository->find($id);
+        $companies=$this->companyRepository->pluck('name','id');
+        $drugDosages=$this->drugDosageRepository->pluck('name','id');
+        $currencies=$this->currencyRepository->pluck('name','id');
+        $packages=$this->packageRepository->pluck('name','id');
+        $routes=$this->routeRepository->pluck('name','id');
+        $stratums=$this->stratumRepository->pluck('name','id');
+        $countries=$this->countryRepository->pluck('name','id');
+        $laboratories=$this->laboratoryRepository->pluck('name','id');
 
         if (empty($drug)) {
             Flash::error('Drug not found');
@@ -116,7 +167,7 @@ class DrugController extends AppBaseController
             return redirect(route('drugs.index'));
         }
 
-        return view('drugs.edit')->with('drug', $drug);
+        return view('drugs.edit',compact('drug','companies','drugDosages','currencies','packages','routes','stratums','countries','laboratories'))->with('drug', $drug);
     }
 
     /**

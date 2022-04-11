@@ -28,7 +28,8 @@ class Currency extends Model
 
     public $fillable = [
         'name',
-        'price'
+        'price',
+        'default',
     ];
 
     /**
@@ -38,7 +39,8 @@ class Currency extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'price' => 'float'
+        'price' => 'float',
+        'default'=>'boolean',
     ];
 
     /**

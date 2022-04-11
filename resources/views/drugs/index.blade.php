@@ -12,6 +12,7 @@
         ["name" => "company_id","data-column" => 6, "title" =>"Company",'type'=>'select','collection'=>$companies,'property'=>'name','value'=>request("company_id")],
         ["name" => "drug_dosage_id","data-column" => 6, "title" =>"drug Dosage",'type'=>'select','collection'=>$drugDosages,'property'=>'name','value'=>request('drug_dosage_id')],
         ["name" => "currency_id","data-column" => 6, "title" =>"Currency",'type'=>'select','collection'=>$currencies,'property'=>'name','value'=>request("currency_id")],
+        ["name" => "package_id","data-column" => 6, "title" =>"Package",'type'=>'select','collection'=>$packages,'property'=>'name','value'=>request("package_id")],
 
     ];
 
@@ -76,5 +77,47 @@
              </div>
          </div>
     </div>
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Currency price</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+                <ul class="list-group" id="list-price">
+                  </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
 @endsection
+@push('scripts')
+<script type="text/javascript">
+
+    // $(document).ready(function () {
+        $('#exampleModalCenter').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            console.log(button.data('x'));
+
+            var recipient = button.data('x');// Extract info from data-* attributes
+            // // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            // modal.find('.modal-title').text('New message to ' + recipient)
+            $("#list-price").empty()
+            $("#list-price").append(recipient);
+        })
+// });
+</script>
+@endpush
 

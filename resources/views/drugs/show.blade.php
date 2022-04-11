@@ -20,9 +20,24 @@
                              <div class="card-body">
                                  @include('drugs.show_fields')
                              </div>
+                             <div class="card-body" style="overflow: scroll">
+                                @include('drugs.table')
+
+                            </div>
                          </div>
                      </div>
                  </div>
           </div>
     </div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log('G4545');
+        // $('#drugsviewdatatable-table').dataTable( {
+        //     "scrollX": true
+        // } );
+    } );
+</script>
+@endpush

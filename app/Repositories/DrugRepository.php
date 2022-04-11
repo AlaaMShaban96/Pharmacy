@@ -20,7 +20,7 @@ class DrugRepository extends BaseRepository
         'atc',
         'name',
         'b_g',
-        'Ingredients',
+        'ingredients',
         'drug_dosage',
         'company_id',
         'price'

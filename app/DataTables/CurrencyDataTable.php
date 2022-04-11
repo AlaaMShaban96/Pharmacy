@@ -18,7 +18,16 @@ class CurrencyDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'currencies.datatables_actions');
+        return $dataTable
+        ->editColumn('default', function ($currency) {
+            if ($currency->default) {
+                return 'default Currency';
+            }
+            return "<a href='".route('currencies.setDefault',$currency->id)."'> set default </a>";
+        })
+        ->addColumn('action', 'currencies.datatables_actions')
+        ->rawColumns(['action', 'default']);;
+        ;
     }
 
     /**
@@ -65,7 +74,9 @@ class CurrencyDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name'
+            'name',
+            'price',
+            'default'
         ];
     }
 

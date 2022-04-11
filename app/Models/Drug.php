@@ -2,9 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Route;
 use Eloquent as Model;
 use App\Models\Company;
+use App\Models\Country;
+use App\Models\Package;
+use App\Models\Stratum;
+use App\Models\Currency;
 use App\Models\DrugDosage;
+use App\Models\Laboratory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,9 +45,16 @@ class Drug extends Model
         'atc',
         'name',
         'b_g',
+        'code',
+        'package_id',
         'ingredients',
         'drug_dosage_id',
         'company_id',
+        'strata_id',
+        'route_id',
+        'currency_id',
+        'country_id',
+        'laboratory_id',
         'price'
     ];
 
@@ -54,9 +67,8 @@ class Drug extends Model
         'atc' => 'string',
         'name' => 'string',
         'code' => 'string',
-        'package' => 'string',
         'b_g' => 'string',
-        'Ingredients' => 'string',
+        'ingredients' => 'string',
         'price' => 'float',
     ];
 
@@ -71,14 +83,18 @@ class Drug extends Model
         'atc' => 'required',
         'name' => 'required',
         'code' => 'required',
-        'package' => 'required',
-
+        'package_id' => 'required',
         'b_g' => 'required',
         'ingredients' => 'required',
         'drug_dosage_id' => 'required',
         'company_id' => 'required',
+        'currency_id' => 'required',
         'price' => 'required'
     ];
+    public function getAbbreviatedIngredientsAttribute()
+    {
+        return substr($this->ingredients,0,20).".....";
+    }
     /**
      * Get the company that owns the Drug
      *
@@ -89,6 +105,15 @@ class Drug extends Model
         return $this->belongsTo(Company::class, 'company_id');
     }
     /**
+     * Get the country that owns the Drug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+    /**
      * Get the drugDosage that owns the Drug
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -96,6 +121,51 @@ class Drug extends Model
     public function drugDosage(): BelongsTo
     {
         return $this->belongsTo(DrugDosage::class, 'drug_dosage_id');
+    }
+    /**
+     * Get the Currency that owns the Drug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+    /**
+     * Get the Package that owns the Drug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function package(): BelongsTo
+    {
+        return $this->belongsTo(Package::class, 'package_id');
+    }
+    /**
+     * Get the Package that owns the Drug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function laboratory(): BelongsTo
+    {
+        return $this->belongsTo(Laboratory::class, 'laboratory_id');
+    }
+     /**
+     * Get the Package that owns the Drug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function strata(): BelongsTo
+    {
+        return $this->belongsTo(Stratum::class, 'strata_id');
+    }
+     /**
+     * Get the Package that owns the Drug
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function route(): BelongsTo
+    {
+        return $this->belongsTo(Route::class, 'route_id');
     }
 
 
