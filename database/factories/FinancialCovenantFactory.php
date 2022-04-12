@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\FinancialCovenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class FinancialCovenantFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = FinancialCovenant::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'name' => $this->faker->word,
+        'amount' => $this->faker->word,
+        'user_id' => $this->faker->word,
+        'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }

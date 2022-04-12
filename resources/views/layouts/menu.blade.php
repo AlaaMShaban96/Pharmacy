@@ -4,9 +4,10 @@
         <span>Dashboard</span>
     </a>
 </li>
-    <button class="btn nav-link {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Health Management
-    </button>
+
+<button class="btn nav-link {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Health Management
+</button>
 
   <div class="collapse" id="collapseExample">
     <li class="nav-item {{ Request::is('currencies*') ? 'active' : '' }}">
@@ -65,4 +66,29 @@
     </li>
   </div>
 
+  <button class="btn nav-link {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
+    Pocket money Management
+</button>
 
+  <div class="collapse" id="collapsePocket">
+    <li class="nav-item {{ Request::is('financialCovenants*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('financialCovenants.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Financial Covenants</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('outlays.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Outlays</span>
+        </a>
+    </li>
+  </div>
+
+
+<li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('users.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Users</span>
+    </a>
+</li>

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Outlay;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class OutlayFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Outlay::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,11 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'user_id' => $this->faker->word,
+        'financial_covenant_id' => $this->faker->word,
+        'note' => $this->faker->word,
+        'price' => $this->faker->word,
+        'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }

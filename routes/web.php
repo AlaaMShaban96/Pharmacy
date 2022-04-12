@@ -54,3 +54,12 @@ Route::resource('routes', App\Http\Controllers\RouteController::class);
 
 
 Route::resource('laboratories', App\Http\Controllers\LaboratoryController::class);
+
+
+Route::resource('users', App\Http\Controllers\UserController::class);
+
+
+Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);
+
+
+Route::resource('outlays', App\Http\Controllers\OutlayController::class);
