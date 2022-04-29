@@ -63,3 +63,6 @@ Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantCont
 
 
 Route::resource('outlays', App\Http\Controllers\OutlayController::class);
+
+
+Route::resource('eventSpecialties', App\Http\Controllers\EventSpecialtyController::class);
