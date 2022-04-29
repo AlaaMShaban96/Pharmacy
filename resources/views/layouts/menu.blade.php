@@ -98,3 +98,9 @@
         <span>Event Specialties</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('eventTypes*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('eventTypes.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Event Types</span>
+    </a>
+</li>

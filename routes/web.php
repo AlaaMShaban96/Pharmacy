@@ -66,3 +66,6 @@ Route::resource('outlays', App\Http\Controllers\OutlayController::class);
 
 
 Route::resource('eventSpecialties', App\Http\Controllers\EventSpecialtyController::class);
+
+
+Route::resource('eventTypes', App\Http\Controllers\EventTypeController::class);
