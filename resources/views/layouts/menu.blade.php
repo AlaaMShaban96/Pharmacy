@@ -1,19 +1,22 @@
 
 <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('home') }}">
-        <i class="nav-icon icon-cursor"></i>
+        <i class="nav-icon icon-layers "></i>
         <span>Dashboard</span>
     </a>
 </li>
 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('users.index') }}">
-        <i class="nav-icon icon-cursor"></i>
+        <i class="nav-icon icon-user "></i>
         <span>Users</span>
     </a>
 </li>
-<button class="btn nav-link {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Health Management
-</button>
+<li class="nav-item {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <a class="nav-link" href="#">
+        <i class="nav-icon icon-heart"></i>
+        <span> Health  </span>
+    </a>
+</li>
 
   <div class="collapse {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'show' : ''}}" id="collapseExample">
     <li class="nav-item {{ Request::is('drugs*') ? 'active' : '' }}">
@@ -72,10 +75,12 @@
     </li>
 
   </div>
-
-  <button class="btn nav-link {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
-    Pocket money Management
-</button>
+<li class="nav-item {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
+    <a class="nav-link" href="#">
+        <i class="nav-icon icon-wallet "></i>
+        <span> Pocket money  </span>
+    </a>
+</li>
 
   <div class="collapse {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'show' : ''}}" id="collapsePocket">
     <li class="nav-item {{ Request::is('financialCovenants*') ? 'active' : '' }}">
@@ -94,9 +99,12 @@
 
 
 
-<button class="btn nav-link {{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
-    Event Management
-</button>
+<li class="nav-item{{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
+    <a class="nav-link" href="#">
+        <i class="nav-icon icon-badge  "></i>
+        <span> Events</span>
+    </a>
+</li>
 <div class="collapse {{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
 
     <li class="nav-item {{ Request::is('events*') ? 'active' : '' }}">

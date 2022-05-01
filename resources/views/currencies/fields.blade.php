@@ -9,7 +9,7 @@
           {!! Form::number('price', null, ['class' => 'form-control','step' => '0.1']) !!}
       </div>
 </div>
-
+<br>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

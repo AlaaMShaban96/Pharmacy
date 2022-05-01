@@ -1,12 +1,14 @@
-<div class="col-sm-2">
-    {!! Form::label('Name', 'Name:') !!}
-    {!! Form::input('string', 'name', null, ['class' => 'form-control']) !!}
+<!-- Name Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Name:') !!}
+    {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
-<div class="col-sm-2">
-    {!! Form::label('email', 'email:') !!}
-    {!! Form::input('string', 'email', null, ['class' => 'form-control']) !!}
+<!-- email Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'email:') !!}
+    {!! Form::email('email', null, ['class' => 'form-control']) !!}
 </div>
-<div class="col-sm-4">
+<div class="form-group col-sm-6">
     {!! Form::label('password', 'password:') !!}
     {!! Form::password('password', null, ['class' => 'form-control']) !!}
 </div>
