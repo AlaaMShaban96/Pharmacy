@@ -10,6 +10,7 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DrugsViewDatatable extends DataTable
 {
@@ -153,7 +154,16 @@ class DrugsViewDatatable extends DataTable
             'price'
         ];
     }
-
+    /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
+    }
     /**
      * Get filename for export.
      *

@@ -7,6 +7,7 @@ use App\Models\Currency;
 use Yajra\DataTables\EloquentDataTable;
 use App\Repositories\CurrencyRepository;
 use Yajra\DataTables\Services\DataTable;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DrugDataTable extends DataTable
 {
@@ -161,7 +162,16 @@ class DrugDataTable extends DataTable
             'price'
         ];
     }
-
+    /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
+    }
     /**
      * Get filename for export.
      *

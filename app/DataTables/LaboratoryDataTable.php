@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Laboratory;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class LaboratoryDataTable extends DataTable
 {
@@ -68,7 +69,16 @@ class LaboratoryDataTable extends DataTable
             'name'
         ];
     }
-
+    /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
+    }
     /**
      * Get filename for export.
      *

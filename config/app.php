@@ -233,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

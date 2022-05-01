@@ -134,7 +134,7 @@ return [
 
         'localized' => false,
 
-        'tables_searchable_default' => true,
+        'tables_searchable_default' => false,
 
         'repository_pattern' => true,
 

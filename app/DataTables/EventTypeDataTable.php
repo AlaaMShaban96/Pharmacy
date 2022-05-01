@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\EventType;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class EventTypeDataTable extends DataTable
 {
@@ -56,7 +57,16 @@ class EventTypeDataTable extends DataTable
                 ],
             ]);
     }
-
+    /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
+    }
     /**
      * Get columns.
      *
