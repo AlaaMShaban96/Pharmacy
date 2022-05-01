@@ -2,7 +2,7 @@
 
 @section('content')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">Companies</li>
+        <li class="breadcrumb-item">Event Materials</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -12,13 +12,13 @@
                      <div class="card">
                          <div class="card-header">
                              <i class="fa fa-align-justify"></i>
-                             Companies
-                             <a class="pull-right" href="{{ route('companies.create',['type'=>$type]) }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                             EventMaterials
+                             <a class="pull-right" href="{{ route('eventMaterials.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
                          <div class="card-body">
-                             @include('companies.table')
+                             @include('event_materials.table')
                               <div class="pull-right mr-3">
-
+                                     
                               </div>
                          </div>
                      </div>

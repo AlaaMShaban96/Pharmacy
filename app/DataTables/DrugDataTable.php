@@ -30,21 +30,21 @@ class DrugDataTable extends DataTable
         ->editColumn('ingredients', function ($drug) {
             return $drug->getAbbreviatedIngredientsAttribute();
         })
-        ->editColumn('package.name', function ($drug) {
+        ->editColumn('package_id', function ($drug) {
             return $drug->package->name;
         })
-        ->editColumn('drug_dosage.name', function ($drug) {
+        ->editColumn('drug_dosage_id', function ($drug) {
             return $drug->drugDosage->name;
         })
-        ->editColumn('currency.name', function ($drug) {
+        ->editColumn('currency_id', function ($drug) {
             $x=$this->getCurrencyPrice($drug);;
             return "<a href='#' id='price_list' data-toggle='modal'  data-target='#exampleModalCenter' data-x='$x'>".$drug->currency->name."</a>";
         })
-        ->editColumn('company.name', function ($drug) {
+        ->editColumn('company_id', function ($drug) {
             return $drug->company->name;
         })
         ->addColumn('action', 'drugs.datatables_actions')
-        ->rawColumns(['action', 'ingredients','drug_dosage.name','currency.name','company.name']);;
+        ->rawColumns(['action', 'ingredients','drug_dosage_id','currency_id','company_id']);;
     }
 
     /**
@@ -136,12 +136,28 @@ class DrugDataTable extends DataTable
             'atc',
             'name',
             'code',
-            'package.name',
+            [
+                'data' => 'package_id',
+                'title' => 'package name',
+                'searchable' => false,
+            ],
             'b_g',
             'ingredients',
-            'drug_dosage.name',
-            'company.name',
-            'currency.name',
+            [
+                'data' => 'drug_dosage_id',
+                'title' => 'drug dosage name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'company_id',
+                'title' => 'company name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'currency_id',
+                'title' => 'currency name',
+                'searchable' => false,
+            ],
             'price'
         ];
     }

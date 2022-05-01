@@ -1,15 +1,27 @@
+
 <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('home') }}">
         <i class="nav-icon icon-cursor"></i>
         <span>Dashboard</span>
     </a>
 </li>
-
+<li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('users.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Users</span>
+    </a>
+</li>
 <button class="btn nav-link {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     Health Management
 </button>
 
-  <div class="collapse" id="collapseExample">
+  <div class="collapse {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'show' : ''}}" id="collapseExample">
+    <li class="nav-item {{ Request::is('drugs*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('drugs.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Drugs</span>
+        </a>
+    </li>
     <li class="nav-item {{ Request::is('currencies*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('currencies.index') }}">
             <i class="nav-icon icon-cursor"></i>
@@ -17,7 +29,7 @@
         </a>
     </li>
     <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('companies.index') }}">
+        <a class="nav-link" href="{{ route('companies.index',['type'=>'pharmacy']) }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Companies</span>
         </a>
@@ -58,19 +70,14 @@
             <span>Laboratories</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('drugs*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('drugs.index') }}">
-            <i class="nav-icon icon-cursor"></i>
-            <span>Drugs</span>
-        </a>
-    </li>
+
   </div>
 
   <button class="btn nav-link {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
     Pocket money Management
 </button>
 
-  <div class="collapse" id="collapsePocket">
+  <div class="collapse {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'show' : ''}}" id="collapsePocket">
     <li class="nav-item {{ Request::is('financialCovenants*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('financialCovenants.index') }}">
             <i class="nav-icon icon-cursor"></i>
@@ -86,21 +93,48 @@
   </div>
 
 
-<li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('users.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Users</span>
-    </a>
-</li>
-<li class="nav-item {{ Request::is('eventSpecialties*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('eventSpecialties.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Event Specialties</span>
-    </a>
-</li>
-<li class="nav-item {{ Request::is('eventTypes*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('eventTypes.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Event Types</span>
-    </a>
-</li>
+
+<button class="btn nav-link {{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
+    Event Management
+</button>
+<div class="collapse {{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
+
+    <li class="nav-item {{ Request::is('events*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('events.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Events</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('eventSpecialties*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('eventSpecialties.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Event Specialties</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('eventTypes*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('eventTypes.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Event Types</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('eventLocations*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('eventLocations.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Event Locations</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('companies.index',['type'=>'event']) }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Companies</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('eventMaterials*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('eventMaterials.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Event Materials</span>
+        </a>
+    </li>
+</div>
+
+

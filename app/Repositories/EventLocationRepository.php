@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\Company;
+use App\Models\EventLocation;
 use App\Repositories\BaseRepository;
 
 /**
- * Class CompanyRepository
+ * Class EventLocationRepository
  * @package App\Repositories
  * @version April 29, 2022, 9:00 pm UTC
 */
 
-class CompanyRepository extends BaseRepository
+class EventLocationRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class CompanyRepository extends BaseRepository
      **/
     public function model()
     {
-        return Company::class;
+        return EventLocation::class;
     }
 }

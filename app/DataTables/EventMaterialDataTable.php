@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Company;
+use App\Models\EventMaterial;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class CompanyDataTable extends DataTable
+class EventMaterialDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,18 +18,18 @@ class CompanyDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'companies.datatables_actions');
+        return $dataTable->addColumn('action', 'event_materials.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Company $model
+     * @param \App\Models\EventMaterial $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Company $model)
+    public function query(EventMaterial $model)
     {
-        return $model->newQuery()->where('type',$this->type);
+        return $model->newQuery();
     }
 
     /**
@@ -48,6 +48,7 @@ class CompanyDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
+                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -75,6 +76,6 @@ class CompanyDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'companies_datatable_' . time();
+        return 'event_materials_datatable_' . time();
     }
 }

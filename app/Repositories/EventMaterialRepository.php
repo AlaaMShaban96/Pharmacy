@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\Company;
+use App\Models\EventMaterial;
 use App\Repositories\BaseRepository;
 
 /**
- * Class CompanyRepository
+ * Class EventMaterialRepository
  * @package App\Repositories
- * @version April 29, 2022, 9:00 pm UTC
+ * @version April 30, 2022, 1:41 pm UTC
 */
 
-class CompanyRepository extends BaseRepository
+class EventMaterialRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class CompanyRepository extends BaseRepository
      **/
     public function model()
     {
-        return Company::class;
+        return EventMaterial::class;
     }
 }

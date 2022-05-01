@@ -69,3 +69,14 @@ Route::resource('eventSpecialties', App\Http\Controllers\EventSpecialtyControlle
 
 
 Route::resource('eventTypes', App\Http\Controllers\EventTypeController::class);
+
+
+Route::resource('eventLocations', App\Http\Controllers\EventLocationController::class);
+
+
+Route::resource('eventMaterials', App\Http\Controllers\EventMaterialController::class);
+
+Route::post('addMaterials', [App\Http\Controllers\EventController::class,'addMaterials'])->name('addMaterials');
+Route::post('removeMaterials', [App\Http\Controllers\EventController::class,'removeMaterials'])->name('removeMaterials');
+
+Route::resource('events', App\Http\Controllers\EventController::class);

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\CompanyDataTable;
+use Flash;
+use Response;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\DataTables\CompanyDataTable;
+use App\Repositories\CompanyRepository;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
-use App\Repositories\CompanyRepository;
-use Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class CompanyController extends AppBaseController
 {
     /** @var CompanyRepository $companyRepository*/
     private $companyRepository;
-
     public function __construct(CompanyRepository $companyRepo)
     {
         $this->companyRepository = $companyRepo;
@@ -28,9 +28,10 @@ class CompanyController extends AppBaseController
      *
      * @return Response
      */
-    public function index(CompanyDataTable $companyDataTable)
+    public function index(Request $request,CompanyDataTable $companyDataTable)
     {
-        return $companyDataTable->render('companies.index');
+        $type=$request->type;
+        return $companyDataTable->with('type',$type)->render('companies.index',compact('type'));
     }
 
     /**
@@ -38,9 +39,10 @@ class CompanyController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('companies.create');
+        $type=$request->type;
+        return view('companies.create',compact('type'));
     }
 
     /**
@@ -53,12 +55,11 @@ class CompanyController extends AppBaseController
     public function store(CreateCompanyRequest $request)
     {
         $input = $request->all();
-
         $company = $this->companyRepository->create($input);
 
         Flash::success('Company saved successfully.');
 
-        return redirect(route('companies.index'));
+        return redirect(route('companies.index',['type'=>$input['type']]));
     }
 
     /**
@@ -136,7 +137,7 @@ class CompanyController extends AppBaseController
     public function destroy($id)
     {
         $company = $this->companyRepository->find($id);
-
+        $type=$company->type;
         if (empty($company)) {
             Flash::error('Company not found');
 
@@ -147,6 +148,6 @@ class CompanyController extends AppBaseController
 
         Flash::success('Company deleted successfully.');
 
-        return redirect(route('companies.index'));
+        return redirect(route('companies.index',['type'=>$type]));
     }
 }

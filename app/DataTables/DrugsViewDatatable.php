@@ -27,31 +27,31 @@ class DrugsViewDatatable extends DataTable
         ->editColumn('ingredients', function ($drug) {
             return $drug->getAbbreviatedIngredientsAttribute();
         })
-        ->editColumn('package.name', function ($drug) {
+        ->editColumn('package_id', function ($drug) {
             return $drug->package->name;
         })
-        ->editColumn('drug_dosage.name', function ($drug) {
+        ->editColumn('drug_dosage_id', function ($drug) {
             return $drug->drugDosage->name;
         })
-        ->editColumn('currency.name', function ($drug) {
+        ->editColumn('currency_id', function ($drug) {
             return $drug->currency->name;
         })
-        ->editColumn('company.name', function ($drug) {
+        ->editColumn('company_id', function ($drug) {
             return $drug->company->name;
         })
-        ->editColumn('strata.name', function ($drug) {
+        ->editColumn('strata_id', function ($drug) {
             return $drug->strata->name;
         })
-        ->editColumn('package.name', function ($drug) {
+        ->editColumn('package_id', function ($drug) {
             return $drug->package->name;
         })
-        ->editColumn('route.name', function ($drug) {
+        ->editColumn('route_id', function ($drug) {
             return $drug->route->name;
         })
-        ->editColumn('country.name', function ($drug) {
+        ->editColumn('country_id', function ($drug) {
             return $drug->country->name;
         })
-        ->editColumn('laboratory.name', function ($drug) {
+        ->editColumn('laboratory_id', function ($drug) {
             return $drug->laboratory->name;
         })
             ->addColumn('action', 'drugsviewdatatable.action');
@@ -103,17 +103,53 @@ class DrugsViewDatatable extends DataTable
             'atc',
             'name',
             'code',
-            'package.name',
+            [
+                'data' => 'package_id',
+                'title' => 'package name',
+                'searchable' => false,
+            ],
             'b_g',
             'ingredients',
-            'drug_dosage.name',
-            'company.name',
-            'currency.name',
-            'strata.name',
-            'package.name',
-            'route.name',
-            'country.name',
-            'laboratory.name',
+            [
+                'data' => 'drug_dosage_id',
+                'title' => 'drug dosage name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'company_id',
+                'title' => 'company name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'currency_id',
+                'title' => 'currency name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'strata_id',
+                'title' => 'strata name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'package_id',
+                'title' => 'package name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'route_id',
+                'title' => 'route name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'country_id',
+                'title' => 'country name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'laboratory_id',
+                'title' => 'laboratory name',
+                'searchable' => false,
+            ],
             'price'
         ];
     }

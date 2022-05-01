@@ -196,4 +196,10 @@ abstract class BaseRepository
 
         return $query->pluck($needThis, $needThisToo);
     }
+    public function where($column,$value)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->where($column, $value);
+    }
 }
