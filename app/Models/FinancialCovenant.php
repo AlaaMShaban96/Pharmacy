@@ -59,6 +59,10 @@ class FinancialCovenant extends Model
         'amount' => 'required',
         'user_id' => 'required'
     ];
+    public function getRemainingAttribute()
+    {
+        return ($this->amount-$this->total);
+    }
     /**
      * Get the user that owns the FinancialCovenant
      *

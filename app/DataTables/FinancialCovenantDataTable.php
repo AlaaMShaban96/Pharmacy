@@ -20,9 +20,17 @@ class FinancialCovenantDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-        ->editColumn('user.name', function ($financialCovenant) {
+        ->editColumn('user_id', function ($financialCovenant) {
             return $financialCovenant->user->name;
         })
+        ->editColumn('remaining', function ($financialCovenant) {
+            return $financialCovenant->remaining;
+        })
+        ->orderColumn('remaining', function ($query) {
+
+            $query->orderBy('total', 'desc');
+
+         })
         ->addColumn('action', 'financial_covenants.datatables_actions');
     }
 
@@ -47,7 +55,7 @@ class FinancialCovenantDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->addAction(['width' => '120px', 'printable' => false,"ordering"=> false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,
@@ -72,7 +80,16 @@ class FinancialCovenantDataTable extends DataTable
         return [
             'name',
             'amount',
-            'user.name',
+            [
+                'data' => 'user_id',
+                'title' => 'User Name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'remaining',
+                'title' => 'remaining',
+                'searchable' => false,
+            ],
             'total'
         ];
     }

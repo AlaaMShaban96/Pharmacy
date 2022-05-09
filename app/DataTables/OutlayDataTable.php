@@ -20,8 +20,11 @@ class OutlayDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         return $dataTable
 
-        ->editColumn('financial_covenant.name', function ($outlay) {
+        ->editColumn('financial_covenant_id', function ($outlay) {
             return $outlay->financialCovenant->name;
+        })
+        ->editColumn('user_id', function ($outlay) {
+            return $outlay->user->name;
         })
         ->addColumn('action', 'outlays.datatables_actions');
     }
@@ -70,8 +73,16 @@ class OutlayDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'user_id',
-            'financial_covenant.name',
+            [
+                'data' => 'user_id',
+                'title' => 'User Name',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'financial_covenant_id',
+                'title' => 'financial Name',
+                'searchable' => false,
+            ],
             'note',
             'price'
         ];
