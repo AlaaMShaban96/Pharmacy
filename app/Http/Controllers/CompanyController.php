@@ -124,7 +124,7 @@ class CompanyController extends AppBaseController
 
         Flash::success('Company updated successfully.');
 
-        return redirect(route('companies.index'));
+        return redirect(route('companies.index',['type'=>$company->type]));
     }
 
     /**

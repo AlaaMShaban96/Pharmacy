@@ -65,7 +65,8 @@ class CompanyDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name'
+            'name',
+            'phone_number',
         ];
     }
     /**

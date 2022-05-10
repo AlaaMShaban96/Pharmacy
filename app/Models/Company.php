@@ -27,7 +27,7 @@ class Company extends Model
 
 
     public $fillable = [
-        'name','type'
+        'name','type','phone_number'
     ];
 
     /**
