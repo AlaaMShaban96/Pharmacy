@@ -71,7 +71,6 @@ class DrugDataTable extends DataTable
             $query->orderBy('price', 'desc');
 
          })
-         ->setRowClass('{{ $drug->id % 2 == 0 ? "alert-success" : "alert-warning" }}')
         ->addColumn('action', 'drugs.datatables_actions')
         ->rawColumns(['action', 'ingredients','drug_dosage_id','currency_id','company_id']);;
     }

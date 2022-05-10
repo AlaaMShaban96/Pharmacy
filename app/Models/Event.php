@@ -65,7 +65,9 @@ class Event extends Model
         'medical_representative',
         'event_time',
         'event_cost',
-        'user_id'
+        'user_id',
+        'event_start',
+        'event_close'
     ];
 
     /**

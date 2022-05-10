@@ -32,6 +32,16 @@
         {!! Form::label('event_date', 'Event Date:') !!}
         {!! Form::text('event_date', null, ['class' => 'form-control','id'=>'event_date']) !!}
     </div>
+     <!-- Event Date Field -->
+     <div class="form-group col-sm-6">
+        {!! Form::label('event_start', 'Event Start:') !!}
+        {!! Form::text('event_start', null, ['class' => 'form-control','id'=>'event_start']) !!}
+    </div>
+     <!-- Event Date Field -->
+     <div class="form-group col-sm-6">
+        {!! Form::label('event_close', 'Event Close:') !!}
+        {!! Form::text('event_close', null, ['class' => 'form-control','id'=>'event_close']) !!}
+    </div>
     <!-- Event Date Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('event_time', 'Event Time:') !!}
@@ -112,6 +122,24 @@
         });
         $('#event_time').datetimepicker({
             format: 'HH:mm',
+            useCurrent: true,
+            icons: {
+                up: "icon-arrow-up-circle icons font-2xl",
+                down: "icon-arrow-down-circle icons font-2xl"
+            },
+            sideBySide: true
+        })
+        $('#event_start').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            useCurrent: true,
+            icons: {
+                up: "icon-arrow-up-circle icons font-2xl",
+                down: "icon-arrow-down-circle icons font-2xl"
+            },
+            sideBySide: true
+        })
+        $('#event_close').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
             useCurrent: true,
             icons: {
                 up: "icon-arrow-up-circle icons font-2xl",
