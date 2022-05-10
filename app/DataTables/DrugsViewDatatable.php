@@ -55,6 +55,20 @@ class DrugsViewDatatable extends DataTable
         ->editColumn('laboratory_id', function ($drug) {
             return $drug->laboratory->name;
         })
+        ->addColumn('percentage', function ($drug) {
+            return (($drug->price/$drug->selling_price)*100).'%';
+        })
+        ->orderColumn('percentage', function ($query) {
+
+            $query->orderBy('price', 'desc');
+
+         })
+         ->addColumn('supplier_reg_no', function ($drug) {
+            return $drug->laboratory->regNo;
+        })
+        ->addColumn('supplier_status', function ($drug) {
+            return $drug->laboratory->status;
+        })
             ->addColumn('action', 'drugsviewdatatable.action');
     }
 
@@ -101,57 +115,94 @@ class DrugsViewDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            'atc',
-            'name',
-            'code',
             [
-                'data' => 'package_id',
-                'title' => 'package name',
-                'searchable' => false,
-            ],
-            'b_g',
-            'ingredients',
-            [
-                'data' => 'drug_dosage_id',
-                'title' => 'drug dosage name',
+                'data' => 'atc',
+                'title' => 'U-code',
                 'searchable' => false,
             ],
             [
-                'data' => 'company_id',
-                'title' => 'company name',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'currency_id',
-                'title' => 'currency name',
+                'data' => 'code',
+                'title' => 'S-code',
                 'searchable' => false,
             ],
             [
                 'data' => 'strata_id',
-                'title' => 'strata name',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'package_id',
-                'title' => 'package name',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'route_id',
-                'title' => 'route name',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'country_id',
-                'title' => 'country name',
+                'title' => 'Specialty',
                 'searchable' => false,
             ],
             [
                 'data' => 'laboratory_id',
-                'title' => 'laboratory name',
+                'title' => 'Supplier',
                 'searchable' => false,
             ],
-            'price'
+            [
+                'data' => 'country_id',
+                'title' => 'Country',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'name',
+                'title' => 'Brand name',
+                'searchable' => false,
+            ],
+            'ingredients',
+            [
+                'data' => 'drug_dosage_id',
+                'title' => 'Dosage',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'route_id',
+                'title' => 'Form',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'package_id',
+                'title' => 'Pack size',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'b_g',
+                'title' => 'Shelf life',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'company_id',
+                'title' => 'Agent',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'currency_id',
+                'title' => 'Currency',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'selling_price',
+                'title' => 'Selling price',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'price',
+                'title' => 'Purchase price',
+                'searchable' => false,
+            ],
+
+            [
+                'data' => 'percentage',
+                'title' => 'margin%',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'supplier_status',
+                'title' => 'Supplier status',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'supplier_reg_no',
+                'title' => 'Supplier Reg No',
+                'searchable' => false,
+            ],
+
         ];
     }
     /**

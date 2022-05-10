@@ -27,7 +27,7 @@
     <!-- Event Date Field -->
     <div class="form-group col-4">
         {!! Form::label('event_date', 'Event Date:') !!}
-        <p>{{ $event->event_date? $event->event_date->format('Y-m-d'):"No date" }}</p>
+        <p>{{ $event->event_date }}</p>
     </div>
 
     <!-- Visitors Number Field -->
@@ -75,7 +75,7 @@
     <!-- Event Time Field -->
     <div class="form-group col-4">
         {!! Form::label('event_time', 'Event Time:') !!}
-        <p>{{ $event->event_time?$event->event_time->format('h:m:s'):'No time' }}</p>
+        <p>{{ $event->event_time }}</p>
     </div>
 
     <!-- Event Cost Field -->

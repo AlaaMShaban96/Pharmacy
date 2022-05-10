@@ -9,9 +9,9 @@
     {!! Form::select('type', ['pharmacy'=>'pharmacy', 'event'=>'event'],$type, ['class' => 'form-control']) !!}
 </div>
 <br>
-{{-- {{dd($type)}} --}}
+{{dd($type)}}
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{{ route('companies.index') }}" class="btn btn-secondary">Cancel</a>
+    <a href="{{ route('companies.index',['type'=>$type]) }}" class="btn btn-secondary">Cancel</a>
 </div>

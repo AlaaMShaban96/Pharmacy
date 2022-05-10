@@ -66,7 +66,9 @@ class LaboratoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name'
+            'name',
+            'status',
+            'regNo'
         ];
     }
     /**

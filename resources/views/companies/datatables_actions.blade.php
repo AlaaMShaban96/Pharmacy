@@ -3,7 +3,7 @@
     <a href="{{ route('companies.show', $id) }}" class='btn btn-ghost-success'>
        <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('companies.edit', $id) }}" class='btn btn-ghost-info'>
+    <a href="{{ route('companies.edit', $id,['type'=>$type]) }}" class='btn btn-ghost-info'>
        <i class="fa fa-edit"></i>
     </a>
     {!! Form::button('<i class="fa fa-trash"></i>', [

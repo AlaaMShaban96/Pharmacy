@@ -48,7 +48,7 @@
      <!-- Visitors Number Field -->
      <div class="form-group col-sm-6">
         {!! Form::label('event_cost', 'Event cost:') !!}
-        {!! Form::number('event_cost', null, ['class' => 'form-control','step' => '0.123']) !!}
+        {!! Form::number('event_cost', null, ['class' => 'form-control']) !!}
     </div>
     <!-- Event Food Location Field -->
     <div class="form-group col-sm-6">

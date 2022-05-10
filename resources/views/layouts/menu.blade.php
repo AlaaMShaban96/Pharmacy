@@ -34,13 +34,13 @@
     <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('companies.index',['type'=>'pharmacy']) }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Companies</span>
+            <span>Agents</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('drugDosages*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('drugDosages.index') }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Drug Dosages</span>
+            <span>Dosages</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('packages*') ? 'active' : '' }}">
@@ -58,19 +58,19 @@
     <li class="nav-item {{ Request::is('strata*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('strata.index') }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Strata</span>
+            <span>Specialty</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('routes*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('routes.index') }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Routes</span>
+            <span>Forms</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('laboratories*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('laboratories.index') }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Laboratories</span>
+            <span>Suppliers</span>
         </a>
     </li>
 

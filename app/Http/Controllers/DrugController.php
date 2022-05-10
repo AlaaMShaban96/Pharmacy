@@ -45,7 +45,8 @@ class DrugController extends AppBaseController
     private $countryRepository;
 /** @var LaboratoryRepository $laboratoryRepository*/
     private $laboratoryRepository;
-    public function __construct(LaboratoryRepository $laboratoryRepo,CountryRepository $countryRepo,CompanyRepository $companyRepo,RouteRepository $routeRepo,StratumRepository $stratumRepo,PackageRepository $packageRepo,CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
+
+    public function __construct( LaboratoryRepository $laboratoryRepo,CountryRepository $countryRepo,CompanyRepository $companyRepo,RouteRepository $routeRepo,StratumRepository $stratumRepo,PackageRepository $packageRepo,CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
     {
         $this->laboratoryRepository = $laboratoryRepo;
         $this->countryRepository = $countryRepo;
@@ -73,8 +74,8 @@ class DrugController extends AppBaseController
         $drugDosages=$this->drugDosageRepository->all();
         $currencies=$this->currencyRepository->all();
         $packages=$this->packageRepository->all();
-
-        return $drugDataTable->render('drugs.index',compact('companies','drugDosages','currencies','packages'));
+        $laboratories=$this->laboratoryRepository->all();
+        return $drugDataTable->render('drugs.index',compact('laboratories','companies','drugDosages','currencies','packages'));
     }
 
     /**

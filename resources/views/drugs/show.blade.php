@@ -20,6 +20,7 @@
                              <div class="card-body">
                                  @include('drugs.show_fields')
                              </div>
+                             <h3>Drugs With Same Ingredients</h3>
                              <div class="card-body" style="overflow: scroll">
                                 @include('drugs.table')
 

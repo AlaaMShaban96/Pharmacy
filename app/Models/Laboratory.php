@@ -20,14 +20,16 @@ class Laboratory extends Model
     use HasFactory;
 
     public $table = 'laboratories';
-    
+
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        'name'
+        'name',
+        'status',
+        'regNo'
     ];
 
     /**
@@ -48,5 +50,5 @@ class Laboratory extends Model
         'name' => 'required'
     ];
 
-    
+
 }

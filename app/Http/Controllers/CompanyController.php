@@ -89,17 +89,17 @@ class CompanyController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         $company = $this->companyRepository->find($id);
-
+        $type=$request->type;
         if (empty($company)) {
             Flash::error('Company not found');
 
             return redirect(route('companies.index'));
         }
 
-        return view('companies.edit')->with('company', $company);
+        return view('companies.edit')->with('type',$type)->with('company', $company);
     }
 
     /**

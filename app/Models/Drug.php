@@ -55,7 +55,8 @@ class Drug extends Model
         'currency_id',
         'country_id',
         'laboratory_id',
-        'price'
+        'price',
+        'selling_price'
     ];
 
     /**
@@ -70,6 +71,8 @@ class Drug extends Model
         'b_g' => 'string',
         'ingredients' => 'string',
         'price' => 'float',
+        'selling_price' => 'float',
+
     ];
 
     /**
@@ -89,8 +92,14 @@ class Drug extends Model
         'drug_dosage_id' => 'required',
         'company_id' => 'required',
         'currency_id' => 'required',
-        'price' => 'required'
+        'price' => 'required',
+        'selling_price' => 'required'
+
     ];
+    public function getPercentageAttribute()
+    {
+        return (($this->salling_price-$this->price)*100);
+    }
     public function getAbbreviatedIngredientsAttribute()
     {
         return substr($this->ingredients,0,20).".....";

@@ -29,7 +29,7 @@ class DrugDataTable extends DataTable
 
         return $dataTable
         ->editColumn('ingredients', function ($drug) {
-            return $drug->getAbbreviatedIngredientsAttribute();
+            return $drug->ingredients;
         })
         ->editColumn('package_id', function ($drug) {
             return $drug->package->name;
@@ -44,6 +44,34 @@ class DrugDataTable extends DataTable
         ->editColumn('company_id', function ($drug) {
             return $drug->company->name;
         })
+        ->editColumn('laboratory_id', function ($drug) {
+            return $drug->laboratory->name;
+        })
+        ->addColumn('supplier_reg_no', function ($drug) {
+            return $drug->laboratory->regNo;
+        })
+
+        ->editColumn('country_id', function ($drug) {
+            return $drug->country->name;
+        })
+        ->addColumn('supplier_status', function ($drug) {
+            return $drug->laboratory->status;
+        })
+        ->editColumn('route_id', function ($drug) {
+            return $drug->route->name;
+        })
+        ->addColumn('percentage', function ($drug) {
+            return ((($drug->price*$drug->currency->price)/$drug->selling_price)*100).'%';
+        })
+        ->addColumn('purchase_ly', function ($drug) {
+            return $drug->price*$drug->currency->price;
+        })
+        ->orderColumn('percentage', function ($query) {
+
+            $query->orderBy('price', 'desc');
+
+         })
+         ->setRowClass('{{ $drug->id % 2 == 0 ? "alert-success" : "alert-warning" }}')
         ->addColumn('action', 'drugs.datatables_actions')
         ->rawColumns(['action', 'ingredients','drug_dosage_id','currency_id','company_id']);;
     }
@@ -97,6 +125,16 @@ class DrugDataTable extends DataTable
                 $q->where('id',  request('package_id'));
             });
         }
+        if (request()->filled('laboratory_id')) {
+            $query->whereHas('laboratory', function($q){
+                $q->where('id',  request('laboratory_id'));
+            });
+        }
+        if (request()->filled('route_id')) {
+            $query->whereHas('route', function($q){
+                $q->where('id',  request('route_id'));
+            });
+        }
         return $query
         ->orderByDesc('id')->with('package','drugDosage','currency','company');
     }
@@ -134,32 +172,100 @@ class DrugDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'atc',
-            'name',
-            'code',
             [
-                'data' => 'package_id',
-                'title' => 'package name',
+                'data' => 'atc',
+                'title' => 'U-code',
                 'searchable' => false,
             ],
-            'b_g',
+            [
+                'data' => 'code',
+                'title' => 'S-code',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'strata_id',
+                'title' => 'Specialty',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'laboratory_id',
+                'title' => 'Supplier',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'country_id',
+                'title' => 'Country',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'name',
+                'title' => 'Brand name',
+                'searchable' => false,
+            ],
             'ingredients',
             [
                 'data' => 'drug_dosage_id',
-                'title' => 'drug dosage name',
+                'title' => 'Dosage',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'route_id',
+                'title' => 'Form',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'package_id',
+                'title' => 'Pack size',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'b_g',
+                'title' => 'Shelf life',
                 'searchable' => false,
             ],
             [
                 'data' => 'company_id',
-                'title' => 'company name',
+                'title' => 'Agent',
                 'searchable' => false,
             ],
             [
                 'data' => 'currency_id',
-                'title' => 'currency name',
+                'title' => 'Currency',
                 'searchable' => false,
             ],
-            'price'
+            [
+                'data' => 'price',
+                'title' => 'Purchase price INC',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'purchase_ly',
+                'title' => 'Purchase LY',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'selling_price',
+                'title' => 'Selling price LY',
+                'searchable' => false,
+            ],
+
+
+            [
+                'data' => 'percentage',
+                'title' => 'margin%',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'supplier_status',
+                'title' => 'Supplier status',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'supplier_reg_no',
+                'title' => 'Supplier Reg No',
+                'searchable' => false,
+            ],
+
         ];
     }
     /**
