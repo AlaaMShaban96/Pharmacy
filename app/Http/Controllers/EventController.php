@@ -202,7 +202,10 @@ class EventController extends AppBaseController
                 $material = $this->eventMaterialRepository->find($request->material_id);
 
                 if ($event->materials()->where('event_material_id',$request->material_id)->exists()) {
+                    $data=$event->materials()->where('event_material_id',$request->material_id)->first();
                     $event->materials()->updateExistingPivot($request->material_id,['count'=>$request->count]);
+                    $material->count=$material->count+$data->pivot->count;
+                    $material->save();
                 } else {
                     $event->materials()->attach($request->material_id,['count'=>$request->count]);
 
