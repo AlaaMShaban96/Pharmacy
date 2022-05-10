@@ -286,7 +286,7 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 @push('scripts')
 <script type="text/javascript">
         var add_materials_url=@json(route('addMaterials'));

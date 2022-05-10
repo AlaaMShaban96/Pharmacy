@@ -199,12 +199,16 @@ class EventController extends AppBaseController
         try {
             DB::beginTransaction();
                 $event = $this->eventRepository->find($request->event_id);
+                $material = $this->eventMaterialRepository->find($request->material_id);
+
                 if ($event->materials()->where('event_material_id',$request->material_id)->exists()) {
                     $event->materials()->updateExistingPivot($request->material_id,['count'=>$request->count]);
-
                 } else {
                     $event->materials()->attach($request->material_id,['count'=>$request->count]);
+
                 }
+                $material->count=$material->count-$request->count;
+                $material->save();
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
@@ -218,6 +222,10 @@ class EventController extends AppBaseController
         try {
             DB::beginTransaction();
                 $event = $this->eventRepository->find($request->event_id);
+                $data=$event->materials()->where('event_material_id',$request->material_id)->first();
+                $material = $this->eventMaterialRepository->find($request->material_id);
+                $material->count+=$data->pivot->count;
+                $material->save();
                 $event->materials()->detach($request->material_id);
             DB::commit();
         } catch (\Throwable $th) {

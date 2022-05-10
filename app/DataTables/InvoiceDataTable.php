@@ -2,12 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\EventMaterial;
+use App\Models\Invoice;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
-use Barryvdh\DomPDF\Facade as PDF;
 
-class EventMaterialDataTable extends DataTable
+class InvoiceDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,16 +18,16 @@ class EventMaterialDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'event_materials.datatables_actions');
+        return $dataTable->addColumn('action', 'invoices.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\EventMaterial $model
+     * @param \App\Models\Invoice $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(EventMaterial $model)
+    public function query(Invoice $model)
     {
         return $model->newQuery();
     }
@@ -66,21 +65,13 @@ class EventMaterialDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
+            'company_id',
+            'currency_id',
             'price',
-            'count'
+            'user_id'
         ];
     }
-    /**
-     * Export PDF using DOMPDF
-     * @return mixed
-     */
-    public function pdf()
-    {
-        $data = $this->getDataForPrint();
-        $pdf = PDF::loadView($this->printPreview, compact('data'));
-        return $pdf->download($this->filename() . '.pdf');
-    }
+
     /**
      * Get filename for export.
      *
@@ -88,6 +79,6 @@ class EventMaterialDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'event_materials_datatable_' . time();
+        return 'invoices_datatable_' . time();
     }
 }

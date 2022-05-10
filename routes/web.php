@@ -73,6 +73,8 @@ Route::resource('eventTypes', App\Http\Controllers\EventTypeController::class);
 
 Route::resource('eventLocations', App\Http\Controllers\EventLocationController::class);
 
+Route::post('addInvoice', [App\Http\Controllers\EventMaterialController::class,'addInvoices'])->name('addInvoice');
+Route::post('removeInvoice', [App\Http\Controllers\EventMaterialController::class,'removeInvoices'])->name('removeInvoice');
 
 Route::resource('eventMaterials', App\Http\Controllers\EventMaterialController::class);
 
@@ -85,3 +87,5 @@ Route::post('addSpeakers', [App\Http\Controllers\EventController::class,'addSpea
 Route::post('removeSpeakers', [App\Http\Controllers\EventController::class,'removeSpeakers'])->name('removeSpeakers');
 
 Route::resource('speakers', App\Http\Controllers\SpeakerController::class);
+
+Route::resource('invoices', App\Http\Controllers\InvoiceController::class);

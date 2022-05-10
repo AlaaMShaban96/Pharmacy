@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -20,14 +21,16 @@ class EventMaterial extends Model
     use HasFactory;
 
     public $table = 'event_materials';
-    
+
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        'name'
+        'name',
+        'count',
+        'price'
     ];
 
     /**
@@ -47,6 +50,15 @@ class EventMaterial extends Model
     public static $rules = [
         'name' => 'required'
     ];
+    /**
+     * Get all of the Invoices for the EventMaterial
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'event_material_id',);
+    }
 
-    
+
 }

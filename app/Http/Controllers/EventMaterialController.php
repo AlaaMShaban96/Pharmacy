@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\EventMaterialDataTable;
+use Flash;
+use Response;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\CompanyRepository;
+use App\Repositories\InvoiceRepository;
+use Illuminate\Http\Request;
+use App\Repositories\CurrencyRepository;
+use App\DataTables\EventMaterialDataTable;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\EventMaterialRepository;
 use App\Http\Requests\CreateEventMaterialRequest;
 use App\Http\Requests\UpdateEventMaterialRequest;
-use App\Repositories\EventMaterialRepository;
-use Flash;
-use App\Http\Controllers\AppBaseController;
-use Response;
 
 class EventMaterialController extends AppBaseController
 {
     /** @var EventMaterialRepository $eventMaterialRepository*/
     private $eventMaterialRepository;
-
-    public function __construct(EventMaterialRepository $eventMaterialRepo)
+    /** @var InvoiceRepository $invoiceRepository*/
+    private $invoiceRepository;
+    /** @var CurrencyRepository $currencyRepository*/
+    private $currencyRepository;
+    /** @var CompanyRepository $companyRepository*/
+    private $companyRepository;
+    public function __construct(CompanyRepository $companyRepo,CurrencyRepository $currencyRepo,InvoiceRepository $invoiceRepo,EventMaterialRepository $eventMaterialRepo)
     {
+        $this->companyRepository = $companyRepo;
+        $this->currencyRepository = $currencyRepo;
+        $this->invoiceRepository = $invoiceRepo;
         $this->eventMaterialRepository = $eventMaterialRepo;
     }
 
@@ -71,6 +84,8 @@ class EventMaterialController extends AppBaseController
     public function show($id)
     {
         $eventMaterial = $this->eventMaterialRepository->find($id);
+        $currencies=$this->currencyRepository->pluck('name','id');
+        $companies=$this->companyRepository->where('type','event')->pluck('name','id');
 
         if (empty($eventMaterial)) {
             Flash::error('Event Material not found');
@@ -78,7 +93,7 @@ class EventMaterialController extends AppBaseController
             return redirect(route('eventMaterials.index'));
         }
 
-        return view('event_materials.show')->with('eventMaterial', $eventMaterial);
+        return view('event_materials.show',compact('currencies','companies'))->with('eventMaterial', $eventMaterial);
     }
 
     /**
@@ -148,5 +163,37 @@ class EventMaterialController extends AppBaseController
         Flash::success('Event Material deleted successfully.');
 
         return redirect(route('eventMaterials.index'));
+    }
+    public function addInvoices(Request $request)
+    {
+        $eventMaterial = $this->eventMaterialRepository->find($request->event_material_id);
+        try {
+            DB::beginTransaction();
+            $data=$request->all();
+            $data['user_id']=auth()->user()->id;
+            $invoice=$this->invoiceRepository->create($data);
+            $eventMaterial->price=$invoice->currency->price*$invoice->price;
+            $eventMaterial->count+=$invoice->count;
+            $eventMaterial->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+       return response()->json($eventMaterial->invoices()->with('company')->with('currency')->get()->toArray(), 200);
+    }
+    public function removeInvoices(Request $request)
+    {
+        $eventMaterial = $this->eventMaterialRepository->find($request->event_material_id);
+        try {
+            DB::beginTransaction();
+            $this->invoiceRepository->delete($request->invoice_id);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+
+        return response()->json($eventMaterial->invoices()->with('company')->with('currency')->get()->toArray(), 200);
     }
 }

@@ -153,3 +153,9 @@
 
 
 
+<li class="nav-item {{ Request::is('invoices*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('invoices.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Invoices</span>
+    </a>
+</li>
