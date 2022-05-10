@@ -99,13 +99,13 @@
 
 
 
-<li class="nav-item{{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
+<li class="nav-item{{ (Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
     <a class="nav-link" href="#">
         <i class="nav-icon icon-badge  "></i>
         <span> Events</span>
     </a>
 </li>
-<div class="collapse {{ (Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
+<div class="collapse {{ (Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
 
     <li class="nav-item {{ Request::is('events*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('events.index') }}">
@@ -137,6 +137,12 @@
             <span>Companies</span>
         </a>
     </li>
+    <li class="nav-item {{ Request::is('speakers*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('speakers.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Speakers</span>
+        </a>
+    </li>
     <li class="nav-item {{ Request::is('eventMaterials*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('eventMaterials.index') }}">
             <i class="nav-icon icon-cursor"></i>
@@ -144,5 +150,6 @@
         </a>
     </li>
 </div>
+
 
 

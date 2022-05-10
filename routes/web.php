@@ -80,3 +80,8 @@ Route::post('addMaterials', [App\Http\Controllers\EventController::class,'addMat
 Route::post('removeMaterials', [App\Http\Controllers\EventController::class,'removeMaterials'])->name('removeMaterials');
 
 Route::resource('events', App\Http\Controllers\EventController::class);
+
+Route::post('addSpeakers', [App\Http\Controllers\EventController::class,'addSpeakers'])->name('addSpeakers');
+Route::post('removeSpeakers', [App\Http\Controllers\EventController::class,'removeSpeakers'])->name('removeSpeakers');
+
+Route::resource('speakers', App\Http\Controllers\SpeakerController::class);

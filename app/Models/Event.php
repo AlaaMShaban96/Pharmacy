@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use Eloquent as Model;
 use App\Models\Company;
+use App\Models\Speaker;
 use App\Models\EventType;
 use App\Models\EventLocation;
 use App\Models\EventMaterial;
@@ -164,5 +165,14 @@ class Event extends Model
     public function materials(): BelongsToMany
     {
         return $this->belongsToMany(EventMaterial::class, 'events_materials', 'event_id', 'event_material_id')->withPivot('count');
+    }
+    /**
+     * The materials that belong to the Event
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function speakers(): BelongsToMany
+    {
+        return $this->belongsToMany(Speaker::class, 'events_speakers', 'event_id', 'speaker_id')->withPivot('count','note');
     }
 }

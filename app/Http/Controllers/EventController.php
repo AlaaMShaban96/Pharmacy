@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Repositories\UserRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\CompanyRepository;
+use App\Repositories\SpeakerRepository;
 use App\Http\Requests\CreateEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Repositories\EventTypeRepository;
@@ -37,8 +38,11 @@ class EventController extends AppBaseController
     private $eventTypeRepository;
     /** @var UserRepository $userRepository*/
     private $userRepository;
-    public function __construct(UserRepository $userRepo,EventTypeRepository $eventTypeRepo,EventSpecialtyRepository $eventSpecialtyRepo,EventMaterialRepository $eventMaterialRepo,CompanyRepository $companyRepo,EventLocationRepository $eventLocationRepo,EventRepository $eventRepo)
+    /** @var SpeakerRepository $speakerRepository*/
+    private $speakerRepository;
+    public function __construct( SpeakerRepository $speakerRepo,UserRepository $userRepo,EventTypeRepository $eventTypeRepo,EventSpecialtyRepository $eventSpecialtyRepo,EventMaterialRepository $eventMaterialRepo,CompanyRepository $companyRepo,EventLocationRepository $eventLocationRepo,EventRepository $eventRepo)
     {
+        $this->speakerRepository = $speakerRepo;
         $this->userRepository = $userRepo;
         $this->eventTypeRepository = $eventTypeRepo;
         $this->eventSpecialtyRepository = $eventSpecialtyRepo;
@@ -106,6 +110,7 @@ class EventController extends AppBaseController
     {
         $event = $this->eventRepository->find($id);
         $eventMaterials=$this->eventMaterialRepository->pluck('name','id');
+        $speakers=$this->speakerRepository->pluck('name','id');
 
         if (empty($event)) {
             Flash::error('Event not found');
@@ -113,7 +118,7 @@ class EventController extends AppBaseController
             return redirect(route('events.index'));
         }
 
-        return view('events.show',compact('eventMaterials'))->with('event', $event);
+        return view('events.show',compact('eventMaterials','speakers'))->with('event', $event);
     }
 
     /**
@@ -207,6 +212,7 @@ class EventController extends AppBaseController
 
        return response()->json($event->materials->toArray(), 200);
     }
+
     public function removeMaterials(Request $request)
     {
         try {
@@ -220,5 +226,37 @@ class EventController extends AppBaseController
 
 
         return response()->json($event->materials->toArray(), 200);
+    }
+    public function addSpeakers(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+                $event = $this->eventRepository->find($request->event_id);
+                if ($event->speakers()->where('speaker_id',$request->speaker_id)->exists()) {
+                    $event->speakers()->updateExistingPivot($request->speaker_id,['count'=>$request->count,'note'=>$request->note]);
+
+                } else {
+                    $event->speakers()->attach($request->speaker_id,['count'=>$request->count,'note'=>$request->note]);
+                }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+       return response()->json($event->speakers->toArray(), 200);
+    }
+    public function removeSpeakers(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+                $event = $this->eventRepository->find($request->event_id);
+                $event->speakers()->detach($request->speaker_id);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+
+        return response()->json($event->speakers->toArray(), 200);
     }
 }

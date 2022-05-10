@@ -102,22 +102,61 @@
         <p>{{ $event->updated_at }}</p>
     </div>
 </div>
+{{-- <h3>Speakers</h3>
 
 <div class="row">
     <!-- event Materials Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('user_id', 'Materials:') !!}
-        {!! Form::select('event_material_id',$eventMaterials, null, ['class' => 'form-control','id'=>'event_material_id']) !!}
-    </div>
-    <div class="form-group col-sm-6">
-        {!! Form::label('medical_representative', 'Count :') !!}
-        {!! Form::number('count', null, ['class' => 'form-control','id'=>'event_material_count']) !!}
-    </div>
-    <div class="form-group col-sm-6">
-        <button id="add-event-material" type="button" class="btn btn-success ">Add</button>
+        <div class="form-group col-sm-6">
+            {!! Form::label('user_id', 'Speaker:') !!}
+            {!! Form::select('speaker_id',$speakers, null, ['class' => 'form-control','id'=>'event_material_id']) !!}
+        </div>
+        <div class="form-group col-sm-6">
+            {!! Form::label('medical_representative', 'Count :') !!}
+            {!! Form::number('count', null, ['class' => 'form-control','id'=>'event_material_count']) !!}
+        </div>
+        <div class="form-group col-sm-6">
+            <button id="add-event-material" type="button" class="btn btn-success ">Add</button>
 
-    </div>
+        </div>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="col-2">#</th>
+        <th class="col-6">Item</th>
+        <th class="col-4">Count</th>
+        <th class="col-2">Action</th>
+      </tr>
+    </thead>
+    <tbody id="material-body">
+        @foreach ($event->speakers as $key=> $material)
+            <tr>
+                <th class='col-2'  scope='row'>{{$key}}</th>
+                <td class='col-6' >{{$material->name}}</td>
+                <td class='col-4' >{{$material->pivot->count}}</td>
+                <td class='col-2' ><button onclick="onDelete({{$material->id}})" type='button' class='btn btn-danger'>Delete</button></td>
+            </tr>
+        @endforeach
 
+    </tbody>
+</table>--}}
+{{-- selection for materials --}}
+    {{-- <h3>Materials</h3>
+
+<div class="row">
+    <!-- event Materials Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('user_id', 'Materials:') !!}
+            {!! Form::select('event_material_id',$eventMaterials, null, ['class' => 'form-control','id'=>'event_material_id']) !!}
+        </div>
+        <div class="form-group col-sm-6">
+            {!! Form::label('medical_representative', 'Count :') !!}
+            {!! Form::number('count', null, ['class' => 'form-control','id'=>'event_material_count']) !!}
+        </div>
+        <div class="form-group col-sm-6">
+            <button id="add-event-material" type="button" class="btn btn-success ">Add</button>
+
+        </div>
 </div>
 <table class="table table-striped">
     <thead>
@@ -139,34 +178,143 @@
         @endforeach
 
     </tbody>
-  </table>
+</table> --}}
+<div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Materials#
+          </button>
+        </h5>
+      </div>
 
-  @push('scripts')
-  <script type="text/javascript">
-            var add_materials_url=@json(route('addMaterials'));
-            var remove_materials_url=@json(route('removeMaterials'));
-            var eventId =@json($event->id);
-          $('#add-event-material').on('click', function(){
-              var material_id = $('#event_material_id').val();
-              var count = $('#event_material_count').val();
-              var data={
-                "_token": "{{ csrf_token() }}",
-                  'material_id':material_id,
-                  'count':count,
-                  'event_id':eventId
-              };
-              if ($.trim(count) != '' || count != 0){
-              $.post(add_materials_url, data, function(data){
-                $('#material-body').empty()
-                data.forEach((element,index) => {
-                    var row = createTR(element,index);
-                    $("#material-body").append(row);
-                  });
-              });
-              };
-          });
-          function onDelete(material_id) {
-              console.log(material_id);
+      <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+            <div class="row">
+                <!-- event Materials Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('user_id', 'Materials:') !!}
+                        {!! Form::select('event_material_id',$eventMaterials, null, ['class' => 'form-control','id'=>'event_material_id']) !!}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('medical_representative', 'Count :') !!}
+                        {!! Form::number('count', null, ['class' => 'form-control','id'=>'event_material_count']) !!}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <button id="add-event-material" type="button" class="btn btn-success ">Add</button>
+
+                    </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-2">#</th>
+                    <th class="col-6">Item</th>
+                    <th class="col-4">Count</th>
+                    <th class="col-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="material-body">
+                    @foreach ($event->materials as $key=> $material)
+                        <tr>
+                            <th class='col-2'  scope='row'>{{$key}}</th>
+                            <td class='col-6' >{{$material->name}}</td>
+                            <td class='col-4' >{{$material->pivot->count}}</td>
+                            <td class='col-2' ><button onclick="onDelete({{$material->id}})" type='button' class='btn btn-danger'>Delete</button></td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Speakers #
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+            <div class="row">
+                <!-- event Materials Field -->
+                    <div class="form-group col-sm-4">
+                        {!! Form::label('user_id', 'Speaker:') !!}
+                        {!! Form::select('speaker_id',$speakers, null, ['class' => 'form-control','id'=>'speaker_id']) !!}
+                    </div>
+                    <div class="form-group col-sm-2">
+                        {!! Form::label('medical_representative', 'Count :') !!}
+                        {!! Form::number('count', null, ['class' => 'form-control','id'=>'speaker_count']) !!}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('medical_representative', 'Note :') !!}
+                        {!! Form::text('note', null, ['class' => 'form-control','id'=>'speaker_note']) !!}
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <button id="add-speakers" type="button" class="btn btn-success ">Add</button>
+
+                    </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-2">#</th>
+                    <th class="col-2">Item</th>
+                    <th class="col-2">Count</th>
+                    <th class="col-4">Note</th>
+                    <th class="col-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="speaker-body">
+                    @foreach ($event->speakers as $key=> $speaker)
+                        <tr>
+                            <td class='col-2' >{{$key}}</th>
+                            <td class='col-2' >{{$speaker->name}}</td>
+                            <td class='col-2' >{{$speaker->pivot->count}}</td>
+                            <td class='col-4' >{{$speaker->pivot->note}}</td>
+
+                            <td class='col-2' ><button onclick="onDeleteSpeaker({{$speaker->id}})" type='button' class='btn btn-danger'>Delete</button></td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+@push('scripts')
+<script type="text/javascript">
+        var add_materials_url=@json(route('addMaterials'));
+        var remove_materials_url=@json(route('removeMaterials'));
+        var add_speaker_url=@json(route('addSpeakers'));
+        var remove_speaker_url=@json(route('removeSpeakers'));
+        var eventId =@json($event->id);
+        $('#add-event-material').on('click', function(){
+            var material_id = $('#event_material_id').val();
+            var count = $('#event_material_count').val();
+            var data={
+            "_token": "{{ csrf_token() }}",
+                'material_id':material_id,
+                'count':count,
+                'event_id':eventId
+            };
+            if ($.trim(count) != '' || count != 0){
+            $.post(add_materials_url, data, function(data){
+            $('#material-body').empty()
+            data.forEach((element,index) => {
+                var row = createTRMaterial(element,index);
+                $("#material-body").append(row);
+                });
+            });
+            };
+        });
+        function onDelete(material_id) {
+            console.log(material_id);
             var material_id = material_id;
             var data={
             "_token": "{{ csrf_token() }}",
@@ -176,13 +324,54 @@
             $.post(remove_materials_url, data, function(data){
                 $('#material-body').empty()
                 data.forEach((element,index) => {
-                    var row = createTR(element,index);
+                    var row = createTRMaterial(element,index);
                     $("#material-body").append(row);
                 });
                 });
-          }
-          function createTR(element,index) {
-              return $(" <tr><th class='col-2'  scope='row'>"+index+"</th><td class='col-6' >"+element.name+"</td><td class='col-4' >"+element.pivot.count+"</td><td class='col-2' ><button onclick='onDelete("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
-          }
-      </script>
-  @endpush
+        }
+        function createTRMaterial(element,index) {
+            return $(" <tr><th class='col-2'  scope='row'>"+index+"</th><td class='col-6' >"+element.name+"</td><td class='col-4' >"+element.pivot.count+"</td><td class='col-2' ><button onclick='onDelete("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
+        }
+
+        $('#add-speakers').on('click', function(){
+            var speaker_id = $('#speaker_id').val();
+            var count = $('#speaker_count').val();
+            var note = $('#speaker_note').val();
+
+            var data={
+            "_token": "{{ csrf_token() }}",
+                'speaker_id':speaker_id,
+                'note':note,
+                'count':count,
+                'event_id':eventId
+            };
+            if ($.trim(count) != '' || count != 0){
+            $.post(add_speaker_url, data, function(data){
+            $('#speaker-body').empty()
+            data.forEach((element,index) => {
+                var row = createTRSpeakers(element,index);
+                $("#speaker-body").append(row);
+                });
+            });
+            };
+        });
+        function onDeleteSpeaker(speaker_id) {
+            var speaker_id = speaker_id;
+            var data={
+            "_token": "{{ csrf_token() }}",
+                'speaker_id':speaker_id,
+                'event_id':eventId
+            };
+            $.post(remove_speaker_url, data, function(data){
+                $('#speaker-body').empty()
+                data.forEach((element,index) => {
+                    var row = createTRSpeakers(element,index);
+                    $("#speaker-body").append(row);
+                });
+                });
+        }
+        function createTRSpeakers(element,index) {
+            return $(" <tr><th class='col-2'  scope='row'>"+index+"</th><td class='col-2' >"+element.name+"</td><td class='col-2' >"+element.pivot.count+"</td><td class='col-4' >"+element.pivot.note+"</td><td class='col-2' ><button onclick='onDeleteSpeaker("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
+        }
+    </script>
+@endpush
