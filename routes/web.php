@@ -97,3 +97,8 @@ Route::post('addFinancialCovenantTypes', [App\Http\Controllers\FinancialCovenant
 Route::post('removeFinancialCovenantTypes', [App\Http\Controllers\FinancialCovenantTypeController::class,'removeFinancialCovenantTypes'])->name('removeFinancialCovenantTypes');
 
 Route::resource('financialCovenantTypes', App\Http\Controllers\FinancialCovenantTypeController::class);
+
+Route::post('addClause', [App\Http\Controllers\ClauseController::class,'addClause'])->name('addClause');
+Route::post('removeClause', [App\Http\Controllers\ClauseController::class,'removeClause'])->name('removeClause');
+
+Route::resource('clauses', App\Http\Controllers\ClauseController::class);

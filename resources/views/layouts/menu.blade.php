@@ -107,6 +107,13 @@
             <span>Financial Covenant Types</span>
         </a>
     </li>
+
+    <li class="nav-item {{ Request::is('clauses*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('clauses.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Clauses</span>
+        </a>
+    </li>
   </div>
 
 

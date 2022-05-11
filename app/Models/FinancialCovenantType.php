@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Clause;
 use Eloquent as Model;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -85,6 +87,15 @@ class FinancialCovenantType extends Model
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+    /**
+     * Get all of the comments for the FinancialCovenantType
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function clauses(): HasMany
+    {
+        return $this->hasMany(Clause::class);
     }
 
 }

@@ -175,8 +175,8 @@ class FinancialCovenantTypeController extends AppBaseController
         } catch (\Throwable $th) {
             DB::rollback();
         }
-
-       return response()->json($department->financialCovenantTypes->toArray(), 200);
+        $data=empty($department->materials)?[]:$department->materials->toArray();
+        return response()->json($data, 200);
     }
     /**
      * Remove the specified FinancialCovenantType from storage.
