@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('posts', App\Http\Controllers\PostController::class);
+//Route::resource('posts', App\Http\Controllers\PostController::class);
 
 
 Route::resource('companies', App\Http\Controllers\CompanyController::class);
@@ -89,3 +89,11 @@ Route::post('removeSpeakers', [App\Http\Controllers\EventController::class,'remo
 Route::resource('speakers', App\Http\Controllers\SpeakerController::class);
 
 Route::resource('invoices', App\Http\Controllers\InvoiceController::class);
+
+
+Route::resource('departments', App\Http\Controllers\DepartmentController::class);
+
+Route::post('addFinancialCovenantTypes', [App\Http\Controllers\FinancialCovenantTypeController::class,'addFinancialCovenantTypes'])->name('addFinancialCovenantTypes');
+Route::post('removeFinancialCovenantTypes', [App\Http\Controllers\FinancialCovenantTypeController::class,'removeFinancialCovenantTypes'])->name('removeFinancialCovenantTypes');
+
+Route::resource('financialCovenantTypes', App\Http\Controllers\FinancialCovenantTypeController::class);

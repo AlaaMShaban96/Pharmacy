@@ -373,5 +373,5 @@
         function createTRSpeakers(element,index) {
             return $(" <tr><th class='col-2'  scope='row'>"+index+"</th><td class='col-2' >"+element.name+"</td><td class='col-2' >"+element.pivot.count+"</td><td class='col-4' >"+element.pivot.note+"</td><td class='col-2' ><button onclick='onDeleteSpeaker("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
         }
-    </script>
+</script>
 @endpush
