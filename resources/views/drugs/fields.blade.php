@@ -70,10 +70,13 @@
         {!! Form::select('laboratory_id',$laboratories,null, ['class' => ' form-control']) !!}
     </div>
 
+    <!-- Submit Field -->
+    <div class="form-group col-sm-12 mt-5">
+        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+        <a href="{{ route('drugs.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
 
-</div>
-<!-- Submit Field -->
-<div class="form-group col-sm-12 mt-5">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{{ route('drugs.index') }}" class="btn btn-secondary">Cancel</a>
-</div>
+
+
+

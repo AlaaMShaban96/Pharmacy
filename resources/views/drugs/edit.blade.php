@@ -23,10 +23,64 @@
                               @include('drugs.fields')
 
                               {!! Form::close() !!}
+                              <div id="accordion">
+                                <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Invoices #
+                                      </button>
+                                    </h5>
+                                  </div>
+
+                                  <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <table class="table table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th class="col-2">#</th>
+                                                <th class="col-2">company</th>
+                                                <th class="col-2">currency</th>
+                                                <th class="col-2">price</th>
+                                                <th class="col-2">date</th>
+                                                <th class="col-2">Action</th>
+
+                                              </tr>
+                                            </thead>
+                                            <tbody id="invoice-body">
+                                                @foreach ($invoices as $key=> $invoice)
+                                                    <tr>
+                                                        <th class='col-2'  scope='row'>{{$key}}</th>
+                                                        <td class='col-2' >{{$invoice->company->name}}</td>
+                                                        <td class='col-2' >{{$invoice->currency->name}}</td>
+                                                        <td class='col-2' >{{$invoice->price}}</td>
+                                                        <td class='col-2' >{{$invoice->createdAtDiff}}</td>
+                                                        <td class='col-2' >
+                                                            {!! Form::open(['route' => ['invoices.destroy', $invoice->id], 'method' => 'delete']) !!}
+
+                                                                {!! Form::button('<i class="fa fa-trash"></i>', [
+                                                                    'type' => 'submit',
+                                                                    'class' => 'btn btn-ghost-danger delete-confirm',
+                                                                    //'onclick' => "return confirm('Are you sure?')"
+                                                                ]) !!}
+                                                            {!! Form::close() !!}
+
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
          </div>
     </div>
+
 @endsection

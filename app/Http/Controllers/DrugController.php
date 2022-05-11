@@ -16,6 +16,7 @@ use App\Repositories\RouteRepository;
 use App\DataTables\DrugsViewDatatable;
 use App\Repositories\CompanyRepository;
 use App\Repositories\CountryRepository;
+use App\Repositories\InvoiceRepository;
 use App\Repositories\PackageRepository;
 use App\Repositories\StratumRepository;
 use App\Http\Requests\CreateDrugRequest;
@@ -43,11 +44,13 @@ class DrugController extends AppBaseController
     private $companyRepository;
     /** @var CountryRepository $countryRepository*/
     private $countryRepository;
-/** @var LaboratoryRepository $laboratoryRepository*/
+    /** @var LaboratoryRepository $laboratoryRepository*/
     private $laboratoryRepository;
-
-    public function __construct( LaboratoryRepository $laboratoryRepo,CountryRepository $countryRepo,CompanyRepository $companyRepo,RouteRepository $routeRepo,StratumRepository $stratumRepo,PackageRepository $packageRepo,CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
+/** @var InvoiceRepository $invoiceRepository*/
+    private $invoiceRepository;
+    public function __construct(InvoiceRepository $invoiceRepo,LaboratoryRepository $laboratoryRepo,CountryRepository $countryRepo,CompanyRepository $companyRepo,RouteRepository $routeRepo,StratumRepository $stratumRepo,PackageRepository $packageRepo,CurrencyRepository $currencyRepo,DrugRepository $drugRepo,DrugDosageRepository $drugDosageRepo)
     {
+        $this->invoiceRepository = $invoiceRepo;
         $this->laboratoryRepository = $laboratoryRepo;
         $this->countryRepository = $countryRepo;
         $this->companyRepository = $companyRepo;
@@ -110,7 +113,14 @@ class DrugController extends AppBaseController
     {
         $input = $request->all();
         $drug = $this->drugRepository->create($input);
-
+        $this->invoiceRepository->create([
+            'drug_id'=>$drug->id,
+            'company_id'=>$drug->company_id,
+            'currency_id'=>$drug->currency_id,
+            'price'=>$drug->price,
+            'user_id'=>auth()->user()->id,
+            'type'=>'drug'
+        ]);
         Flash::success('Drug saved successfully.');
 
         return redirect(route('drugs.index'));
@@ -161,14 +171,14 @@ class DrugController extends AppBaseController
         $stratums=$this->stratumRepository->pluck('name','id');
         $countries=$this->countryRepository->pluck('name','id');
         $laboratories=$this->laboratoryRepository->pluck('name','id');
-
+        $invoices=$this->invoiceRepository->where('drug_id',$drug->id)->where('type','drug')->get();
         if (empty($drug)) {
             Flash::error('Drug not found');
 
             return redirect(route('drugs.index'));
         }
 
-        return view('drugs.edit',compact('drug','companies','drugDosages','currencies','packages','routes','stratums','countries','laboratories'))->with('drug', $drug);
+        return view('drugs.edit',compact('invoices','drug','companies','drugDosages','currencies','packages','routes','stratums','countries','laboratories'))->with('drug', $drug);
     }
 
     /**
@@ -190,7 +200,14 @@ class DrugController extends AppBaseController
         }
 
         $drug = $this->drugRepository->update($request->all(), $id);
-
+        $this->invoiceRepository->create([
+            'drug_id'=>$drug->id,
+            'company_id'=>$drug->company_id,
+            'currency_id'=>$drug->currency_id,
+            'price'=>$drug->price,
+            'user_id'=>auth()->user()->id,
+            'type'=>'drug'
+        ]);
         Flash::success('Drug updated successfully.');
 
         return redirect(route('drugs.index'));
