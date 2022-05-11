@@ -68,8 +68,10 @@ class DrugsViewDatatable extends DataTable
         })
         ->addColumn('supplier_status', function ($drug) {
             return $drug->laboratory->status;
-        })
-            ->addColumn('action', 'drugsviewdatatable.action');
+        });
+            // ->addColumn('action', 'drugs.datatables_actions')
+            // ->rawColumns(['action']);;
+
     }
 
     /**
@@ -95,7 +97,8 @@ class DrugsViewDatatable extends DataTable
                     ->setTableId('drugsviewdatatable-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->parameters(['scrollY' => true])
+                    ->addAction(['scrollY' => true,'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+                    // ->parameters(['scrollY' => true])
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
@@ -202,7 +205,7 @@ class DrugsViewDatatable extends DataTable
                 'title' => 'Supplier Reg No',
                 'searchable' => false,
             ],
-
+            // 'action'
         ];
     }
     /**
