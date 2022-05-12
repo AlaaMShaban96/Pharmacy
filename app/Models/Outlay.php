@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Clause;
 use Eloquent as Model;
 use App\Models\FinancialCovenant;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,9 +35,11 @@ class Outlay extends Model
 
     public $fillable = [
         'user_id',
+        'clause_id',
         'financial_covenant_id',
         'note',
-        'price'
+        'price',
+        'count'
     ];
 
     /**
@@ -45,10 +48,8 @@ class Outlay extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'double',
-        'financial_covenant_id' => 'double',
         'note' => 'string',
-        'price' => 'double'
+        'price' => 'float'
     ];
 
     /**
@@ -57,6 +58,7 @@ class Outlay extends Model
      * @var array
      */
     public static $rules = [
+        'user_id' => 'required',
         'financial_covenant_id' => 'required',
         'price' => 'required'
     ];
@@ -78,6 +80,21 @@ class Outlay extends Model
     {
         return $this->belongsTo(FinancialCovenant::class);
     }
+    /**
+     * Get the clause that owns the Outlay
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function clause(): BelongsTo
+    {
+        return $this->belongsTo(Clause::class);
+    }
+    /**
+     * Get the clause that owns the Outlay
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
 
 
 }

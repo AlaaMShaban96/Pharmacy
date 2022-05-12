@@ -3,7 +3,7 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('outlays.index') !!}">Outlay</a>
+             <a href="{!! route('outlays.index') !!}">Outlays</a>
           </li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
@@ -15,10 +15,10 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit Outlay</strong>
+                              <strong>Edit Outlays</strong>
                           </div>
                           <div class="card-body">
-                              {!! Form::model($outlay, ['route' => ['outlays.update', $outlay->id], 'method' => 'patch']) !!}
+                              {!! Form::model($outlays, ['route' => ['outlays.update', $outlays->id], 'method' => 'patch']) !!}
 
                               @include('outlays.fields')
 

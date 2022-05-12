@@ -62,6 +62,9 @@ Route::resource('users', App\Http\Controllers\UserController::class);
 // Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);
 
 
+Route::post('addOutlays', [App\Http\Controllers\OutlayController::class,'addOutlays'])->name('addOutlays');
+Route::post('removeOutlays', [App\Http\Controllers\OutlayController::class,'removeOutlays'])->name('removeOutlays');
+
 Route::resource('outlays', App\Http\Controllers\OutlayController::class);
 
 

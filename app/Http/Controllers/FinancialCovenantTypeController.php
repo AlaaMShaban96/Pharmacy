@@ -175,7 +175,7 @@ class FinancialCovenantTypeController extends AppBaseController
         } catch (\Throwable $th) {
             DB::rollback();
         }
-        $data=empty($department->materials)?[]:$department->materials->toArray();
+        $data=empty($department->financialCovenantTypes)?[]:$department->financialCovenantTypes->toArray();
         return response()->json($data, 200);
     }
     /**
@@ -196,7 +196,7 @@ class FinancialCovenantTypeController extends AppBaseController
         } catch (\Throwable $th) {
             DB::rollback();
         }
-        $data=empty($department->materials)?[]:$department->materials->toArray();
+        $data=empty($department->financialCovenantTypes)?[]:$department->financialCovenantTypes->toArray();
         return response()->json($data, 200);
     }
 }

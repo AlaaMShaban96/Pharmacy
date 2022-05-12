@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use Carbon\Carbon;
 use App\Http\Requests;
 use App\Repositories\UserRepository;
+use App\Repositories\ClauseRepository;
+use App\Repositories\OutlayRepository;
 use App\Repositories\DepartmentRepository;
 use App\Http\Controllers\AppBaseController;
 use App\DataTables\FinancialCovenantDataTable;
@@ -24,8 +27,14 @@ class FinancialCovenantController extends AppBaseController
     private $financialCovenantTypeRepository;
     /** @var UserRepository $userRepository*/
     private $userRepository;
-    public function __construct(UserRepository $userRepo,FinancialCovenantTypeRepository $financialCovenantTypeRepo,DepartmentRepository $departmentRepo,FinancialCovenantRepository $financialCovenantRepo)
+    /** @var OutlayRepository $outlayRepository*/
+    private $outlayRepository;
+    /** @var ClauseRepository $clauseRepository*/
+    private $clauseRepository;
+    public function __construct(ClauseRepository $clauseRepo,OutlayRepository $outlayRepo,UserRepository $userRepo,FinancialCovenantTypeRepository $financialCovenantTypeRepo,DepartmentRepository $departmentRepo,FinancialCovenantRepository $financialCovenantRepo)
     {
+        $this->clauseRepository = $clauseRepo;
+        $this->outlayRepository = $outlayRepo;
         $this->userRepository = $userRepo;
         $this->financialCovenantTypeRepository = $financialCovenantTypeRepo;
         $this->departmentRepository = $departmentRepo;
@@ -51,7 +60,7 @@ class FinancialCovenantController extends AppBaseController
      */
     public function create()
     {
-        $financialCovenantTypes=$this->financialCovenantTypeRepository->pluck('name','id');
+        $financialCovenantTypes=$this->financialCovenantTypeRepository->all();
         $departments=$this->departmentRepository->pluck('name','id');
         $users=$this->userRepository->pluck('name','id');
 
@@ -68,7 +77,7 @@ class FinancialCovenantController extends AppBaseController
     public function store(CreateFinancialCovenantRequest $request)
     {
         $input = $request->all();
-
+        $input['date']=Carbon::now();
         $financialCovenant = $this->financialCovenantRepository->create($input);
 
         Flash::success('Financial Covenant saved successfully.');
@@ -86,6 +95,7 @@ class FinancialCovenantController extends AppBaseController
     public function show($id)
     {
         $financialCovenant = $this->financialCovenantRepository->find($id);
+        $clauses=$this->clauseRepository->where('financial_covenant_type_id',$financialCovenant->financial_covenant_type_id)->pluck('name','id');
 
         if (empty($financialCovenant)) {
             Flash::error('Financial Covenant not found');
@@ -93,7 +103,7 @@ class FinancialCovenantController extends AppBaseController
             return redirect(route('financialCovenants.index'));
         }
 
-        return view('financial_covenants.show')->with('financialCovenant', $financialCovenant);
+        return view('financial_covenants.show',compact('clauses'))->with('financialCovenant', $financialCovenant);
     }
 
     /**
@@ -106,15 +116,17 @@ class FinancialCovenantController extends AppBaseController
     public function edit($id)
     {
         $financialCovenant = $this->financialCovenantRepository->find($id);
-                $financialCovenantTypes=$this->financialCovenantTypeRepository->pluck('name','id');
+        $financialCovenantTypes=$this->financialCovenantTypeRepository->pluck('name','id');
         $departments=$this->departmentRepository->pluck('name','id');
+        $users=$this->userRepository->pluck('name','id');
+
         if (empty($financialCovenant)) {
             Flash::error('Financial Covenant not found');
 
             return redirect(route('financialCovenants.index'));
         }
 
-        return view('financial_covenants.edit',compact('financialCovenantTypes','departments'))->with('financialCovenant', $financialCovenant);
+        return view('financial_covenants.edit',compact('users','financialCovenantTypes','departments'))->with('financialCovenant', $financialCovenant);
     }
 
     /**

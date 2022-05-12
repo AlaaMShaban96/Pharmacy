@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Outlay;
 use Eloquent as Model;
 use App\Models\Department;
 use App\Models\FinancialCovenantType;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -69,7 +72,6 @@ class FinancialCovenant extends Model
         'department_id' => 'required',
         'financial_covenant_type_id' => 'required',
         'amount' => 'required',
-        'date' => 'required'
     ];
 
     public static function boot()
@@ -78,8 +80,7 @@ class FinancialCovenant extends Model
         self::creating(function ($model) {
             $department=Department::find($model->department_id);
             $financialCovenantType=FinancialCovenantType::find($model->financial_covenant_type_id);
-            rand(10000,99999);
-            $model->number=$department->n_code.'-'.$financialCovenantType->code.'-'.rand(10000,99999);
+            $model->number=$department->n_code.'-'.$financialCovenantType->code.'-'.Carbon::now()->format('Y-m-d');
         });
     }
     /**
@@ -108,5 +109,14 @@ class FinancialCovenant extends Model
     public function financialCovenantType(): BelongsTo
     {
         return $this->belongsTo(FinancialCovenantType::class);
+    }
+    /**
+     * Get all of the Outlay for the FinancialCovenant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outlays(): HasMany
+    {
+        return $this->hasMany(Outlay::class);
     }
 }

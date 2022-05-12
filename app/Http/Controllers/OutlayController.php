@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Flash;
 use Response;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\OutlayDataTable;
 use App\Repositories\OutlayRepository;
@@ -174,5 +175,58 @@ class OutlayController extends AppBaseController
         Flash::success('Outlay deleted successfully.');
 
         return redirect(route('outlays.index'));
+    }
+    /**
+     * Store a newly created FinancialCovenantType in storage.
+     *
+     * @param CreateFinancialCovenantTypeRequest $request
+     *
+     * @return Response
+     */
+    public function addOutlays(Request $request)
+    {
+        $financialCovenant =$this->financialCovenantRepository->find($request->financial_covenant_id);
+
+        try {
+            DB::beginTransaction();
+            if ($financialCovenant->amount < ($financialCovenant->total+$request->price)) {
+                return response()->json(['error'=>'financialCovenant if cosed.'], 200);
+            }
+                $input = $request->all();
+                $input['user_id']=auth()->user()->id;
+                $outlay = $this->outlayRepository->create($input);
+                $financialCovenant->total+=$request->price;
+                $financialCovenant->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+        $data=empty($financialCovenant->outlays)?[]:$financialCovenant->outlays()->with('user')->with('clause')->get()->toArray();
+        return response()->json($data, 200);
+    }
+    /**
+     * Remove the specified FinancialCovenantType from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function removeOutlays(Request $request)
+    {
+
+        $financialCovenant = $this->financialCovenantRepository->find($request->financial_covenant_id);
+        $outlay = $this->outlayRepository->find($request->outlay_id);
+
+        DB::beginTransaction();
+            $financialCovenant = $this->financialCovenantRepository->find($outlay->financial_covenant_id);
+            $financialCovenant->total-=$outlay->price;
+            $financialCovenant->save();
+
+            $this->outlayRepository->delete($request->outlay_id);
+        DB::commit();
+
+
+        $data=empty($financialCovenant->outlays)?[]:$financialCovenant->outlays()->with('user')->with('clause')->get()->toArray();
+        return response()->json($data, 200);
     }
 }

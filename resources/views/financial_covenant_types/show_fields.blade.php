@@ -14,7 +14,7 @@
     <!-- Department Id Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('financial_covenant_type_id', 'Department Id:') !!}
-        <p>{{ $financialCovenantType->financial_covenant_type_id }}</p>
+        <p>{{ $financialCovenantType->department_id }}</p>
     </div>
 
     <!-- Created At Field -->

@@ -3,7 +3,7 @@
 @section('content')
      <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('financialCovenantTypes.index') }}">Financial Covenant Type</a>
+                <a href="{{ route('departments.show', $financialCovenantType->department_id) }}">{{$financialCovenantType->department->name}}</a>
             </li>
             <li class="breadcrumb-item active">Detail</li>
      </ol>
@@ -15,7 +15,7 @@
                          <div class="card">
                              <div class="card-header">
                                  <strong>Details</strong>
-                                  <a href="{{ route('financialCovenantTypes.index') }}" class="btn btn-light">Back</a>
+                                  <a href="{{ route('departments.show', $financialCovenantType->department_id) }}" class="btn btn-light">Back</a>
                              </div>
                              <div class="card-body">
                                  @include('financial_covenant_types.show_fields')

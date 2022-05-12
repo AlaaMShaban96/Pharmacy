@@ -16,10 +16,12 @@ class CreateOutlaysTable extends Migration
     {
         Schema::create('outlays', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('user_id')->constrained()->nullable();;
-            $table->foreignId('financial_covenant_id')->constrained()->nullable();;
+            $table->foreignId('user_id')->constrained()->nullable();
+            $table->foreignId('financial_covenant_id')->constrained()->nullable();
+            $table->foreignId('clause_id')->constrained()->nullable();
             $table->string('note')->nullable();
-            $table->double('price')->nullable();
+            $table->float('price')->nullable();
+            $table->bigInteger('count')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

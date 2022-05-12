@@ -8,7 +8,7 @@
     <!-- User Id Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('user_id', 'User Id:') !!}
-        <p>{{ $department->user_id }}</p>
+        <p>{{ $department->user->name }}</p>
     </div>
 
     <!-- D Code Field -->
@@ -29,11 +29,11 @@
         <p>{{ $department->created_at }}</p>
     </div>
 
-    <!-- Updated At Field -->
+    {{-- <!-- Updated At Field -->
     <div class="form-group">
         {!! Form::label('updated_at', 'Updated At:') !!}
         <p>{{ $department->updated_at }}</p>
-    </div>
+    </div> --}}
 </div>
 
 <div id="accordion">
@@ -74,13 +74,15 @@
                   </tr>
                 </thead>
                 <tbody id="material-body">
-                    @foreach ($department->financialCovenantTypes as $key=> $material)
+                    @foreach ($department->financialCovenantTypes as $key=> $financialCovenantTypes)
                         <tr>
                             <th class='col-2'  >{{$key}}</th>
-                            <td class='col-4' >{{$material->name}}</td>
-                            <td class='col-2' >{{$material->code}}</td>
-                            <td class='col-2' >{{$material->cost}}</td>
-                            <td class='col-2' ><button onclick="onDelete({{$material->id}})" type='button' class='btn btn-danger'>Delete</button></td>
+                            <td class='col-4' >{{$financialCovenantTypes->name}}</td>
+                            <td class='col-2' >{{$financialCovenantTypes->code}}</td>
+                            <td class='col-2' >{{$financialCovenantTypes->cost}}</td>
+                            <td class='col-2' >
+                                <a href='{{ route('financialCovenantTypes.show', $financialCovenantTypes->id) }}' class='btn btn-ghost-success'><i class='fa fa-eye'></i></a>
+                                <button onclick="onDelete({{$financialCovenantTypes->id}})" type='button' class='btn btn-danger'>Delete</button></td>
                         </tr>
                     @endforeach
 
@@ -106,7 +108,7 @@
             };
             if ($.trim(cost) != '' || cost != 0){
             $.post(add_types_url, data, function(data){
-            $('#material-body').empty()
+            $('#material-body').empty();
             data.forEach((element,index) => {
                 var row = createTRMaterial(element,index);
                 $("#material-body").append(row);
@@ -122,7 +124,7 @@
                 'department_id':departmentId
             };
             $.post(remove_types_url, data, function(data){
-                $('#material-body').empty()
+                $('#material-body').empty();
                 data.forEach((element,index) => {
                     var row = createTRMaterial(element,index);
                     $("#material-body").append(row);
@@ -130,7 +132,7 @@
                 });
         }
         function createTRMaterial(element,index) {
-            return $(" <tr><th class='col-2'>"+index+"</th><td class='col-4' >"+element.name+"</td><td class='col-2' >"+element.code+"</td><td class='col-2' >"+element.cost+"</td><td class='col-2' ><button onclick='onDelete("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
+            return $(" <tr><th class='col-2'>"+index+"</th><td class='col-4' >"+element.name+"</td><td class='col-2' >"+element.code+"</td><td class='col-2' >"+element.cost+"</td><td class='col-2' ><a href='{{ route('financialCovenantTypes.show', ".element.id.") }}' class='btn btn-ghost-success'><i class='fa fa-eye'></i></a><button onclick='onDelete("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
         }
 </script>
 @endpush

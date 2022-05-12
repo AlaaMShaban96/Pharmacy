@@ -75,45 +75,45 @@
     </li>
 
   </div>
-<li class="nav-item {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
+<li class="nav-item {{ (Request::is('financialCovenantTypes*') || Request::is('clauses*') ||Request::is('departments*') ||Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
     <a class="nav-link" href="#">
         <i class="nav-icon icon-wallet "></i>
         <span> Pocket money  </span>
     </a>
 </li>
 
-  <div class="collapse {{ (Request::is('financialCovenants*') || Request::is('outlays*'))? 'show' : ''}}" id="collapsePocket">
+  <div class="collapse {{ (Request::is('financialCovenantTypes*') ||Request::is('clauses*') ||Request::is('departments*') ||Request::is('financialCovenants*') || Request::is('outlays*'))? 'show' : ''}}" id="collapsePocket">
     <li class="nav-item {{ Request::is('financialCovenants*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('financialCovenants.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Financial Covenants</span>
         </a>
     </li>
-    {{-- <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('outlays.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Outlays</span>
         </a>
-    </li> --}}
+    </li>
     <li class="nav-item {{ Request::is('departments*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('departments.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Departments</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('financialCovenantTypes*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('financialCovenantTypes*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('financialCovenantTypes.index') }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Financial Covenant Types</span>
+            <span>Types</span>
         </a>
-    </li>
+    </li> --}}
 
-    <li class="nav-item {{ Request::is('clauses*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('clauses*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('clauses.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Clauses</span>
         </a>
-    </li>
+    </li> --}}
   </div>
 
 
