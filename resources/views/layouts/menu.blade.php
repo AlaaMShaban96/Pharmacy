@@ -89,12 +89,12 @@
             <span>Financial Covenants</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('outlays.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Outlays</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item {{ Request::is('departments*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('departments.index') }}">
             <i class="nav-icon icon-cursor"></i>
@@ -178,5 +178,6 @@
         <span>Invoices</span>
     </a>
 </li>
+
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Eloquent as Model;
 use App\Models\FinancialCovenantType;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -69,6 +70,15 @@ class Department extends Model
     public function financialCovenantTypes(): HasMany
     {
         return $this->hasMany(FinancialCovenantType::class);
+    }
+    /**
+     * Get the user that owns the Department
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 

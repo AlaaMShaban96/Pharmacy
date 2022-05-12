@@ -59,7 +59,7 @@ Route::resource('laboratories', App\Http\Controllers\LaboratoryController::class
 Route::resource('users', App\Http\Controllers\UserController::class);
 
 
-Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);
+// Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);
 
 
 Route::resource('outlays', App\Http\Controllers\OutlayController::class);
@@ -102,3 +102,6 @@ Route::post('addClause', [App\Http\Controllers\ClauseController::class,'addClaus
 Route::post('removeClause', [App\Http\Controllers\ClauseController::class,'removeClause'])->name('removeClause');
 
 Route::resource('clauses', App\Http\Controllers\ClauseController::class);
+
+
+Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);

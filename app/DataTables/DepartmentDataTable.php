@@ -18,7 +18,11 @@ class DepartmentDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'departments.datatables_actions');
+        return $dataTable
+        ->editColumn('user_id', function ($department) {
+            return $department->user->name;
+        })
+        ->addColumn('action', 'departments.datatables_actions');
     }
 
     /**
@@ -66,7 +70,11 @@ class DepartmentDataTable extends DataTable
     {
         return [
             'name',
-            'user_id',
+            [
+                'data' =>'user_id',
+                'title' => 'User',
+                'searchable' => false,
+            ],
             'd_code',
             'n_code'
         ];

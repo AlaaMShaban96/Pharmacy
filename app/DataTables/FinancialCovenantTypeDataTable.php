@@ -18,7 +18,11 @@ class FinancialCovenantTypeDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'financial_covenant_types.datatables_actions');
+        return $dataTable
+        ->editColumn('department_id', function ($financialCovenantType) {
+            return $financialCovenantType->department->name;
+        })
+        ->addColumn('action', 'financial_covenant_types.datatables_actions');
     }
 
     /**
@@ -67,7 +71,11 @@ class FinancialCovenantTypeDataTable extends DataTable
         return [
             'name',
             'code',
-            'department_id'
+            [
+                'data' =>'department_id',
+                'title' => 'Department ',
+                'searchable' => false,
+            ],
         ];
     }
 

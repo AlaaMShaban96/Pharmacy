@@ -16,10 +16,14 @@ class CreateFinancialCovenantsTable extends Migration
     {
         Schema::create('financial_covenants', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
-            $table->double('amount')->nullable();
-            $table->double('total')->default(0)->nullable();
+            $table->foreignId('department_id')->constrained()->nullable();
+            $table->foreignId('financial_covenant_type_id')->constrained()->nullable();
             $table->foreignId('user_id')->constrained()->nullable();
+            $table->string('number')->nullable();
+            $table->bigInteger('amount')->nullable();
+            $table->date('date')->nullable();
+            $table->string('note')->nullable();
+            $table->float('total')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

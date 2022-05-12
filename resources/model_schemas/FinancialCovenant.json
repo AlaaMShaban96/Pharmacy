@@ -12,10 +12,34 @@
         "inView": false
     },
     {
-        "name": "name",
+        "name": "department_id",
+        "dbType": "foreignId",
+        "htmlType": "select",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "financial_covenant_type_id",
+        "dbType": "foreignId",
+        "htmlType": "select",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "number",
         "dbType": "string",
         "htmlType": "text",
-        "validations": "required",
+        "validations": "",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -25,7 +49,7 @@
     },
     {
         "name": "amount",
-        "dbType": "double",
+        "dbType": "bigInteger",
         "htmlType": "number",
         "validations": "required",
         "searchable": true,
@@ -36,10 +60,34 @@
         "inView": true
     },
     {
-        "name": "user_id",
-        "dbType": "double",
-        "htmlType": "number",
+        "name": "date",
+        "dbType": "date",
+        "htmlType": "date",
         "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "note",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "total",
+        "dbType": "float",
+        "htmlType": "number",
+        "validations": "",
         "searchable": true,
         "fillable": true,
         "primary": false,

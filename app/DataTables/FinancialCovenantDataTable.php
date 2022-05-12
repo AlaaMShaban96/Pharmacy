@@ -5,7 +5,6 @@ namespace App\DataTables;
 use App\Models\FinancialCovenant;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
-use Barryvdh\DomPDF\Facade as PDF;
 
 class FinancialCovenantDataTable extends DataTable
 {
@@ -23,14 +22,18 @@ class FinancialCovenantDataTable extends DataTable
         ->editColumn('user_id', function ($financialCovenant) {
             return $financialCovenant->user->name;
         })
-        ->editColumn('remaining', function ($financialCovenant) {
-            return $financialCovenant->remaining;
+        ->editColumn('department_id', function ($financialCovenant) {
+            return $financialCovenant->department->name;
         })
-        ->orderColumn('remaining', function ($query) {
-
-            $query->orderBy('total', 'desc');
-
-         })
+        ->editColumn('financial_covenant_type_id', function ($financialCovenant) {
+            return $financialCovenant->financialCovenantType->name;
+        })
+        ->editColumn('date', function ($financialCovenant) {
+            return $financialCovenant->date->format('Y-m-d');
+        })
+        ->addColumn('remaining', function ($financialCovenant) {
+            return $financialCovenant->amount-$financialCovenant->total;
+        })
         ->addColumn('action', 'financial_covenants.datatables_actions');
     }
 
@@ -55,7 +58,7 @@ class FinancialCovenantDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false,"ordering"=> false])
+            ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,
@@ -78,31 +81,29 @@ class FinancialCovenantDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
+            [
+                'data' =>'user_id',
+                'title' => 'User ',
+                'searchable' => false,
+            ],
+            [
+                'data' =>'department_id',
+                'title' => 'Department ',
+                'searchable' => false,
+            ],
+            [
+                'data' =>'financial_covenant_type_id',
+                'title' => 'Type ',
+                'searchable' => false,
+            ],
+            'number',
             'amount',
-            [
-                'data' => 'user_id',
-                'title' => 'User Name',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'remaining',
-                'title' => 'remaining',
-                'searchable' => false,
-            ],
+            'date',
+            'remaining',
             'total'
         ];
     }
-    /**
-     * Export PDF using DOMPDF
-     * @return mixed
-     */
-    public function pdf()
-    {
-        $data = $this->getDataForPrint();
-        $pdf = PDF::loadView($this->printPreview, compact('data'));
-        return $pdf->download($this->filename() . '.pdf');
-    }
+
     /**
      * Get filename for export.
      *

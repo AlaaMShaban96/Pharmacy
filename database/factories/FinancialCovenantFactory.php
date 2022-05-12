@@ -22,9 +22,13 @@ class FinancialCovenantFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+            'department_id' => $this->faker->word,
+        'financial_covenant_type_id' => $this->faker->word,
+        'number' => $this->faker->word,
         'amount' => $this->faker->word,
-        'user_id' => $this->faker->word,
+        'date' => $this->faker->word,
+        'note' => $this->faker->word,
+        'total' => $this->faker->randomDigitNotNull,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

@@ -5,23 +5,30 @@ namespace App\Http\Controllers;
 use Flash;
 use Response;
 use App\Http\Requests;
-use App\DataTables\OutlayDataTable;
 use App\Repositories\UserRepository;
+use App\Repositories\DepartmentRepository;
 use App\Http\Controllers\AppBaseController;
 use App\DataTables\FinancialCovenantDataTable;
 use App\Repositories\FinancialCovenantRepository;
 use App\Http\Requests\CreateFinancialCovenantRequest;
 use App\Http\Requests\UpdateFinancialCovenantRequest;
+use App\Repositories\FinancialCovenantTypeRepository;
 
 class FinancialCovenantController extends AppBaseController
 {
     /** @var FinancialCovenantRepository $financialCovenantRepository*/
     private $financialCovenantRepository;
+    /** @var DepartmentRepository $departmentRepository*/
+    private $departmentRepository;
+    /** @var FinancialCovenantTypeRepository $financialCovenantTypeRepository*/
+    private $financialCovenantTypeRepository;
     /** @var UserRepository $userRepository*/
     private $userRepository;
-    public function __construct(UserRepository $userRepo,FinancialCovenantRepository $financialCovenantRepo)
+    public function __construct(UserRepository $userRepo,FinancialCovenantTypeRepository $financialCovenantTypeRepo,DepartmentRepository $departmentRepo,FinancialCovenantRepository $financialCovenantRepo)
     {
         $this->userRepository = $userRepo;
+        $this->financialCovenantTypeRepository = $financialCovenantTypeRepo;
+        $this->departmentRepository = $departmentRepo;
         $this->financialCovenantRepository = $financialCovenantRepo;
     }
 
@@ -44,8 +51,11 @@ class FinancialCovenantController extends AppBaseController
      */
     public function create()
     {
+        $financialCovenantTypes=$this->financialCovenantTypeRepository->pluck('name','id');
+        $departments=$this->departmentRepository->pluck('name','id');
         $users=$this->userRepository->pluck('name','id');
-        return view('financial_covenants.create',compact('users'));
+
+        return view('financial_covenants.create',compact('users','financialCovenantTypes','departments'));
     }
 
     /**
@@ -73,7 +83,7 @@ class FinancialCovenantController extends AppBaseController
      *
      * @return Response
      */
-    public function show(OutlayDataTable $outlayDataTable,$id)
+    public function show($id)
     {
         $financialCovenant = $this->financialCovenantRepository->find($id);
 
@@ -82,7 +92,7 @@ class FinancialCovenantController extends AppBaseController
 
             return redirect(route('financialCovenants.index'));
         }
-        return $outlayDataTable->render('financial_covenants.show',compact('financialCovenant'));
+
         return view('financial_covenants.show')->with('financialCovenant', $financialCovenant);
     }
 
@@ -96,15 +106,15 @@ class FinancialCovenantController extends AppBaseController
     public function edit($id)
     {
         $financialCovenant = $this->financialCovenantRepository->find($id);
-        $users=$this->userRepository->pluck('name','id');
-
+                $financialCovenantTypes=$this->financialCovenantTypeRepository->pluck('name','id');
+        $departments=$this->departmentRepository->pluck('name','id');
         if (empty($financialCovenant)) {
             Flash::error('Financial Covenant not found');
 
             return redirect(route('financialCovenants.index'));
         }
 
-        return view('financial_covenants.edit',compact('users'))->with('financialCovenant', $financialCovenant);
+        return view('financial_covenants.edit',compact('financialCovenantTypes','departments'))->with('financialCovenant', $financialCovenant);
     }
 
     /**
