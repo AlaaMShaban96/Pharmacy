@@ -86,15 +86,15 @@
     <li class="nav-item {{ Request::is('financialCovenants*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('financialCovenants.index') }}">
             <i class="nav-icon icon-cursor"></i>
-            <span>Financial Covenants</span>
+            <span>Financial</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('outlays*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('outlays.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Outlays</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item {{ Request::is('departments*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('departments.index') }}">
             <i class="nav-icon icon-cursor"></i>
@@ -124,6 +124,7 @@
         <span> Events</span>
     </a>
 </li>
+
 <div class="collapse {{ (Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
 
     <li class="nav-item {{ Request::is('events*') ? 'active' : '' }}">
@@ -172,12 +173,47 @@
 
 
 
-<li class="nav-item {{ Request::is('invoices*') ? 'active' : '' }}">
+
+<li class="nav-item{{ (Request::is('stores*')||Request::is('receives*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseRepository" aria-expanded="false" aria-controls="collapseExample">
+    <a class="nav-link" href="#">
+        <i class="nav-icon icon-badge  "></i>
+        <span> Repository </span>
+    </a>
+</li>
+
+<div class="collapse {{ (Request::is('stores*')||Request::is('receives*') )? 'show ' : ''}}" id="collapseRepository">
+    <li class="nav-item {{ Request::is('receives*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('receives.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Receives</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('stores*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('stores.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Stores</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('companies.index',['type'=>'store']) }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Companies</span>
+        </a>
+    </li>
+
+</div>
+
+
+{{-- <li class="nav-item {{ Request::is('stores*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('stores.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Stores</span>
+    </a>
+</li> --}}
+{{-- <li class="nav-item {{ Request::is('invoices*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('invoices.index') }}">
         <i class="nav-icon icon-cursor"></i>
         <span>Invoices</span>
     </a>
-</li>
-
-
+</li> --}}
 

@@ -108,3 +108,9 @@ Route::resource('clauses', App\Http\Controllers\ClauseController::class);
 
 
 Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);
+
+
+Route::resource('stores', App\Http\Controllers\StoreController::class);
+
+
+Route::resource('receives', App\Http\Controllers\ReceiveController::class);

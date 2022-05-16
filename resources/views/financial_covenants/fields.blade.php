@@ -58,16 +58,6 @@
 @push('scripts')
 <script type="text/javascript">
         var financialCovenantTypes=@json($financialCovenantTypes);
-
-        // $('#date').datetimepicker({
-        //     format: 'YYYY-MM-DD HH:mm:ss',
-        //     useCurrent: true,
-        //     icons: {
-        //         up: "icon-arrow-up-circle icons font-2xl",
-        //         down: "icon-arrow-down-circle icons font-2xl"
-        //     },
-        //     sideBySide: true
-        // })
         createSelectFinancialCovenantTypes();
         setAmount();
 

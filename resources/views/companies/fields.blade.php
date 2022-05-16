@@ -8,9 +8,13 @@
     {!! Form::input('number', 'phone_number', null, ['class' => 'form-control']) !!}
 </div>
 <div class="col-sm-4">
+    {!! Form::label('name', 'Code:') !!}
+    {!! Form::input('code', 'code', null, ['class' => 'form-control']) !!}
+</div>
+<div class="col-sm-4">
     {!! Form::label('name', 'Type:') !!}
     {{-- {!! Form::select($name, $list, $selected, [$options]) !!} --}}
-    {!! Form::select('type', ['pharmacy'=>'pharmacy', 'event'=>'event'],$type, ['class' => 'form-control']) !!}
+    {!! Form::select('type', ['pharmacy'=>'pharmacy', 'event'=>'event','store'=>'store'],$type, ['class' => 'form-control']) !!}
 </div>
 <br>
 <!-- Submit Field -->

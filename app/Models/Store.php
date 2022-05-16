@@ -7,27 +7,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Company
+ * Class Store
  * @package App\Models
- * @version April 29, 2022, 9:00 pm UTC
+ * @version May 15, 2022, 6:06 pm UTC
  *
  * @property string $name
  */
-class Company extends Model
+class Store extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'companies';
-
+    public $table = 'stores';
+    
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        'name','type','phone_number','code'
+        'name'
     ];
 
     /**
@@ -45,8 +45,8 @@ class Company extends Model
      * @var array
      */
     public static $rules = [
-
+        'name' => 'required'
     ];
 
-
+    
 }
