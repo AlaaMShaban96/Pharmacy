@@ -3,7 +3,7 @@
 @section('content')
      <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('receives.index',['type'=>$receive->type]) }}">{{ucfirst($receive->type)}}</a>
+                <a href="{{ route('receives.show',$shipmentModel->receive->id) }}">Shipment Model</a>
             </li>
             <li class="breadcrumb-item active">Detail</li>
      </ol>
@@ -15,10 +15,10 @@
                          <div class="card">
                              <div class="card-header">
                                  <strong>Details</strong>
-                                  <a href="{{ route('receives.index',['type'=>$receive->type]) }}" class="btn btn-light">Back</a>
+                                  <a href="{{ route('receives.show',$shipmentModel->receive->id) }}" class="btn btn-light">Back</a>
                              </div>
                              <div class="card-body">
-                                 @include('receives.show_fields')
+                                 @include('shipment_models.show_fields')
                              </div>
                          </div>
                      </div>

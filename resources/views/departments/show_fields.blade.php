@@ -132,7 +132,7 @@
                 });
         }
         function createTRMaterial(element,index) {
-            return $(" <tr><th class='col-2'>"+index+"</th><td class='col-4' >"+element.name+"</td><td class='col-2' >"+element.code+"</td><td class='col-2' >"+element.cost+"</td><td class='col-2' ><a href='{{ route('financialCovenantTypes.show', ".element.id.") }}' class='btn btn-ghost-success'><i class='fa fa-eye'></i></a><button onclick='onDelete("+element.id+")' type='button' class='btn btn-danger'>Delete</button></td></tr>");
+            return $(" <tr><th class='col-2'>"+index+"</th><td class='col-4' >"+element.name+"</td><td class='col-2' >"+element.code+"</td><td class='col-2' >"+element.cost+"</td><td class='col-2' ><a href='{{ route('financialCovenantTypes.show', ".element.id.") }}' class='btn btn-ghost-success'><i class='fa fa-eye'></i></a><button onclick='onDelete("+element.id+")' type='button' class='btn btn-danger'><i class='fa fa-trash'></i></button></td></tr>");
         }
 </script>
 @endpush

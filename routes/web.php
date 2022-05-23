@@ -113,4 +113,10 @@ Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantCont
 Route::resource('stores', App\Http\Controllers\StoreController::class);
 
 
+
 Route::resource('receives', App\Http\Controllers\ReceiveController::class);
+
+Route::post('addShipmentModels', [App\Http\Controllers\ShipmentModelController::class,'addShipmentModels'])->name('addShipmentModels');
+Route::post('removeShipmentModels', [App\Http\Controllers\ShipmentModelController::class,'removeShipmentModels'])->name('removeShipmentModels');
+
+Route::resource('shipmentModels', App\Http\Controllers\ShipmentModelController::class);

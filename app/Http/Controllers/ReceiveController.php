@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Flash;
 use Response;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\DataTables\ReceiveDataTable;
+use App\Repositories\DrugRepository;
 use App\Repositories\StoreRepository;
 use App\Repositories\CompanyRepository;
 use App\Repositories\ReceiveRepository;
@@ -21,8 +23,11 @@ class ReceiveController extends AppBaseController
     private $companyRepository;
     /** @var StoreRepository $storeRepository*/
     private $storeRepository;
-    public function __construct(StoreRepository $storeRepo,CompanyRepository $companyRepo,ReceiveRepository $receiveRepo)
+    /** @var DrugRepository $drugRepository*/
+    private $drugRepository;
+    public function __construct(DrugRepository $drugRepo,StoreRepository $storeRepo,CompanyRepository $companyRepo,ReceiveRepository $receiveRepo)
     {
+        $this->drugRepository = $drugRepo;
         $this->storeRepository = $storeRepo;
         $this->companyRepository = $companyRepo;
         $this->receiveRepository = $receiveRepo;
@@ -45,7 +50,7 @@ class ReceiveController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $stores=$this->storeRepository->pluck('name','id');
         $all_companies=$this->companyRepository->where('type','store')->get();
@@ -64,12 +69,14 @@ class ReceiveController extends AppBaseController
     public function store(CreateReceiveRequest $request)
     {
         $input = $request->all();
+        // dd($input);
         $input['user_id']=auth()->user()->id;
         $receive = $this->receiveRepository->create($input);
+        // dd($receive->type);
 
         Flash::success('Receive saved successfully.');
 
-        return redirect(route('receives.index'));
+        return redirect(route('receives.index',['type'=>$receive->type]));
     }
 
     /**
@@ -82,14 +89,17 @@ class ReceiveController extends AppBaseController
     public function show($id)
     {
         $receive = $this->receiveRepository->find($id);
+        $drugs=$this->drugRepository->with('drugDosage')->get();
+        $drugsSelect=$drugs->pluck('name','id');
+        $drugscodes=$drugs->pluck('code','id');
 
         if (empty($receive)) {
             Flash::error('Receive not found');
 
-            return redirect(route('receives.index'));
+            return redirect(route('receives.index',['type'=>$receive->type]));
         }
 
-        return view('receives.show')->with('receive', $receive);
+        return view('receives.show',compact('drugscodes','drugs','drugsSelect'))->with('receive', $receive);
     }
 
     /**
@@ -107,7 +117,7 @@ class ReceiveController extends AppBaseController
         if (empty($receive)) {
             Flash::error('Receive not found');
 
-            return redirect(route('receives.index'));
+            return redirect(route('receives.index',['type'=>$receive->type]));
         }
 
         return view('receives.edit',compact('companies','stores'))->with('receive', $receive);
@@ -135,7 +145,7 @@ class ReceiveController extends AppBaseController
 
         Flash::success('Receive updated successfully.');
 
-        return redirect(route('receives.index'));
+        return redirect(route('receives.index',['type'=>$receive->type]));
     }
 
     /**
@@ -159,6 +169,6 @@ class ReceiveController extends AppBaseController
 
         Flash::success('Receive deleted successfully.');
 
-        return redirect(route('receives.index'));
+        return redirect(route('receives.index',['type'=>$receive->type]));
     }
 }

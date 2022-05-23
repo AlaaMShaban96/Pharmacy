@@ -16,18 +16,19 @@ class CreateReceivesTable extends Migration
     {
         Schema::create('receives', function (Blueprint $table) {
             $table->id('id');
-            $table->date('receive_date');
-            $table->date('inventory_date');
-            $table->foreignId('company_id');
+            $table->date('receive_date')->nullable();;
+            $table->date('inventory_date')->nullable();;
+            $table->foreignId('company_id')->nullable();;
             $table->foreignId('store_id');
             $table->foreignId('user_id');
             $table->string('company_code')->nullable();
             $table->string('shipment_number');
-            $table->string('invoice_number');
-            $table->string('packing_list_number');
+            $table->string('invoice_number')->nullable();;
+            $table->string('packing_list_number')->nullable();;
             $table->bigInteger('containers_number');
             $table->bigInteger('pallet_number');
             $table->enum('shipment_type', ['air_freight', 'sea_freight']);
+            $table->enum('type', ['receive','inventory'])->default('receive');
             $table->timestamps();
             $table->softDeletes();
         });

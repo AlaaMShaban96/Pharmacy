@@ -3,7 +3,7 @@
 @section('content')
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-         <a href="{!! route('receives.index',['type'=>request('type')]) !!}">{{ucfirst(request('type'))}}</a>
+         <a href="{!! route('shipmentModels.index') !!}">Shipment Model</a>
       </li>
       <li class="breadcrumb-item active">Create</li>
     </ol>
@@ -15,12 +15,12 @@
                         <div class="card">
                             <div class="card-header">
                                 <i class="fa fa-plus-square-o fa-lg"></i>
-                                <strong>Create {{ucfirst(request('type'))}}</strong>
+                                <strong>Create Shipment Model</strong>
                             </div>
                             <div class="card-body">
-                                {!! Form::open(['route' => 'receives.store']) !!}
+                                {!! Form::open(['route' => 'shipmentModels.store']) !!}
 
-                                   @include('receives.fields')
+                                   @include('shipment_models.fields')
 
                                 {!! Form::close() !!}
                             </div>

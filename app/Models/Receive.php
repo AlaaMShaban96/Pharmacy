@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Models\User;
 use Eloquent as Model;
 use App\Models\Company;
+use App\Models\ShipmentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -51,6 +53,7 @@ class Receive extends Model
         'shipment_type',
         'store_id',
         'user_id',
+        'type',
     ];
 
     /**
@@ -78,15 +81,15 @@ class Receive extends Model
      */
     public static $rules = [
         'receive_date' => 'required',
-        'inventory_date' => 'required',
+        // 'inventory_date' => 'required',
         'company_id' => 'required',
         'company_code' => 'required',
         'shipment_number' => 'required',
-        'invoice_number' => 'required',
-        'packing_list_number' => 'required',
+        // 'invoice_number' => 'required',
+        // 'packing_list_number' => 'required',
         'containers_number' => 'required',
         'pallet_number' => 'required',
-        'shipment_type' => 'required',
+        // 'shipment_type' => 'required',
         'store_id' => 'required',
     ];
 
@@ -107,5 +110,14 @@ class Receive extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+    /**
+     * Get all of the ShipmentModels for the Receive
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function shipmentModels(): HasMany
+    {
+        return $this->hasMany(ShipmentModel::class);
     }
 }

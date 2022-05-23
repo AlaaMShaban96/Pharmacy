@@ -20,11 +20,14 @@
     @endpush
 
 
+    @if (request('type')=='receive')
     <!-- Inventory Date Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('inventory_date', 'Inventory Date:') !!}
-        {!! Form::text('inventory_date', null, ['class' => 'form-control','id'=>'inventory_date']) !!}
-    </div>
+        <div class="form-group col-sm-6">
+            {!! Form::label('inventory_date', 'Inventory Date:') !!}
+            {!! Form::text('inventory_date', null, ['class' => 'form-control','id'=>'inventory_date']) !!}
+        </div>
+    @endif
+
 
     @push('scripts')
     <script type="text/javascript">
@@ -64,18 +67,21 @@
         {!! Form::text('shipment_number', null, ['class' => 'form-control']) !!}
     </div>
 
-    <!-- Invoice Number Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('invoice_number', 'Invoice Number:') !!}
-        {!! Form::text('invoice_number', null, ['class' => 'form-control']) !!}
-    </div>
+    @if (request('type')=='receive')
+        <!-- Invoice Number Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('invoice_number', 'Invoice Number:') !!}
+            {!! Form::text('invoice_number', null, ['class' => 'form-control']) !!}
+        </div>
 
-    <!-- Packing List Number Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('packing_list_number', 'Packing List Number:') !!}
-        {!! Form::text('packing_list_number', null, ['class' => 'form-control']) !!}
-    </div>
 
+
+        <!-- Packing List Number Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('packing_list_number', 'Packing List Number:') !!}
+            {!! Form::text('packing_list_number', null, ['class' => 'form-control']) !!}
+        </div>
+    @endif
     <!-- Containers Number Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('containers_number', 'Containers Number:') !!}
@@ -87,18 +93,21 @@
         {!! Form::label('pallet_number', 'Pallet Number:') !!}
         {!! Form::number('pallet_number', null, ['class' => 'form-control']) !!}
     </div>
-
+    @if (request('type')=='receive')
     <!-- Shipment Type Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('shipment_type', 'Shipment Type:') !!}
-        {!! Form::select('shipment_type', ['air_freight'=>'Air freight', 'sea_freight'=>'Sea freight'], null, ['class' => 'form-control']) !!}
-    </div>
+        <div class="form-group col-sm-6">
+            {!! Form::label('shipment_type', 'Shipment Type:') !!}
+            {!! Form::select('shipment_type', ['air_freight'=>'Air freight', 'sea_freight'=>'Sea freight'], null, ['class' => 'form-control']) !!}
+        </div>
+    @endif
+
 
 </div>
+<input type="hidden" name="type" value="{{request('type')}}">
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{{ route('receives.index') }}" class="btn btn-secondary">Cancel</a>
+    <a href="{{ route('receives.index',['type'=>request('type')]) }}" class="btn btn-secondary">Cancel</a>
 </div>
 @push('scripts')
 

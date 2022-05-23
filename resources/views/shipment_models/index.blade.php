@@ -2,7 +2,7 @@
 
 @section('content')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">{{ucfirst(request('type'))}}</li>
+        <li class="breadcrumb-item">Shipment Models</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -12,13 +12,13 @@
                      <div class="card">
                          <div class="card-header">
                              <i class="fa fa-align-justify"></i>
-                             {{ucfirst(request('type'))}}
-                             <a class="pull-right" href="{{ route('receives.create',['type'=>request('type')]) }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                             ShipmentModels
+                             <a class="pull-right" href="{{ route('shipmentModels.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
-                         <div class="card-body" style="overflow: scroll">
-                             @include('receives.table')
+                         <div class="card-body">
+                             @include('shipment_models.table')
                               <div class="pull-right mr-3">
-
+                                     
                               </div>
                          </div>
                      </div>

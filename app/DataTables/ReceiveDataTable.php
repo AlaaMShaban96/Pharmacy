@@ -20,10 +20,10 @@ class ReceiveDataTable extends DataTable
 
         return $dataTable
         ->editColumn('receive_date', function ($receive) {
-            return $receive->receive_date->format('Y-m-d H:m');
+            return $receive->receive_date?$receive->receive_date->format('Y-m-d H:m'):'';
         })
         ->editColumn('inventory_date', function ($receive) {
-            return $receive->inventory_date->format('Y-m-d H:m');
+            return $receive->inventory_date?$receive->inventory_date->format('Y-m-d H:m'):'';
         })
         ->editColumn('company_id', function ($receive) {
             return $receive->company->name;
@@ -39,7 +39,9 @@ class ReceiveDataTable extends DataTable
      */
     public function query(Receive $model)
     {
-        return $model->newQuery();
+        $query= $model->newQuery();
+        $query->where('type',  request('type'));
+        return $query;
     }
 
     /**
@@ -58,7 +60,7 @@ class ReceiveDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    // ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -74,7 +76,7 @@ class ReceiveDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $columns= [
             [
                 'data' => 'receive_date',
                 'title' => 'Receive date',
@@ -90,10 +92,21 @@ class ReceiveDataTable extends DataTable
                 'title' => 'Company',
                 'searchable' => false,
             ],
-            'company_code',
-            'shipment_number',
-            'invoice_number',
-            'packing_list_number',
+            [
+                'data' => 'company_code',
+                'title' => 'Company code',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'shipment_number',
+                'title' => 'Shipment number',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'invoice_number',
+                'title' => 'Invoice number',
+                'searchable' => false,
+            ],
             [
                 'data' => 'packing_list_number',
                 'title' => 'Packing list',
@@ -109,8 +122,34 @@ class ReceiveDataTable extends DataTable
                 'title' => 'Pallet',
                 'searchable' => false,
             ],
-            'shipment_type'
+            [
+                'data' => 'shipment_type',
+                'title' => 'Shipment type',
+                'searchable' => false,
+            ],
         ];
+        if ( request('type')=='inventory') {
+            foreach ($columns as $key => $column) {
+               switch ($column['data']) {
+                    case 'inventory_date':
+                        unset($columns[$key]);
+                        break;
+                    case 'invoice_number':
+                        unset($columns[$key]);
+                        break;
+                    case 'packing_list_number':
+                        unset($columns[$key]);
+                        break;
+                    case 'shipment_type':
+                        unset($columns[$key]);
+                        break;
+
+               }
+            }
+
+        }
+        return $columns;
+
     }
 
     /**

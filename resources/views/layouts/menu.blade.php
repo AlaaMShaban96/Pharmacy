@@ -183,9 +183,15 @@
 
 <div class="collapse {{ (Request::is('stores*')||Request::is('receives*') )? 'show ' : ''}}" id="collapseRepository">
     <li class="nav-item {{ Request::is('receives*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('receives.index') }}">
+        <a class="nav-link" href="{{ route('receives.index',['type'=>'receive']) }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Receives</span>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('receives*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('receives.index',['type'=>'inventory']) }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Inventory</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('stores*') ? 'active' : '' }}">
@@ -217,3 +223,9 @@
     </a>
 </li> --}}
 
+<li class="nav-item {{ Request::is('shipmentModels*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('shipmentModels.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Shipment Models</span>
+    </a>
+</li>

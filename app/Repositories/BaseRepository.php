@@ -202,4 +202,10 @@ abstract class BaseRepository
 
         return $query->where($column, $value);
     }
+    public function with($model)
+    {
+        $query = $this->model->newQuery();
+
+        return $query->with($model);
+    }
 }
