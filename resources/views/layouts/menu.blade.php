@@ -229,3 +229,15 @@
         <span>Shipment Models</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('sampleReceiveds*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('sampleReceiveds.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Sample Receiveds</span>
+    </a>
+</li>
+<li class="nav-item {{ Request::is('doctors*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('doctors.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Doctors</span>
+    </a>
+</li>

@@ -89,7 +89,7 @@ class DrugController extends AppBaseController
     public function create()
     {
 
-        $companies=$this->companyRepository->pluck('name','id');
+        $companies=$this->companyRepository->where('type','pharmacy')->pluck('name','id');
         $drugDosages=$this->drugDosageRepository->pluck('name','id');
         $currencies=$this->currencyRepository->pluck('name','id');
         $packages=$this->packageRepository->pluck('name','id');
@@ -136,7 +136,7 @@ class DrugController extends AppBaseController
     public function show(DrugsViewDatatable $drugDataTable,$id)
     {
         $drug = $this->drugRepository->find($id);
-        $companies=$this->companyRepository->pluck('name','id');
+        $companies=$this->companyRepository->where('type','pharmacy')->pluck('name','id');
         $drugDosages=$this->drugDosageRepository->pluck('name','id');
         $currencies=$this->currencyRepository->pluck('name','id');
         $packages=$this->packageRepository->pluck('name','id');
@@ -163,7 +163,7 @@ class DrugController extends AppBaseController
      */
     public function edit(Drug $drug)
     {
-        $companies=$this->companyRepository->pluck('name','id');
+        $companies=$this->companyRepository->where('type','pharmacy')->pluck('name','id');
         $drugDosages=$this->drugDosageRepository->pluck('name','id');
         $currencies=$this->currencyRepository->pluck('name','id');
         $packages=$this->packageRepository->pluck('name','id');

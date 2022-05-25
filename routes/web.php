@@ -120,3 +120,9 @@ Route::post('addShipmentModels', [App\Http\Controllers\ShipmentModelController::
 Route::post('removeShipmentModels', [App\Http\Controllers\ShipmentModelController::class,'removeShipmentModels'])->name('removeShipmentModels');
 
 Route::resource('shipmentModels', App\Http\Controllers\ShipmentModelController::class);
+
+
+Route::resource('sampleReceiveds', App\Http\Controllers\SampleReceivedController::class);
+
+
+Route::resource('doctors', App\Http\Controllers\DoctorController::class);
