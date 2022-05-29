@@ -208,4 +208,10 @@ abstract class BaseRepository
 
         return $query->with($model);
     }
+    public function query()
+    {
+        $query = $this->model->newQuery();
+
+        return $query;
+    }
 }

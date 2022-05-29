@@ -126,3 +126,10 @@ Route::resource('sampleReceiveds', App\Http\Controllers\SampleReceivedController
 
 
 Route::resource('doctors', App\Http\Controllers\DoctorController::class);
+
+
+Route::resource('orders', App\Http\Controllers\OrderController::class);
+
+Route::post('orderRequests/{id}/status', [App\Http\Controllers\OrderRequestController::class,'changeStatus'])->name('orderRequests.changeStatus');
+
+Route::resource('orderRequests', App\Http\Controllers\OrderRequestController::class);
