@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{{config('app.name')}}</title>
+    <meta name="_token" content="{{ csrf_token() }}"/>
+
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 4.1.1 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
@@ -107,6 +109,8 @@
 </body>
 <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 <!-- jQuery 3.1.1 -->
+
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

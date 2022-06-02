@@ -133,3 +133,10 @@ Route::resource('orders', App\Http\Controllers\OrderController::class);
 Route::post('orderRequests/{id}/status', [App\Http\Controllers\OrderRequestController::class,'changeStatus'])->name('orderRequests.changeStatus');
 
 Route::resource('orderRequests', App\Http\Controllers\OrderRequestController::class);
+
+
+Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+
+Route::post('roles/{role}/permissions/{permission}', [App\Http\Controllers\RoleController::class,'addPermission'])->name('user');
+
+Route::resource('roles', App\Http\Controllers\RoleController::class);
