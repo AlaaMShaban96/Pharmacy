@@ -17,11 +17,13 @@ class CreatePermissionRolesSeeder extends Seeder
     {
         DB::transaction(function () {
             $roles=[
+                ['name' => 'Super Admin','guard_name'=>'web'],
                 ['name' => 'Admin','guard_name'=>'web'],
+                ['name' => 'Moderator','guard_name'=>'web'],
                 ['name' => 'User','guard_name'=>'web'],
-                ['name' => 'Company','guard_name'=>'web'],
             ];
             Role::insert($roles);
+
         });
     }
 }

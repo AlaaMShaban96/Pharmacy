@@ -47,10 +47,10 @@ Route::resource('tests', App\Http\Controllers\TestController::class);
 Route::resource('countries', App\Http\Controllers\CountryController::class);
 
 
-Route::resource('strata', App\Http\Controllers\StratumController::class);
+Route::resource('strata', App\Http\Controllers\StratumController::class );
 
 
-Route::resource('routes', App\Http\Controllers\RouteController::class);
+Route::resource('forms', App\Http\Controllers\RouteController::class,['names' => 'forms']);
 
 
 Route::resource('laboratories', App\Http\Controllers\LaboratoryController::class);
@@ -135,7 +135,8 @@ Route::post('orderRequests/{id}/status', [App\Http\Controllers\OrderRequestContr
 Route::resource('orderRequests', App\Http\Controllers\OrderRequestController::class);
 
 
-Route::resource('roles', App\Http\Controllers\RoleController::class);
-
-
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+
+Route::post('roles/{role}/permissions/{permission}', [App\Http\Controllers\RoleController::class,'addPermission'])->name('user');
+
+Route::resource('roles', App\Http\Controllers\RoleController::class);

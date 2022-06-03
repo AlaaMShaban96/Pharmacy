@@ -58,7 +58,7 @@ class RouteController extends AppBaseController
 
         Flash::success('Route saved successfully.');
 
-        return redirect(route('routes.index'));
+        return redirect(route('forms.index'));
     }
 
     /**
@@ -75,7 +75,7 @@ class RouteController extends AppBaseController
         if (empty($route)) {
             Flash::error('Route not found');
 
-            return redirect(route('routes.index'));
+            return redirect(route('forms.index'));
         }
 
         return view('routes.show')->with('route', $route);
@@ -95,7 +95,7 @@ class RouteController extends AppBaseController
         if (empty($route)) {
             Flash::error('Route not found');
 
-            return redirect(route('routes.index'));
+            return redirect(route('forms.index'));
         }
 
         return view('routes.edit')->with('route', $route);
@@ -116,14 +116,14 @@ class RouteController extends AppBaseController
         if (empty($route)) {
             Flash::error('Route not found');
 
-            return redirect(route('routes.index'));
+            return redirect(route('forms.index'));
         }
 
         $route = $this->routeRepository->update($request->all(), $id);
 
         Flash::success('Route updated successfully.');
 
-        return redirect(route('routes.index'));
+        return redirect(route('forms.index'));
     }
 
     /**
@@ -140,13 +140,13 @@ class RouteController extends AppBaseController
         if (empty($route)) {
             Flash::error('Route not found');
 
-            return redirect(route('routes.index'));
+            return redirect(route('forms.index'));
         }
 
         $this->routeRepository->delete($id);
 
         Flash::success('Route deleted successfully.');
 
-        return redirect(route('routes.index'));
+        return redirect(route('forms.index'));
     }
 }

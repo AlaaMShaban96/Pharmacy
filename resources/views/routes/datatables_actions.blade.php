@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['routes.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['forms.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('routes.show', $id) }}" class='btn btn-ghost-success'>
+    <a href="{{ route('forms.show', $id) }}" class='btn btn-ghost-success'>
        <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('routes.edit', $id) }}" class='btn btn-ghost-info'>
+    <a href="{{ route('forms.edit', $id) }}" class='btn btn-ghost-info'>
        <i class="fa fa-edit"></i>
     </a>
     {!! Form::button('<i class="fa fa-trash"></i>', [

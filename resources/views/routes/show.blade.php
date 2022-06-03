@@ -3,7 +3,7 @@
 @section('content')
      <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('routes.index') }}">Route</a>
+                <a href="{{ route('forms.index') }}">Forms</a>
             </li>
             <li class="breadcrumb-item active">Detail</li>
      </ol>
@@ -15,7 +15,7 @@
                          <div class="card">
                              <div class="card-header">
                                  <strong>Details</strong>
-                                  <a href="{{ route('routes.index') }}" class="btn btn-light">Back</a>
+                                  <a href="{{ route('forms.index') }}" class="btn btn-light">Back</a>
                              </div>
                              <div class="card-body">
                                  @include('routes.show_fields')

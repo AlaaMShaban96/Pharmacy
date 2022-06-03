@@ -61,8 +61,8 @@
             <span>Specialty</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('routes*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('routes.index') }}">
+    <li class="nav-item {{ Request::is('forms*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('forms.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Forms</span>
         </a>
