@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\DoctorDataTable;
+use Flash;
+use Response;
 use App\Http\Requests;
+use App\DataTables\DoctorDataTable;
+use App\Repositories\UserRepository;
+use App\Repositories\DoctorRepository;
 use App\Http\Requests\CreateDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
-use App\Repositories\DoctorRepository;
-use Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class DoctorController extends AppBaseController
 {
     /** @var DoctorRepository $doctorRepository*/
     private $doctorRepository;
-
-    public function __construct(DoctorRepository $doctorRepo)
+    /** @var UserRepository $userRepository*/
+    private $userRepository;
+    public function __construct(UserRepository $userRepo,DoctorRepository $doctorRepo)
     {
+        $this->userRepository = $userRepo;
         $this->doctorRepository = $doctorRepo;
     }
 
@@ -55,6 +58,11 @@ class DoctorController extends AppBaseController
         $input = $request->all();
 
         $doctor = $this->doctorRepository->create($input);
+        $user = $this->userRepository->create([
+            'name'=>$doctor->name,
+            'mobile'=>$doctor->phone_number,
+            'password'=>bcrypt($doctor->phone_number)
+        ]);
 
         Flash::success('Doctor saved successfully.');
 

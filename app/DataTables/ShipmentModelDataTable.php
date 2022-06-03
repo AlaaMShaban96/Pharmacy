@@ -71,7 +71,7 @@ class ShipmentModelDataTable extends DataTable
             'playback_number',
             'location',
             'count',
-            'In_kind_inventory',
+            'in_kind_inventory',
             'samples',
             'damaged',
             'free',

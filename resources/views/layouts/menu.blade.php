@@ -223,12 +223,12 @@
     </a>
 </li> --}}
 
-<li class="nav-item {{ Request::is('shipmentModels*') ? 'active' : '' }}">
+{{-- <li class="nav-item {{ Request::is('shipmentModels*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('shipmentModels.index') }}">
         <i class="nav-icon icon-cursor"></i>
         <span>Shipment Models</span>
     </a>
-</li>
+</li> --}}
 <li class="nav-item {{ Request::is('sampleReceiveds*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('sampleReceiveds.index') }}">
         <i class="nav-icon icon-cursor"></i>
@@ -259,9 +259,9 @@
         <span>Roles</span>
     </a>
 </li>
-<li class="nav-item {{ Request::is('permissions*') ? 'active' : '' }}">
+{{-- <li class="nav-item {{ Request::is('permissions*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('permissions.index') }}">
         <i class="nav-icon icon-cursor"></i>
         <span>Permissions</span>
     </a>
-</li>
+</li> --}}

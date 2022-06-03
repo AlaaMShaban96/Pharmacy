@@ -7,6 +7,7 @@ use Response;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\DrugRepository;
 use App\Repositories\ReceiveRepository;
 use App\DataTables\ShipmentModelDataTable;
 use App\Http\Controllers\AppBaseController;
@@ -20,8 +21,11 @@ class ShipmentModelController extends AppBaseController
     private $shipmentModelRepository;
         /** @var ReceiveRepository $receiveRepository*/
     private $receiveRepository;
-    public function __construct(ReceiveRepository $receiveRepo,ShipmentModelRepository $shipmentModelRepo)
+    /** @var DrugRepository $drugRepository*/
+    private $drugRepository;
+    public function __construct(DrugRepository $drugRepo,ReceiveRepository $receiveRepo,ShipmentModelRepository $shipmentModelRepo)
     {
+        $this->drugRepository = $drugRepo;
         $this->receiveRepository = $receiveRepo;
         $this->shipmentModelRepository = $shipmentModelRepo;
     }
@@ -45,7 +49,12 @@ class ShipmentModelController extends AppBaseController
      */
     public function create()
     {
-        return view('shipment_models.create');
+        $drugs=$this->drugRepository->all();
+
+        $drugscodes=$drugs->pluck('code','code');
+        $drugsSelect=$drugs->pluck('name','id');
+
+        return view('shipment_models.create',compact('drugs','drugscodes','drugsSelect'));
     }
 
     /**

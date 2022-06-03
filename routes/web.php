@@ -135,8 +135,7 @@ Route::post('orderRequests/{id}/status', [App\Http\Controllers\OrderRequestContr
 Route::resource('orderRequests', App\Http\Controllers\OrderRequestController::class);
 
 
-Route::resource('permissions', App\Http\Controllers\PermissionController::class);
-
-Route::post('roles/{role}/permissions/{permission}', [App\Http\Controllers\RoleController::class,'addPermission'])->name('user');
-
 Route::resource('roles', App\Http\Controllers\RoleController::class);
+
+
+Route::resource('permissions', App\Http\Controllers\PermissionController::class);
