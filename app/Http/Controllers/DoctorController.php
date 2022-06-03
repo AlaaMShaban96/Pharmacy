@@ -6,6 +6,7 @@ use Flash;
 use Response;
 use App\Http\Requests;
 use App\DataTables\DoctorDataTable;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\DoctorRepository;
 use App\Http\Requests\CreateDoctorRequest;
@@ -18,8 +19,11 @@ class DoctorController extends AppBaseController
     private $doctorRepository;
     /** @var UserRepository $userRepository*/
     private $userRepository;
-    public function __construct(UserRepository $userRepo,DoctorRepository $doctorRepo)
+    /** @var RoleRepository $roleRepository*/
+    private $roleRepository;
+    public function __construct(RoleRepository $roleRepo,UserRepository $userRepo,DoctorRepository $doctorRepo)
     {
+        $this->roleRepository = $roleRepo;
         $this->userRepository = $userRepo;
         $this->doctorRepository = $doctorRepo;
     }
@@ -63,7 +67,8 @@ class DoctorController extends AppBaseController
             'mobile'=>$doctor->phone_number,
             'password'=>bcrypt($doctor->phone_number)
         ]);
-
+        $role=$this->roleRepository->where('name','User')->first();
+        $user->assignRole($role);
         Flash::success('Doctor saved successfully.');
 
         return redirect(route('doctors.index'));
