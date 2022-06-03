@@ -3,7 +3,7 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('strata.index') !!}">Stratum</a>
+             <a href="{!! route('specialties.index') !!}">Specialties</a>
           </li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
@@ -15,10 +15,10 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit Stratum</strong>
+                              <strong>Edit Specialty</strong>
                           </div>
                           <div class="card-body">
-                              {!! Form::model($stratum, ['route' => ['strata.update', $stratum->id], 'method' => 'patch']) !!}
+                              {!! Form::model($stratum, ['route' => ['specialties.update', $stratum->id], 'method' => 'patch']) !!}
 
                               @include('strata.fields')
 

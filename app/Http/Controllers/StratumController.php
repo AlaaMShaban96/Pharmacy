@@ -58,7 +58,7 @@ class StratumController extends AppBaseController
 
         Flash::success('Stratum saved successfully.');
 
-        return redirect(route('strata.index'));
+        return redirect(route('specialties.index'));
     }
 
     /**
@@ -75,7 +75,7 @@ class StratumController extends AppBaseController
         if (empty($stratum)) {
             Flash::error('Stratum not found');
 
-            return redirect(route('strata.index'));
+            return redirect(route('specialties.index'));
         }
 
         return view('strata.show')->with('stratum', $stratum);
@@ -95,7 +95,7 @@ class StratumController extends AppBaseController
         if (empty($stratum)) {
             Flash::error('Stratum not found');
 
-            return redirect(route('strata.index'));
+            return redirect(route('specialties.index'));
         }
 
         return view('strata.edit')->with('stratum', $stratum);
@@ -116,14 +116,14 @@ class StratumController extends AppBaseController
         if (empty($stratum)) {
             Flash::error('Stratum not found');
 
-            return redirect(route('strata.index'));
+            return redirect(route('specialties.index'));
         }
 
         $stratum = $this->stratumRepository->update($request->all(), $id);
 
         Flash::success('Stratum updated successfully.');
 
-        return redirect(route('strata.index'));
+        return redirect(route('specialties.index'));
     }
 
     /**
@@ -140,13 +140,13 @@ class StratumController extends AppBaseController
         if (empty($stratum)) {
             Flash::error('Stratum not found');
 
-            return redirect(route('strata.index'));
+            return redirect(route('specialties.index'));
         }
 
         $this->stratumRepository->delete($id);
 
         Flash::success('Stratum deleted successfully.');
 
-        return redirect(route('strata.index'));
+        return redirect(route('specialties.index'));
     }
 }

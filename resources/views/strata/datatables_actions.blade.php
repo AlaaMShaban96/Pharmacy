@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['strata.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['specialties.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('strata.show', $id) }}" class='btn btn-ghost-success'>
+    <a href="{{ route('specialties.show', $id) }}" class='btn btn-ghost-success'>
        <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('strata.edit', $id) }}" class='btn btn-ghost-info'>
+    <a href="{{ route('specialties.edit', $id) }}" class='btn btn-ghost-info'>
        <i class="fa fa-edit"></i>
     </a>
     {!! Form::button('<i class="fa fa-trash"></i>', [

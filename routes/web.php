@@ -47,7 +47,7 @@ Route::resource('tests', App\Http\Controllers\TestController::class);
 Route::resource('countries', App\Http\Controllers\CountryController::class);
 
 
-Route::resource('strata', App\Http\Controllers\StratumController::class );
+Route::resource('specialties', App\Http\Controllers\StratumController::class,['names' => 'specialties'] );
 
 
 Route::resource('forms', App\Http\Controllers\RouteController::class,['names' => 'forms']);

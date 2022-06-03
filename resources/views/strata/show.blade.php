@@ -3,7 +3,7 @@
 @section('content')
      <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('strata.index') }}">Stratum</a>
+                <a href="{{ route('specialties.index') }}">Specialties</a>
             </li>
             <li class="breadcrumb-item active">Detail</li>
      </ol>
@@ -15,7 +15,7 @@
                          <div class="card">
                              <div class="card-header">
                                  <strong>Details</strong>
-                                  <a href="{{ route('strata.index') }}" class="btn btn-light">Back</a>
+                                  <a href="{{ route('specialties.index') }}" class="btn btn-light">Back</a>
                              </div>
                              <div class="card-body">
                                  @include('strata.show_fields')

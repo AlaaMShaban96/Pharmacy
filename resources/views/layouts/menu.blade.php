@@ -56,7 +56,7 @@
         </a>
     </li>
     <li class="nav-item {{ Request::is('strata*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('strata.index') }}">
+        <a class="nav-link" href="{{ route('specialties.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Specialty</span>
         </a>
