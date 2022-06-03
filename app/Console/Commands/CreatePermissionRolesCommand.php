@@ -47,6 +47,7 @@ class CreatePermissionRolesCommand extends Command
         try {
             DB::beginTransaction();
                 Artisan::call('cache:clear');
+                Permission::whereNotNull('id')->delete();
                 $this->info("Building .....!");
                 $routeCollection = Route::getRoutes();
                 $this->output->progressStart(count($routeCollection));

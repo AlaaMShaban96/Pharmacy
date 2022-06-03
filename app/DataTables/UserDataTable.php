@@ -30,7 +30,8 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery();
+        $user=User::where('email','admin@email.com')->first();
+        return $model->newQuery()->where('id','!=',$user->id);
     }
 
     /**
