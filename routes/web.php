@@ -53,7 +53,7 @@ Route::resource('strata', App\Http\Controllers\StratumController::class );
 Route::resource('forms', App\Http\Controllers\RouteController::class,['names' => 'forms']);
 
 
-Route::resource('laboratories', App\Http\Controllers\LaboratoryController::class);
+Route::resource('suppliers', App\Http\Controllers\LaboratoryController::class ,['names' => 'suppliers']);
 
 
 Route::resource('users', App\Http\Controllers\UserController::class);

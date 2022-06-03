@@ -13,7 +13,7 @@
                          <div class="card-header">
                              <i class="fa fa-align-justify"></i>
                              Suppliers
-                             <a class="pull-right" href="{{ route('laboratories.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                             <a class="pull-right" href="{{ route('suppliers.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
                          <div class="card-body">
                              @include('laboratories.table')

@@ -68,7 +68,7 @@
         </a>
     </li>
     <li class="nav-item {{ Request::is('laboratories*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('laboratories.index') }}">
+        <a class="nav-link" href="{{ route('suppliers.index') }}">
             <i class="nav-icon icon-cursor"></i>
             <span>Suppliers</span>
         </a>

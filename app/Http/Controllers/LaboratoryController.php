@@ -58,7 +58,7 @@ class LaboratoryController extends AppBaseController
 
         Flash::success('Laboratory saved successfully.');
 
-        return redirect(route('laboratories.index'));
+        return redirect(route('suppliers.index'));
     }
 
     /**
@@ -75,7 +75,7 @@ class LaboratoryController extends AppBaseController
         if (empty($laboratory)) {
             Flash::error('Laboratory not found');
 
-            return redirect(route('laboratories.index'));
+            return redirect(route('suppliers.index'));
         }
 
         return view('laboratories.show')->with('laboratory', $laboratory);
@@ -95,7 +95,7 @@ class LaboratoryController extends AppBaseController
         if (empty($laboratory)) {
             Flash::error('Laboratory not found');
 
-            return redirect(route('laboratories.index'));
+            return redirect(route('suppliers.index'));
         }
 
         return view('laboratories.edit')->with('laboratory', $laboratory);
@@ -116,14 +116,14 @@ class LaboratoryController extends AppBaseController
         if (empty($laboratory)) {
             Flash::error('Laboratory not found');
 
-            return redirect(route('laboratories.index'));
+            return redirect(route('suppliers.index'));
         }
 
         $laboratory = $this->laboratoryRepository->update($request->all(), $id);
 
         Flash::success('Laboratory updated successfully.');
 
-        return redirect(route('laboratories.index'));
+        return redirect(route('suppliers.index'));
     }
 
     /**
@@ -140,13 +140,13 @@ class LaboratoryController extends AppBaseController
         if (empty($laboratory)) {
             Flash::error('Laboratory not found');
 
-            return redirect(route('laboratories.index'));
+            return redirect(route('suppliers.index'));
         }
 
         $this->laboratoryRepository->delete($id);
 
         Flash::success('Laboratory deleted successfully.');
 
-        return redirect(route('laboratories.index'));
+        return redirect(route('suppliers.index'));
     }
 }
