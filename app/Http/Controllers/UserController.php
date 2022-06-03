@@ -2,22 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\UserDataTable;
+use Flash;
+use Response;
 use App\Http\Requests;
+use App\DataTables\UserDataTable;
+use App\Repositories\RoleRepository;
+use App\Repositories\UserRepository;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Repositories\UserRepository;
-use Flash;
+use App\Repositories\DepartmentRepository;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class UserController extends AppBaseController
 {
     /** @var UserRepository $userRepository*/
     private $userRepository;
-
-    public function __construct(UserRepository $userRepo)
+    /** @var DepartmentRepository $departmentRepository*/
+    private $departmentRepository;
+    /** @var RoleRepository $roleRepository*/
+    private $roleRepository;
+    public function __construct(RoleRepository $roleRepo,DepartmentRepository $departmentRepo,UserRepository $userRepo)
     {
+        $this->roleRepository = $roleRepo;
+        $this->departmentRepository = $departmentRepo;
         $this->userRepository = $userRepo;
     }
 
@@ -40,7 +47,9 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        $departments=$this->departmentRepository->pluck('name','id');
+        $roles=$this->roleRepository->pluck('name','id');
+        return view('users.create',compact('departments','roles'));
     }
 
     /**
@@ -53,9 +62,12 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
+        $input['password'] = bcrypt($request->password);
+        // dd( $input );
 
         $user = $this->userRepository->create($input);
-
+        $role = $this->roleRepository->find($request->role_id);
+        $user->assignRole($role);
         Flash::success('User saved successfully.');
 
         return redirect(route('users.index'));
@@ -91,14 +103,15 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
-
+        $departments=$this->departmentRepository->pluck('name','id');
+        $roles=$this->roleRepository->pluck('name','id');
         if (empty($user)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit',compact('departments','roles'))->with('user', $user);
     }
 
     /**
@@ -118,9 +131,18 @@ class UserController extends AppBaseController
 
             return redirect(route('users.index'));
         }
+        $input = $request->all();
+        if (isset($input['password'])) {
+            $input['password'] = bcrypt($request->password);
+        }else {
+            $input['password']=$user->password;
+        }
 
-        $user = $this->userRepository->update($request->all(), $id);
-
+        $user = $this->userRepository->update($input, $id);
+        if (isset($input['role_id'])) {
+            $role = $this->roleRepository->find($request->role_id);
+            $user->syncRoles($role);
+        }
         Flash::success('User updated successfully.');
 
         return redirect(route('users.index'));

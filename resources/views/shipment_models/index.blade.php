@@ -15,10 +15,10 @@
                              ShipmentModels
                              <a class="pull-right" href="{{ route('shipmentModels.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
-                         <div class="card-body">
+                         <div class="card-body" style="overflow: scroll">
                              @include('shipment_models.table')
                               <div class="pull-right mr-3">
-                                     
+
                               </div>
                          </div>
                      </div>

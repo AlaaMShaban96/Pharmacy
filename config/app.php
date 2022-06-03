@@ -171,6 +171,7 @@ return [
         Yajra\DataTables\ButtonsServiceProvider::class,
         // Yajra\DataTables\HtmlServiceProvider::class,
         // Yajra\DataTables\ButtonsServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */
