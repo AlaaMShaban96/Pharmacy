@@ -7,6 +7,7 @@ use App\Models\Department;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,7 @@ class User extends Authenticatable
 {
     use HasRoles;
     use HasFactory, Notifiable;
+    // use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -41,7 +43,7 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required',
-        'mobile' => 'required',
+        'mobile' => 'required|unique:users',
         'department_id' => 'required'
     ];
     /**
@@ -69,5 +71,9 @@ class User extends Authenticatable
     public function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
+    }
+    public function isDoctor()
+    {
+        return $this->doctor()->exists();
     }
 }

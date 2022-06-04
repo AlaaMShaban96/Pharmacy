@@ -65,9 +65,10 @@ class DoctorController extends AppBaseController
         $user = $this->userRepository->create([
             'name'=>$doctor->name,
             'mobile'=>$doctor->phone_number,
-            'password'=>bcrypt($doctor->phone_number)
+            'password'=>bcrypt($doctor->phone_number),
+            'doctor_id'=>$doctor->id
         ]);
-        $role=$this->roleRepository->where('name','User')->first();
+        $role=$this->roleRepository->where('name','User|Pro')->first();
         $user->assignRole($role);
         Flash::success('Doctor saved successfully.');
 
@@ -155,7 +156,7 @@ class DoctorController extends AppBaseController
 
             return redirect(route('doctors.index'));
         }
-
+        $doctor->user->delete();
         $this->doctorRepository->delete($id);
 
         Flash::success('Doctor deleted successfully.');

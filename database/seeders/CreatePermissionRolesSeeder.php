@@ -20,9 +20,18 @@ class CreatePermissionRolesSeeder extends Seeder
             Role::whereNotNull('id')->delete();
             $roles=[
                 ['name' => 'Super Admin','guard_name'=>'web'],
-                ['name' => 'Admin','guard_name'=>'web'],
-                ['name' => 'Moderator','guard_name'=>'web'],
-                ['name' => 'User','guard_name'=>'web'],
+
+                ['name' => 'Admin|Pro','guard_name'=>'web'],
+                ['name' => 'Moderator|Pro','guard_name'=>'web'],
+                ['name' => 'User|Pro','guard_name'=>'web'],
+
+                ['name' => 'Admin|War','guard_name'=>'web'],
+                ['name' => 'Moderator|War','guard_name'=>'web'],
+                ['name' => 'User|War','guard_name'=>'web'],
+
+                ['name' => 'Admin|supplier','guard_name'=>'web'],
+                ['name' => 'Moderator|supplier','guard_name'=>'web'],
+                ['name' => 'User|supplier','guard_name'=>'web'],
             ];
             $user=User::create([
                 'name'=>'Super Admin',

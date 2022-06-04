@@ -71,7 +71,7 @@
                 <div class="dropdown-header text-center">
                     <strong>Settings</strong>
                 </div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{route('users.edit',auth()->user()->id)}}">
                     <i class="fa fa-user"></i> Profile</a>
                 <a class="dropdown-item" href="#">
                     <i class="fa fa-wrench"></i> Settings</a>

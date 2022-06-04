@@ -13,12 +13,14 @@
                          <div class="card-header">
                              <i class="fa fa-align-justify"></i>
                              OrderRequests
-                             <a class="pull-right" href="{{ route('orderRequests.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                             @can('orderRequests.create')
+                                <a class="pull-right" href="{{ route('orderRequests.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
+                             @endcan
                          </div>
                          <div class="card-body">
                              @include('order_requests.table')
                               <div class="pull-right mr-3">
-                                     
+
                               </div>
                          </div>
                      </div>

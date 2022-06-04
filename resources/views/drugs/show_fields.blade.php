@@ -1,5 +1,5 @@
 
-<div class="row "style="overflow: scroll">
+<div class="row "style="overflow: scroll;overflow: scroll;padding-left: 4%;padding-right: 6%;">
 
     <table class="table table-striped table-bordered">
         <tr class="bg-success">
@@ -9,6 +9,7 @@
             <td>Supplier</td>
             <td>Country</td>
             <td>Brand name</td>
+            <td>Ingredients</td>
             <td>Dosage</td>
             <td>Form</td>
             <td>Pack size</td>
@@ -30,6 +31,7 @@
                 <td>{{$drug->laboratory->name}}</td>
                 <td>{{$drug->country->name}}</td>
                 <td>{{$drug->name}}</td>
+                <td>{{$drug->ingredients}}</td>
                 <td>{{$drug->drugDosage->name}}</td>
                 <td>{{$drug->route->name}}</td>
                 <td>{{$drug->package->name}}</td>

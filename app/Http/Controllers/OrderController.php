@@ -85,6 +85,8 @@ class OrderController extends AppBaseController
         // try {
         //     DB::beginTransaction();
                 $input = $request->all();
+                // dd($input['doctor_id']);
+
                 $orderRequest = $this->orderRequestRepository->create([
                     'code'=>'sfweg',
                     'doctor_id'=>$input['doctor_id'],

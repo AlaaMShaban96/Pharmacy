@@ -8,7 +8,7 @@
     <!-- User Id Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('user_id', 'User Id:') !!}
-        <p>{{ $department->user->name }}</p>
+        <p>{{ $department->user?$department->user->name:''}}</p>
     </div>
 
     <!-- D Code Field -->

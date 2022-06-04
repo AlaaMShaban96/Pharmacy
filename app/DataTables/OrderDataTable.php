@@ -29,7 +29,13 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {
-        return $model->newQuery();
+       $query= $model->newQuery();
+        if (auth()->user()->isDoctor()) {
+            $query->whereHas('orderRequest', function($q){
+                $q->where('doctor_id ',auth()->user()->doctor->id);
+            });
+        }
+        return $query;
     }
 
     /**

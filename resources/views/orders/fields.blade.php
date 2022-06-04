@@ -1,5 +1,5 @@
 <div class="row">
-    @if (false)
+    @if (!auth()->user()->isDoctor())
         <!-- Doctor Id Field -->
         <div class="form-group col-sm-6">
             {!! Form::label('doctor_id', 'Doctor Id:') !!}
@@ -7,7 +7,7 @@
         </div>
 
     @else
-        <input type="hidden" name="doctor_id" value="{{auth()->user()->id }}">
+        <input type="hidden" name="doctor_id" value="{{auth()->user()->doctor->id }}">
     @endif
 
 

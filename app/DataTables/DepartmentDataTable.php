@@ -20,7 +20,7 @@ class DepartmentDataTable extends DataTable
 
         return $dataTable
         ->editColumn('user_id', function ($department) {
-            return $department->user->name;
+            return $department->user?$department->user->name:'';
         })
         ->addColumn('action', 'departments.datatables_actions');
     }

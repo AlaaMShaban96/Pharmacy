@@ -18,7 +18,7 @@ class CreatePermissionRolesCommand extends Command
      * @var string
      */
     protected $signature = 'command:CreatePermissionRolesCommand';
-    protected $except=['api.','debugbar.','generated::CIkxnYur6hV3Z9cC','generated::8SRveb5QEUlAFgCS','generated::MXCH89Pg6paZ7vdX','swaggervel.','requestApprove','visitStore','storeFilter','cityFilter','dashboard-get-products','get-orders','getProducts','create','addstore','thanks'];
+    protected $except=['logout','home','register','login','password.','permissions.','api.','debugbar.','generated::CIkxnYur6hV3Z9cC','generated::8SRveb5QEUlAFgCS','generated::MXCH89Pg6paZ7vdX','swaggervel.','requestApprove','visitStore','storeFilter','cityFilter','dashboard-get-products','get-orders','getProducts','create','addstore','thanks'];
 
     /**
      * The console command description.
@@ -51,7 +51,17 @@ class CreatePermissionRolesCommand extends Command
                 $this->info("Building .....!");
                 $routeCollection = Route::getRoutes();
                 $this->output->progressStart(count($routeCollection));
+                $permission=[
+                    ['name' => 'Health','guard_name'=>'web'],
+                    ['name' => 'PocketMoney','guard_name'=>'web'],
+                    ['name' => 'Repository','guard_name'=>'web'],
+                    ['name' => 'Events','guard_name'=>'web'],
+                    ['name' => 'Samples','guard_name'=>'web'],
+                    ['name' => 'Settings','guard_name'=>'web'],
 
+
+                ];
+                Permission::insert($permission);
                 foreach ($routeCollection as $route) {
                     if ($route->getName() != null ) {
                         try{
@@ -64,8 +74,9 @@ class CreatePermissionRolesCommand extends Command
                         }
                     }
                 }
+
                 $permissions=Permission::pluck('id');
-                $role=Role::where('name','Admin')->first();
+                $role=Role::where('name','like','%Super Admin%')->first();
                 $role->syncPermissions($permissions);
                 Artisan::call('cache:clear');
                 $this->output->progressFinish();

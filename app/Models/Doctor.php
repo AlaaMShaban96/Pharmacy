@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -21,7 +23,7 @@ class Doctor extends Model
     use HasFactory;
 
     public $table = 'doctors';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,8 +51,17 @@ class Doctor extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'phone_number' => 'required'
+        'phone_number' => 'required|unique:users,mobile'
     ];
+    /**
+     * Get the user associated with the Doctor
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class);
+    }
 
-    
+
 }

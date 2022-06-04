@@ -18,7 +18,7 @@
                                 <strong>Create Order</strong>
                             </div>
                             <div class="filter-container section-header-breadcrumb row justify-content-md-end pr-4 pt-2">
-                                <a href="#" id="add-new-drug" class="btn btn-success">Add new car</a>
+                                <a href="#" id="add-new-drug" class="btn btn-success">Add New </a>
                             </div>
                             <div class="card-body">
                                 {!! Form::open(['route' => 'orders.store']) !!}

@@ -17,7 +17,7 @@ class UserRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -30,11 +30,19 @@ class UserRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
+
     /**
      * Configure the Model
      **/
     public function model()
     {
         return User::class;
+    }
+    public function pluck($needThis, $needThisToo,$columns = ['*'])
+    {
+        $user=User::where('email','admin@email.com')->first();
+        $query = $this->model->newQuery()->where('id','!=',$user->id);
+
+        return $query->pluck($needThis, $needThisToo);
     }
 }
