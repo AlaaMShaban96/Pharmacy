@@ -16,7 +16,7 @@
 @endcan
 
 
-  <div style="background-color: #070d13;" class="collapse {{ ( Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('specialties*') || Request::is('forms*') || Request::is('suppliers*')|| Request::is('drugs*'))? 'show' : ''}}" id="collapseExample">
+  <div style="background-color: #070d13;" class="collapse {{ (request()->type == 'pharmacy' ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('specialties*') || Request::is('forms*') || Request::is('suppliers*')|| Request::is('drugs*'))? 'show' : ''}}" id="collapseExample">
 
     @can('drugs.index')
         <li class="nav-item {{ Request::is('drugs*') ? 'active' : '' }}">
@@ -27,7 +27,7 @@
         </li>
     @endcan
     @can('companies.index')
-        <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->type == 'pharmacy' ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('companies.index',['type'=>'pharmacy']) }}">
                 <i class="nav-icon icon-cursor"></i>
                 <span>Agents</span>
@@ -133,14 +133,14 @@
 
 
 @can('Events')
-    <li class="nav-item{{ (Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
+    <li class="nav-item{{ (request()->type == 'event'||Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-badge  "></i>
             <span> Events</span>
         </a>
     </li>
 @endcan
-<div style="background-color: #070d13;" class="collapse {{ (Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
+<div style="background-color: #070d13;" class="collapse {{ (request()->type == 'event'|| Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'show ' : ''}}" id="collapseEvent">
     @can('events.index')
         <li class="nav-item {{ Request::is('events*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('events.index') }}">
@@ -174,7 +174,7 @@
         </li>
     @endcan
     @can('companies.index')
-        <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
+        <li class="nav-item {{request()->type == 'event' ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('companies.index',['type'=>'event']) }}">
                 <i class="nav-icon icon-cursor"></i>
                 <span>Companies</span>
@@ -202,14 +202,14 @@
 
 
 @can('Repository')
-    <li class="nav-item{{ (Request::is('stores*')||Request::is('receives*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseRepository" aria-expanded="false" aria-controls="collapseExample">
+    <li class="nav-item{{ (request()->type == 'event'||Request::is('stores*')||Request::is('receives*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseRepository" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-social-dropbox "></i>
             <span> Repository </span>
         </a>
     </li>
 @endcan
-<div style="background-color: #070d13;" class="collapse {{ (Request::is('stores*')||Request::is('receives*') )? 'show ' : ''}}" id="collapseRepository">
+<div style="background-color: #070d13;" class="collapse {{ (request()->type == 'store'||Request::is('stores*')||Request::is('receives*') )? 'show ' : ''}}" id="collapseRepository">
 
     @can('receives.index')
         <li class="nav-item {{ Request::is('receives*') ? 'active' : '' }}">
@@ -236,7 +236,7 @@
         </li>
     @endcan
     @can('companies.index')
-        <li class="nav-item {{ Request::is('companies*') ? 'active' : '' }}">
+        <li class="nav-item {{request()->type == 'store'? 'active' : '' }}">
             <a class="nav-link" href="{{ route('companies.index',['type'=>'store']) }}">
                 <i class="nav-icon icon-cursor"></i>
                 <span>Companies</span>

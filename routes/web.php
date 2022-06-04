@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('companies', App\Http\Controllers\CompanyController::class);
 
+    // Route::get('/agents', [App\Http\Controllers\CompanyController::class, 'index'])->name('agents.index');
 
     Route::resource('drugDosages', App\Http\Controllers\DrugDosageController::class);
 
