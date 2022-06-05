@@ -21,6 +21,7 @@ class CreateDrugsTable extends Migration
             $table->string('agent')->nullable();
             $table->float('pharmacist_margin')->nullable();
             $table->bigInteger('responsible_party')->constrained()->nullable();
+            $table->bigInteger('laboratory_id')->unsigned()->nullable();
             $table->string('code')->nullable();
             $table->string('package_id')->constrained();
             $table->string('name')->nullable();
@@ -32,12 +33,13 @@ class CreateDrugsTable extends Migration
             $table->foreignId('route_id')->constrained()->nullable();
             $table->foreignId('drug_dosage_id')->constrained();
             $table->foreignId('company_id')->constrained();
-            $table->foreignId('laboratory_id')->constrained()->nullable();
             $table->float('price')->nullable();
+            $table->float('selling_price')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('responsible_party')->references('id')->on('users');
+            $table->foreign('laboratory_id')->references('id')->on('laboratories');
         });
     }
 

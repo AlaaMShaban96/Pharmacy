@@ -28,6 +28,22 @@ class DrugDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
+        ->editColumn('atc', function ($drug) {
+            return "<a href='".route('drugs.show', $drug->id) ."'>".$drug->atc."</a>";
+        })
+        ->editColumn('company_id', function ($drug) {
+            return "<a href='".route('drugs.show', $drug->id) ."'>".$drug->company->name."</a>";
+        })
+
+        ->editColumn('country_id', function ($drug) {
+            return "<a href='".route('drugs.show', $drug->id) ."'>".$drug->country->name."</a>";
+
+        })
+        ->editColumn('laboratory_id', function ($drug) {
+            if($drug->laboratory){
+                return "<a href='".route('drugs.show', $drug->id) ."'>".$drug->laboratory->name."</a>";
+            }
+        })
         ->editColumn('ingredients', function ($drug) {
             return $drug->ingredients;
         })
@@ -41,21 +57,12 @@ class DrugDataTable extends DataTable
             $x=$this->getCurrencyPrice($drug);;
             return "<a href='#' id='price_list' data-toggle='modal'  data-target='#exampleModalCenter' data-x='$x'>".$drug->currency->name."</a>";
         })
-        ->editColumn('company_id', function ($drug) {
-            return $drug->company->name;
-        })
-        ->editColumn('laboratory_id', function ($drug) {
-            return $drug->laboratory->name;
-        })
-        ->addColumn('supplier_reg_no', function ($drug) {
-            return $drug->laboratory->regNo;
-        })
 
-        ->editColumn('country_id', function ($drug) {
-            return $drug->country->name;
+        ->addColumn('supplier_reg_no', function ($drug) {
+            return $drug->laboratory?$drug->laboratory->regNo:'';
         })
         ->addColumn('supplier_status', function ($drug) {
-            return $drug->laboratory->status;
+            return $drug->laboratory?$drug->laboratory->status:'';
         })
         ->editColumn('route_id', function ($drug) {
             return $drug->route->name;
@@ -72,7 +79,7 @@ class DrugDataTable extends DataTable
 
          })
         ->addColumn('action', 'drugs.datatables_actions')
-        ->rawColumns(['action', 'ingredients','drug_dosage_id','currency_id','company_id']);;
+        ->rawColumns(['action','country_id','laboratory_id','atc','ingredients','drug_dosage_id','currency_id','company_id']);;
     }
 
     /**
@@ -84,7 +91,7 @@ class DrugDataTable extends DataTable
     public function query(Drug $model)
     {
 
-        $query=$model->newQuery();
+        $query=$model->newQuery()->where('laboratory_id',null);
 
 
         if (request()->filled('atc')) {

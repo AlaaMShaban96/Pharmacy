@@ -82,7 +82,7 @@ class DrugsViewDatatable extends DataTable
      */
     public function query(Drug $model)
     {
-        $query= $model->newQuery();
+        $query= $model->newQuery()->where('laboratory_id','!=',null);
         return $query->where('atc', $this->drug->atc);
     }
 
@@ -102,7 +102,7 @@ class DrugsViewDatatable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
+                        // Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),

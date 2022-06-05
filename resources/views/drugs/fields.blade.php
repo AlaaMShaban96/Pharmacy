@@ -67,7 +67,7 @@
     </div>
     <div class="col-sm-2">
         {!! Form::label('laboratory_id', 'Suppliers:') !!}
-        {!! Form::select('laboratory_id',$laboratories,null, ['class' => ' form-control']) !!}
+        {!! Form::select('laboratory_id',$laboratories,null, ['class' => ' form-control','placeholder'=>""]) !!}
     </div>
 
     <!-- Submit Field -->

@@ -58,7 +58,7 @@ class Department extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'user_id' => 'required',
+        // 'user_id' => 'required',
         'd_code' => 'required',
         'n_code' => 'required'
     ];

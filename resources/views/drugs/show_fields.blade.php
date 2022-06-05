@@ -28,7 +28,7 @@
                 <td>{{$drug->atc}}</td>
                 <td>{{$drug->code}}</td>
                 <td>{{$drug->strata->name}}</td>
-                <td>{{$drug->laboratory->name}}</td>
+                <td>{{$drug->laboratory?$drug->laboratory->name:''}}</td>
                 <td>{{$drug->country->name}}</td>
                 <td>{{$drug->name}}</td>
                 <td>{{$drug->ingredients}}</td>
@@ -42,8 +42,8 @@
                 <td>{{$drug->price*$drug->currency->price}}</td>
                 <td>{{$drug->selling_price}}</td>
                 <td>{{((($drug->price*$drug->currency->price)/$drug->selling_price)*100).'%'}}</td>
-                <td>{{$drug->laboratory->status}}</td>
-                <td>{{$drug->laboratory->regNo}}</td>
+                <td>{{$drug->laboratory?$drug->laboratory->status:''}}</td>
+                <td>{{$drug->laboratory?$drug->laboratory->regNo:''}}</td>
             </tr>
         </tbody>
     </table>
