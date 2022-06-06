@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Doctor;
 use Eloquent as Model;
@@ -54,8 +55,9 @@ class OrderRequest extends Model
     ];
     public function getTotalAttribute()
     {
-        return $this->orders()->sum('price');
+        return $this->orders()->whereYear('created_at', Carbon::now()->year)->sum('price');
     }
+
     /**
      * Get all of the order for the OrderRequest
      *

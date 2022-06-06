@@ -165,6 +165,6 @@ class OrderRequestController extends AppBaseController
         $orderRequest->save();
         Flash::success('Order Request updated successfully.');
 
-        return redirect(route('orderRequests.index'));
+        return redirect(route('orders.index'));
     }
 }

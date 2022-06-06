@@ -36,7 +36,7 @@
                                       <i class="icon-user"></i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control {{ $errors->has('email')?'is-invalid':'' }}" name="email" value="{{ old('email') }}"
+                                <input type="text" class="form-control {{ $errors->has('email')?'is-invalid':'' }}" name="email" value="{{ old('email') }}"
                                        placeholder="Email">
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">

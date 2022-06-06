@@ -66,7 +66,7 @@ class SampleReceivedDataTable extends DataTable
             $query->whereDate('created_at','<=',request('to'));
         }
 
-        $query->select('code', DB::raw('sum(price) as total'))->groupBy('code')->get();
+        $query->select('code','drug_id')->groupBy('code','drug_id')->get();
         return $query;
     }
 
@@ -126,6 +126,11 @@ class SampleReceivedDataTable extends DataTable
             [
                 'data' => 'total',
                 'title' => 'Total',
+                'searchable' => false,
+            ],
+            [
+                'data' => 'remaining',
+                'title' => 'Remaining',
                 'searchable' => false,
             ],
         ];

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Drug;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Store;
 use Eloquent as Model;
 use App\Models\Company;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,6 +37,7 @@ class SampleReceived extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['total','remaining'];
 
 
     public $fillable = [
@@ -55,7 +59,8 @@ class SampleReceived extends Model
     protected $casts = [
         'code' => 'string',
         'validity' => 'date',
-        'price' => 'float'
+        'price' => 'float',
+        'drug_id'=>'float'
     ];
 
     /**
@@ -71,6 +76,28 @@ class SampleReceived extends Model
         'quantity' => 'required',
         'drug_id' => 'required',
     ];
+    /**
+     * Get total from sum(price * quantity)
+     *
+     * @return float
+     */
+    public function getTotalAttribute()
+    {
+        $value =self::whereYear('created_at',Carbon::now()->year)->where('code',$this->code)->sum(\DB::raw('price * quantity'));
+        return $value;
+    }
+    /**
+     * Get Remaining from sum(price * quantity) on  table Order and Subtract from total
+     *
+     * @return float
+     */
+    public function getRemainingAttribute()
+    {
+        $value =Order::whereHas('orderRequest', function($q){
+            $q->where('status','receive');
+        })->whereYear('created_at',Carbon::now()->year)->where('drug_id',$this->drug_id)->sum(\DB::raw('price * quantity'));
+        return  $this->total - $value ;
+    }
     /**
      * Get the user that owns the SampleReceived
      *
