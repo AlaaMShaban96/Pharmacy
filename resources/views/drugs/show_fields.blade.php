@@ -3,25 +3,25 @@
 
     <table class="table table-striped table-bordered">
         <tr class="bg-success">
-            <td>U-code</td>
-            <td>S-code</td>
-            <td>Specialty</td>
-            <td>Supplier</td>
-            <td>Country</td>
-            <td>Brand name</td>
-            <td>Ingredients</td>
-            <td>Dosage</td>
-            <td>Form</td>
-            <td>Pack size</td>
-            <td>Shelf life</td>
-            <td>Agent</td>
-            <td>Currency</td>
-            <td>Purchase price INC</td>
-            <td>Purchase LY</td>
-            <td>Selling price LY</td>
-            <td>margin%</td>
-            <td>Supplier status</td>
-            <td>Supplier Reg No</td>
+            <td>@lang('health.U_Code')</td>
+            <td>@lang('health.S_Code')</td>
+            <td>@lang('health.Specialty')</td>
+            <td>@lang('health.Supplier')</td>
+            <td>@lang('health.Country')</td>
+            <td>@lang('health.Brand_Name')</td>
+            <td>@lang('health.Ingredients')</td>
+            <td>@lang('health.Dosage')</td>
+            <td>@lang('health.Form')</td>
+            <td>@lang('health.Pack_size')</td>
+            <td>@lang('health.Shelf_life')</td>
+            <td>@lang('health.Agent')</td>
+            <td>@lang('health.Currency')</td>
+            <td>@lang('health.Purchase_price_INC')</td>
+            <td>@lang('health.Purchase_LY')</td>
+            <td>@lang('health.Selling_price_LY')</td>
+            <td>@lang('health.margin')</td>
+            <td>@lang('health.Supplier_status')</td>
+            <td>@lang('health.Supplier_Reg_No')</td>
         </tr>
         <tbody>
             <tr class="bg-info">

@@ -2,7 +2,7 @@
 <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('home') }}">
         <i class="nav-icon icon-layers "></i>
-        <span>Dashboard</span>
+        <span> @lang('app.dashboard') </span>
     </a>
 </li>
 
@@ -10,7 +10,7 @@
     <li class="nav-item {{ (Request::is('currencies*') || Request::is('companies*') ||Request::is('drugDosages*') ||Request::is('packages*') ||Request::is('countries*') || Request::is('strata*') || Request::is('routes*') || Request::is('laboratories*')|| Request::is('drugs*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-heart"></i>
-            <span> Health  </span>
+            <span> @lang('app.health')   </span>
         </a>
     </li>
 @endcan
@@ -22,7 +22,7 @@
         <li class="nav-item {{ Request::is('drugs*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('drugs.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Drugs</span>
+                <span>@lang('app.Drugs') </span>
             </a>
         </li>
     @endcan
@@ -30,7 +30,7 @@
         <li class="nav-item {{ request()->type == 'pharmacy' ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('companies.index',['type'=>'pharmacy']) }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Agents</span>
+                <span>@lang('app.Agents') </span>
             </a>
         </li>
     @endcan
@@ -38,7 +38,7 @@
         <li class="nav-item {{ Request::is('drugDosages*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('drugDosages.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Dosages</span>
+                <span>@lang('app.Dosages')</span>
             </a>
         </li>
     @endcan
@@ -46,7 +46,7 @@
         <li class="nav-item {{ Request::is('packages*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('packages.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Packages</span>
+                <span>@lang('app.Packages')</span>
             </a>
         </li>
     @endcan
@@ -54,7 +54,7 @@
         <li class="nav-item {{ Request::is('countries*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('countries.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Countries</span>
+                <span>@lang('app.Countries')</span>
             </a>
         </li>
     @endcan
@@ -62,7 +62,7 @@
         <li class="nav-item {{ Request::is('strata*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('specialties.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Specialty</span>
+                <span>@lang('app.Specialty')</span>
             </a>
         </li>
     @endcan
@@ -70,7 +70,7 @@
         <li class="nav-item {{ Request::is('forms*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('forms.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Forms</span>
+                <span>@lang('app.Forms')</span>
             </a>
         </li>
     @endcan
@@ -78,7 +78,7 @@
         <li class="nav-item {{ Request::is('laboratories*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('suppliers.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Suppliers</span>
+                <span>@lang('app.Suppliers')</span>
             </a>
         </li>
     @endcan
@@ -87,7 +87,7 @@
     <li class="nav-item {{ (Request::is('financialCovenantTypes*') || Request::is('clauses*') ||Request::is('departments*') ||Request::is('financialCovenants*') || Request::is('outlays*'))? 'active' : ''}}" type="button" data-toggle="collapse" data-target="#collapsePocket" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-wallet "></i>
-            <span> Pocket money  </span>
+            <span> @lang('app.pocket_Money')     </span>
         </a>
     </li>
 @endcan
@@ -97,7 +97,7 @@
         <li class="nav-item {{ Request::is('financialCovenants*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('financialCovenants.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Financial</span>
+                <span>@lang('app.Financial')</span>
             </a>
         </li>
     @endcan
@@ -111,7 +111,7 @@
         <li class="nav-item {{ Request::is('departments*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('departments.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Departments</span>
+                <span>@lang('app.Departments')</span>
             </a>
         </li>
     @endcan
@@ -136,7 +136,7 @@
     <li class="nav-item{{ (request()->type == 'event'||Request::is('speakers*') ||Request::is('eventSpecialties*') ||Request::is('events*') ||Request::is('eventLocations*') ||Request::is('eventMaterials*') ||Request::is('eventTypes*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseEvent" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-badge  "></i>
-            <span> Events</span>
+            <span>@lang('app.events')   </span>
         </a>
     </li>
 @endcan
@@ -145,7 +145,7 @@
         <li class="nav-item {{ Request::is('events*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('events.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Events</span>
+                <span>@lang('app.Events') </span>
             </a>
         </li>
     @endcan
@@ -153,7 +153,7 @@
         <li class="nav-item {{ Request::is('eventSpecialties*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('eventSpecialties.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Event Specialties</span>
+                <span>@lang('app.Event_Specialties')</span>
             </a>
         </li>
     @endcan
@@ -161,7 +161,7 @@
         <li class="nav-item {{ Request::is('eventTypes*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('eventTypes.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Event Types</span>
+                <span>@lang('app.Event_Types')</span>
             </a>
         </li>
     @endcan
@@ -169,7 +169,7 @@
         <li class="nav-item {{ Request::is('eventLocations*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('eventLocations.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Event Locations</span>
+                <span>@lang('app.Event_Locations')</span>
             </a>
         </li>
     @endcan
@@ -177,7 +177,7 @@
         <li class="nav-item {{request()->type == 'event' ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('companies.index',['type'=>'event']) }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Companies</span>
+                <span>@lang('app.Companies')</span>
             </a>
         </li>
     @endcan
@@ -185,7 +185,7 @@
         <li class="nav-item {{ Request::is('speakers*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('speakers.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Speakers</span>
+                <span>@lang('app.Speakers')</span>
             </a>
         </li>
     @endcan
@@ -193,7 +193,7 @@
         <li class="nav-item {{ Request::is('eventMaterials*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('eventMaterials.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Event Materials</span>
+                <span>@lang('app.Event_Materials')</span>
             </a>
         </li>
     @endcan
@@ -205,7 +205,7 @@
     <li class="nav-item{{ (request()->type == 'event'||Request::is('stores*')||Request::is('receives*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseRepository" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-social-dropbox "></i>
-            <span> Repository </span>
+            <span>@lang('app.repository')  </span>
         </a>
     </li>
 @endcan
@@ -215,7 +215,7 @@
         <li class="nav-item {{ Request::is('receives*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('receives.index',['type'=>'receive']) }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Receives</span>
+                <span>@lang('app.Receives')</span>
             </a>
         </li>
     @endcan
@@ -223,7 +223,7 @@
         <li class="nav-item {{ Request::is('receives*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('receives.index',['type'=>'inventory']) }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Inventory</span>
+                <span>@lang('app.Inventory')</span>
             </a>
         </li>
     @endcan
@@ -231,7 +231,7 @@
         <li class="nav-item {{ Request::is('stores*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('stores.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Stores</span>
+                <span>@lang('app.Stores')</span>
             </a>
         </li>
     @endcan
@@ -239,7 +239,7 @@
         <li class="nav-item {{request()->type == 'store'? 'active' : '' }}">
             <a class="nav-link" href="{{ route('companies.index',['type'=>'store']) }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Companies</span>
+                <span>@lang('app.Companies')</span>
             </a>
         </li>
     @endcan
@@ -250,7 +250,7 @@
     <li class="nav-item{{ (Request::is('sampleReceiveds*')||Request::is('doctors*')||Request::is('orders*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseSamples" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-chemistry"></i>
-            <span> Samples </span>
+            <span>@lang('app.samples')  </span>
         </a>
     </li>
 @endcan
@@ -260,7 +260,7 @@
         <li class="nav-item {{ Request::is('sampleReceiveds*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('sampleReceiveds.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Receiveds</span>
+                <span>@lang('app.Receiveds')</span>
             </a>
         </li>
     @endcan
@@ -268,7 +268,7 @@
         <li class="nav-item {{ Request::is('doctors*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('doctors.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Doctors</span>
+                <span>@lang('app.Doctors')</span>
             </a>
         </li>
     @endcan
@@ -276,7 +276,7 @@
         <li class="nav-item {{ Request::is('orders*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('orders.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Orders</span>
+                <span>@lang('app.Orders')</span>
             </a>
         </li>
     @endcan
@@ -286,7 +286,7 @@
     <li class="nav-item{{ (Request::is('sampleReceiveds*')||Request::is('doctors*')||Request::is('orders*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
             <i class="nav-icon icon-settings "></i>
-            <span> Settings </span>
+            <span> @lang('app.settings')  </span>
         </a>
     </li>
 @endcan
@@ -297,7 +297,7 @@
         <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('users.index') }}">
                 <i class="nav-icon icon-cursor "></i>
-                <span>Users</span>
+                <span>@lang('app.Users')</span>
             </a>
         </li>
     @endcan
@@ -305,7 +305,7 @@
         <li class="nav-item {{ Request::is('currencies*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('currencies.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Currencies</span>
+                <span>@lang('app.Currencies')</span>
             </a>
         </li>
     @endcan
@@ -313,7 +313,7 @@
         <li class="nav-item {{ Request::is('roles*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('roles.index') }}">
                 <i class="nav-icon icon-cursor"></i>
-                <span>Roles</span>
+                <span>@lang('app.Roles')</span>
             </a>
         </li>
     @endcan
@@ -321,3 +321,15 @@
 
 
 
+<li class="nav-item {{ Request::is('tools*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('tools.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Tools</span>
+    </a>
+</li>
+<li class="nav-item {{ Request::is('gools*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('gools.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Gools</span>
+    </a>
+</li>

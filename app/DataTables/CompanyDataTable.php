@@ -65,8 +65,16 @@ class CompanyDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'phone_number',
+            [
+                'data' => 'name',
+                'title' => trans('companies.name'),
+                'searchable' => false,
+            ],
+            [
+                'data' => 'phone_number',
+                'title' => trans('companies.phone_number'),
+                'searchable' => false,
+            ],
         ];
     }
     /**

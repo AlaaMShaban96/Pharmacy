@@ -3,9 +3,9 @@
 @section('content')
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-         <a href="{!! route('packages.index') !!}">Package</a>
+         <a href="{!! route('packages.index') !!}">@lang('app.Packages')</a>
       </li>
-      <li class="breadcrumb-item active">Create</li>
+      <li class="breadcrumb-item active">@lang('app.Create')</li>
     </ol>
      <div class="container-fluid">
           <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <i class="fa fa-plus-square-o fa-lg"></i>
-                                <strong>Create Package</strong>
+                                <strong>@lang('app.Create') @lang('app.Packages')</strong>
                             </div>
                             <div class="card-body">
                                 {!! Form::open(['route' => 'packages.store']) !!}

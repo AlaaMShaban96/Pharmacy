@@ -3,9 +3,9 @@
 @section('content')
      <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('companies.index') }}">Company</a>
+                <a href="{{ route('companies.index',['type'=>$company->type]) }}">@lang('companies.Company')</a>
             </li>
-            <li class="breadcrumb-item active">Detail</li>
+            <li class="breadcrumb-item active">@lang('app.Detail')</li>
      </ol>
      <div class="container-fluid">
           <div class="animated fadeIn">
@@ -14,7 +14,7 @@
                      <div class="col-lg-12">
                          <div class="card">
                              <div class="card-header">
-                                 <strong>Details</strong>
+                                 <strong>@lang('app.Detail')</strong>
                                   <a href="{{ route('companies.index') }}" class="btn btn-light">Back</a>
                              </div>
                              <div class="card-body">

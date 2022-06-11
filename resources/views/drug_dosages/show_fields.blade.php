@@ -1,6 +1,6 @@
 <!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', trans('drugDosages.name')) !!}
     <p>{{ $drugDosage->name }}</p>
 </div>
 

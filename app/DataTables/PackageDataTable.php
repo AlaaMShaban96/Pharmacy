@@ -66,7 +66,11 @@ class PackageDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name'
+            [
+                'data' => 'name',
+                'title' => trans('packages.name'),
+                'searchable' => false,
+            ],
         ];
     }
     /**

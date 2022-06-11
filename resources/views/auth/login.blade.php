@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <form method="post" action="{{ url('/login') }}">
                             @csrf
-                            <h1>Login</h1>
+                            <h1>@lang('login.login')</h1>
                             <p class="text-muted">Sign In to your account</p>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -64,6 +64,9 @@
                                 <div class="col-6 text-right">
                                     <a class="btn btn-link px-0" href="{{ url('/password/reset') }}">
                                         Forgot password?
+                                    </a>
+                                    <a class="nav-link text-mine-blue text-center" href="{{ url('/lang/en') }}">
+                                        عربي
                                     </a>
                                 </div>
                             </div>

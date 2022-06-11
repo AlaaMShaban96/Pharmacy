@@ -66,7 +66,11 @@ class DrugDosageDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name'
+            [
+                'data' => 'name',
+                'title' => trans('drugDosages.name'),
+                'searchable' => false,
+            ],
         ];
     }
     /**

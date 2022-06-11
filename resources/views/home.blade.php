@@ -11,10 +11,10 @@
                             <div class="inner">
                                 <h3>12</h3>
 
-                                <p>dashboard_total_orders</p>
+                                <p>Repository</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-shopping-bag"></i>
+                                <i class="nav-icon icon-social-dropbox"></i>
                             </div>
                             <a href="#" class="small-box-footer">dashboard_more_info
                                 <i class="fa fa-arrow-circle-right"></i></a>
@@ -28,10 +28,10 @@
                                     <h3>11DL</h3>
 
 
-                                <p>dashboard_total<span style="font-size: 11px">dashboard_after </span></p>
+                                <p>Samples</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-money"></i>
+                                <i class="nav-icon icon-chemistry"></i>
                             </div>
                             <a href="#" class="small-box-footer">dashboard_more_info
                                 <i class="fa fa-arrow-circle-right"></i></a>
@@ -43,10 +43,10 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>11</h3>
-                                <p>restaurant_plural</p>
+                                <p>Events</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-cutlery"></i>
+                                <i class="nav-icon icon-badge  "></i>
                             </div>
                             <a href="#" class="small-box-footer">dashboard_more_info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
@@ -58,10 +58,10 @@
                             <div class="inner">
                                 <h3>5</h3>
 
-                                <p>dashboard_total_clients</p>
+                                <p>Pocket money </p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-group"></i>
+                                <i class="nav-icon icon-wallet "></i>
                             </div>
                             <a href="#" class="small-box-footer">dashboard_more_info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>

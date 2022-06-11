@@ -3,9 +3,9 @@
 @section('content')
      <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('drugDosages.index') }}">Drug Dosage</a>
+                <a href="{{ route('drugDosages.index') }}">@lang('app.Dosages')</a>
             </li>
-            <li class="breadcrumb-item active">Detail</li>
+            <li class="breadcrumb-item active">@lang('app.Detail')</li>
      </ol>
      <div class="container-fluid">
           <div class="animated fadeIn">
@@ -14,8 +14,8 @@
                      <div class="col-lg-12">
                          <div class="card">
                              <div class="card-header">
-                                 <strong>Details</strong>
-                                  <a href="{{ route('drugDosages.index') }}" class="btn btn-light">Back</a>
+                                 <strong>@lang('app.Detail')</strong>
+                                  <a href="{{ route('drugDosages.index') }}" class="btn btn-light">@lang('app.Back')</a>
                              </div>
                              <div class="card-body">
                                  @include('drug_dosages.show_fields')

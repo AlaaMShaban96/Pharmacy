@@ -12,14 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/profile', function () {
+    return view('profile.index');
 });
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','language'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -143,3 +150,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('roles', App\Http\Controllers\RoleController::class);
 
 });
+
+
+Route::resource('tools', App\Http\Controllers\ToolController::class);
+
+
+Route::resource('gools', App\Http\Controllers\GoolController::class);

@@ -1,0 +1,30 @@
+<?php
+return [
+    'Search'=>'بحث',
+    'U_Code' => 'U-Code',
+    'S_Code' => 'S-Code',
+    'Brand_Name' => 'اسم الدواء',
+    'shelf_time' => 'shelf time',
+    'Ingredients' => 'الوصفة',
+    'Agent' => 'العملاء',
+    'Dosage' => 'الجرعات',
+    'Currency' => 'العمله',
+    'Package' => 'الاحجام',
+    'Supplier' => 'الموردين',
+    'Purchase'=>'سعر الشراء',
+    'Specialty'=>'Specialty',
+    'Country'=>'البلاد',
+    'Form'=>'Form',
+    'Invoices'=>'فواتير الشراء',
+    'Pack_size'=>'حجم',
+    'Shelf_life'=>'Shelf life',
+    'Purchase_price_INC'=>'سعر الشراء العالمي',
+    'Purchase_LY'=>'سعر الشراء المحلي',
+    'Selling_price_LY'=>'سعر البيع',
+    'margin'=>'هامش الربح',
+    'Supplier_status'=>'حالة المورد',
+    'Supplier_Reg_No'=>'رقم المورد',
+    'Registration_number'=>'رقم التسجيل',
+    'Drugs_With_Same_Ingredients'=>'عرض الادوية التي من نفس الصنف'
+
+];

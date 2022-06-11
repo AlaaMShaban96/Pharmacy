@@ -120,92 +120,102 @@ class DrugsViewDatatable extends DataTable
         return [
             [
                 'data' => 'atc',
-                'title' => 'U-code',
+                'title' => trans('health.U_Code'),
                 'searchable' => false,
             ],
             [
                 'data' => 'code',
-                'title' => 'S-code',
+                'title' => trans('health.S_Code'),
                 'searchable' => false,
             ],
             [
                 'data' => 'strata_id',
-                'title' => 'Specialty',
+                'title' => trans('health.Specialty'),
                 'searchable' => false,
             ],
             [
                 'data' => 'laboratory_id',
-                'title' => 'Supplier',
+                'title' => trans('health.Supplier'),
                 'searchable' => false,
             ],
             [
                 'data' => 'country_id',
-                'title' => 'Country',
+                'title' => trans('health.Country'),
                 'searchable' => false,
             ],
             [
                 'data' => 'name',
-                'title' => 'Brand name',
+                'title' => trans('health.Brand_Name'),
                 'searchable' => false,
             ],
-            'ingredients',
+            [
+                'data' => 'ingredients',
+                'title' => trans('health.Ingredients'),
+                'searchable' => false,
+            ],
             [
                 'data' => 'drug_dosage_id',
-                'title' => 'Dosage',
+                'title' => trans('health.Dosage'),
                 'searchable' => false,
             ],
             [
                 'data' => 'route_id',
-                'title' => 'Form',
+                'title' =>  trans('health.Form'),
                 'searchable' => false,
             ],
             [
                 'data' => 'package_id',
-                'title' => 'Pack size',
+                'title' => trans('health.Pack_size'),
                 'searchable' => false,
             ],
             [
                 'data' => 'b_g',
-                'title' => 'Shelf life',
+                'title' => trans('health.Shelf_life'),
                 'searchable' => false,
             ],
             [
                 'data' => 'company_id',
-                'title' => 'Agent',
+                'title' => trans('health.Agent'),
                 'searchable' => false,
             ],
             [
                 'data' => 'currency_id',
-                'title' => 'Currency',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'selling_price',
-                'title' => 'Selling price',
+                'title' => trans('health.Currency'),
                 'searchable' => false,
             ],
             [
                 'data' => 'price',
-                'title' => 'Purchase price',
+                'title' => trans('health.Purchase_price_INC'),
+                'searchable' => false,
+            ],
+            [
+                'data' => 'purchase_ly',
+                'title' => trans('health.Purchase_LY'),
+                'searchable' => false,
+            ],
+            [
+                'data' => 'selling_price',
+                'title' => trans('health.Selling_price_LY'),
                 'searchable' => false,
             ],
 
+
             [
                 'data' => 'percentage',
-                'title' => 'margin%',
+                'title' => trans('health.margin'),
                 'searchable' => false,
             ],
             [
                 'data' => 'supplier_status',
-                'title' => 'Supplier status',
+                'title' => trans('health.Supplier_status'),
                 'searchable' => false,
             ],
             [
                 'data' => 'supplier_reg_no',
-                'title' => 'Supplier Reg No',
+                'title' => trans('health.Supplier_Reg_No'),
                 'searchable' => false,
             ],
-            // 'action'
+
         ];
     }
     /**

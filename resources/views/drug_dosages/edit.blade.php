@@ -3,9 +3,9 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('drugDosages.index') !!}">Drug Dosage</a>
+             <a href="{!! route('drugDosages.index') !!}">@lang('app.Dosages')</a>
           </li>
-          <li class="breadcrumb-item active">Edit</li>
+          <li class="breadcrumb-item active">@lang('app.Edit') </li>
         </ol>
     <div class="container-fluid">
          <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit Drug Dosage</strong>
+                              <strong>@lang('app.Edit')  Drug Dosage</strong>
                           </div>
                           <div class="card-body">
                               {!! Form::model($drugDosage, ['route' => ['drugDosages.update', $drugDosage->id], 'method' => 'patch']) !!}

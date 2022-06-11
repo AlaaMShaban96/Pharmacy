@@ -1,3 +1,6 @@
+@php
+    app()->setLocale(Session::get('locale'));
+@endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +20,7 @@
 
     <link rel="stylesheet" href="{{asset('plugins/bootstrap-sweetalert/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.css')}}">
-
+    <link rel="stylesheet" href="{{asset('css/profile.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600" rel="stylesheet">
 
      <!-- PRO version // if you have PRO version licence than remove comment and use it. -->
@@ -28,6 +31,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
     <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 18px;
+        }
         #collapseOne > .card-body{
            overflow: scroll;
         }
@@ -52,7 +59,7 @@
         <li class="nav-item d-md-down-none">
             <a class="nav-link" href="#">
                 <i class="icon-bell"></i>
-                <span class="badge badge-pill badge-danger">5</span>
+                {{-- <span class="badge badge-pill badge-danger">5</span> --}}
             </a>
         </li>
         <li class="nav-item dropdown">
@@ -61,26 +68,30 @@
                 {{ auth()->user()->name }}
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-header text-center">
+                {{-- <div class="dropdown-header text-center">
                     <strong>Account</strong>
                 </div>
                 <a class="dropdown-item" href="#">
                     <i class="fa fa-envelope-o"></i> Messages
                     <span class="badge badge-success">42</span>
-                </a>
+                </a> --}}
                 <div class="dropdown-header text-center">
-                    <strong>Settings</strong>
+                    <strong>@lang('app.settings')</strong>
                 </div>
                 <a class="dropdown-item" href="{{route('users.edit',auth()->user()->id)}}">
-                    <i class="fa fa-user"></i> Profile</a>
+                    <i class="fa fa-user"></i>@lang('app.profile') </a>
                 <a class="dropdown-item" href="#">
-                    <i class="fa fa-wrench"></i> Settings</a>
+                    <i class="fa fa-wrench"></i>@lang('app.settings') </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                    <i class="fa fa-shield"></i> Lock Account</a>
+                <a class="dropdown-item" href="{{ url('/language/en') }}">
+                    <i class="fa fa-shield"></i>@lang('app.en')
+                </a>
+                <a class="dropdown-item" href="{{ url('/language/ar') }}">
+                    <i class="fa fa-shield"></i>@lang('app.ar')
+                </a>
                 <a href="{{ url('/logout') }}" class="dropdown-item btn btn-default btn-flat"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-lock"></i>Logout
+                    <i class="fa fa-lock"></i> @lang('app.logout')
                 </a>
                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                     @csrf

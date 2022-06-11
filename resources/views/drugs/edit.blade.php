@@ -5,7 +5,7 @@
           <li class="breadcrumb-item">
              <a href="{!! route('drugs.index') !!}">Drug</a>
           </li>
-          <li class="breadcrumb-item active">Edit</li>
+          <li class="breadcrumb-item active">@lang('app.Edit')</li>
         </ol>
     <div class="container-fluid">
          <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit Drug</strong>
+                              <strong>@lang('app.Edit') @lang('app.Drugs') </strong>
                           </div>
                           <div class="card-body">
                               {!! Form::model($drug, ['route' => ['drugs.update', $drug->id], 'method' => 'patch']) !!}
@@ -28,7 +28,7 @@
                                   <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
                                       <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Invoices #
+                                        @lang('health.Invoices') #
                                       </button>
                                     </h5>
                                   </div>

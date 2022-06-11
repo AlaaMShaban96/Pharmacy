@@ -3,9 +3,9 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('packages.index') !!}">Package</a>
+             <a href="{!! route('packages.index') !!}">@lang('app.Packages')</a>
           </li>
-          <li class="breadcrumb-item active">Edit</li>
+          <li class="breadcrumb-item active">@lang('app.Edit')</li>
         </ol>
     <div class="container-fluid">
          <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit Package</strong>
+                              <strong>@lang('app.Edit') @lang('app.Packages')</strong>
                           </div>
                           <div class="card-body">
                               {!! Form::model($package, ['route' => ['packages.update', $package->id], 'method' => 'patch']) !!}
