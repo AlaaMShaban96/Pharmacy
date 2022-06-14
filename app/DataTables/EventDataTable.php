@@ -43,7 +43,12 @@ class EventDataTable extends DataTable
      */
     public function query(Event $model)
     {
-        return $model->newQuery();
+        if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin|Pro')) {
+            return $model->newQuery();
+        } else {
+            return $model->newQuery()->where('user_id',auth()->user()->id);
+        }
+
     }
 
     /**
@@ -78,33 +83,58 @@ class EventDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
-            'name',
-            // 'event_specialty_id',
-            // 'event_location_id',
-            'event_number',
-            [
-                'data' => 'event_date',
-                'title' => 'date',
-                'searchable' => false,
-            ],
-            'visitors_number',
-            [
-                'data' => 'event_time',
-                'title' => 'time',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'event_cost',
-                'title' => 'cost',
-                'searchable' => false,
-            ],
-            [
-                'data' => 'user_id',
-                'title' => 'User name',
-                'searchable' => false,
-            ],
-        ];
+        if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin|Pro')) {
+            return [
+                'name',
+                // 'event_specialty_id',
+                // 'event_location_id',
+                'event_number',
+                [
+                    'data' => 'event_date',
+                    'title' => 'date',
+                    'searchable' => false,
+                ],
+                'visitors_number',
+                [
+                    'data' => 'event_time',
+                    'title' => 'time',
+                    'searchable' => false,
+                ],
+                [
+                    'data' => 'event_cost',
+                    'title' => 'cost',
+                    'searchable' => false,
+                ],
+                [
+                    'data' => 'user_id',
+                    'title' => 'User name',
+                    'searchable' => false,
+                ],
+            ];
+        } else {
+            return [
+                'name',
+                // 'event_specialty_id',
+                // 'event_location_id',
+                [
+                    'data' => 'event_date',
+                    'title' => 'date',
+                    'searchable' => false,
+                ],
+                [
+                    'data' => 'event_cost',
+                    'title' => 'cost',
+                    'searchable' => false,
+                ],
+                [
+                    'data' => 'user_id',
+                    'title' => 'User name',
+                    'searchable' => false,
+                ],
+            ];
+        }
+
+
     }
     /**
      * Export PDF using DOMPDF

@@ -6,31 +6,26 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                        <div class="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file"/>
-                        </div>
+                        <img src="{{Storage::url($user->photo)}}" alt=""/>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="profile-head">
                                 <h5>
-                                    {{auth()->user()->name}}
+                                    {{$user->name}}
                                 </h5>
                                 <h6>
-                                    Web Developer and Designer
+                                    {{$user->department?$user->department->name:'Admin of the system'}}
                                 </h6>
-                                <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tools-tab" data-toggle="tab" href="#tools" role="tab" aria-controls="tools" aria-selected="false">Tools</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#trining" role="tab" aria-controls="trining" aria-selected="false">Trining</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="gools-tab" data-toggle="tab" href="#gools" role="tab" aria-controls="gools" aria-selected="false">Gools</a>
@@ -39,41 +34,28 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    <a href="{{route('users.edit',$user->id)}}" class="btn btn-outline-info waves-effect" name="btnAddMore">Edit</a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row ">
                 <div class="col-md-4">
                     <div class="profile-work">
                         <p>Tools</p>
-                        <span class="badge badge-success">Ipad</span>
-                        <span class="badge badge-success">لابتوب</span>
-                        <span class="badge badge-success">واي مكس</span>
-                        <p>Gools</p>
-                        <a href="">Web Designer</a><br/>
-                        <a href="">Web Developer</a><br/>
-                        <a href="">WordPress</a><br/>
-                        <a href="">WooCommerce</a><br/>
-                        <a href="">PHP, .Net</a><br/>
+                        @foreach ($user->tools as $tool)
+                        <span class="badge badge-pill badge-success">{{$tool->name}}</span>
+
+                        @endforeach
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 shadow-sm p-3 mb-5 bg-white rounded">
                     <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>User Id</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Kshiti123</p>
-                                        </div>
-                                    </div>
+                        <div class="tab-pane fade show active  " id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Kshiti Ghelani</p>
+                                            <p>{{$user->name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -81,7 +63,7 @@
                                             <label>Email</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>kshitighelani@gmail.com</p>
+                                            <p>{{$user->email?$user->email:'No have email'}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -89,147 +71,92 @@
                                             <label>Phone</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>123 456 7890</p>
+                                            <p>{{$user->mobile?$user->mobile:'No have mobile'}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Profession</label>
+                                            <label>department</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Web Developer and Designer</p>
+                                            <p>{{$user->department?$user->department->name:'Admin of the system'}}</p>
                                         </div>
                                     </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Experience</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Expert</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Hourly Rate</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>10$/hr</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Total Projects</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>230</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>English Level</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Expert</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Availability</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>6 months</p>
-                                        </div>
-                                    </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br/>
-                                    <p>Your detail description</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tools" role="tabpanel" aria-labelledby="tools-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Experience</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Total Projects</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>230</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Availability</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>6 months</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br/>
-                                    <p>Your detail description</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="gools" role="tabpanel" aria-labelledby="gools-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                                <table class="table">
-                                    <thead class="thead-dark">
+                        <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row" style="overflow: scroll">
+                                <table class="table table-hover" >
+                                    <thead >
                                       <tr>
-                                        <th scope="col">الهدف</th>
-                                        <th scope="col">القيمة</th>
-                                        <th scope="col">من </th>
-                                        <th scope="col">الي</th>
+                                        <th scope="col">event</th>
+                                        <th scope="col">date</th>
+                                        <th scope="col">Location </th>
+                                        <th scope="col">Cost</th>
                                       </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($user->events as $key=> $event)
+                                        <tr>
+                                            <td>{{$event->name}}</td>
+                                            <td>{{$event->event_date}}</td>
+                                            <td>{{$event->eventLocation->name}}</td>
+                                            <td>{{$event->event_cost}}</td>
+                                        </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="trining" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row" style="overflow: scroll">
+                                <table class="table table-hover" >
+                                    <thead >
                                       <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <th scope="col">name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">from </th>
+                                        <th scope="col">to </th>
+                                        <th scope="col">loction</th>
                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($user->trainings as $key=> $training)
+                                        <tr>
+                                            <td>{{$training->name}}</td>
+                                            <td>{{$training->trainingType->name}}</td>
+                                            <td>{{$training->date}}</td>
+                                            <td>{{$training->end_date}}</td>
+                                            <td>{{$training->loction}}</td>
+
+                                        </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="gools" role="tabpanel" aria-labelledby="gools-tab">
+                            <div class="row" style="overflow: scroll">
+                                <table class="table table-hover" >
+                                    <thead >
                                       <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <th scope="col">gool</th>
+                                        <th scope="col">cost</th>
+                                        <th scope="col">from </th>
+                                        <th scope="col">to</th>
                                       </tr>
-                                      <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($user->gools as $key=> $gool)
+                                        <tr>
+                                            <td>{{$gool->name}}</td>
+                                            <td>{{$gool->cost}}</td>
+                                            <td>{{$gool->from}}</td>
+                                            <td>{{$gool->to}}</td>
+                                        </tr>
+                                        @endforeach
+
                                     </tbody>
                                   </table>
                             </div>
@@ -237,8 +164,10 @@
 
                     </div>
                 </div>
-            </div>
+        </div>
         </form>
     </div>
+
+
 @endsection
 

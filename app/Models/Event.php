@@ -95,10 +95,7 @@ class Event extends Model
         'name' => 'required',
         'event_specialty_id' => 'required',
         'event_location_id' => 'required',
-        'event_number' => 'required',
         'event_date' => 'required',
-        'media_company_id' => 'required',
-        'decoration_company_id' => 'required',
         'event_cost' => 'required',
         'user_id' => 'required'
     ];

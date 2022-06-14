@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
+use App\Models\TrainingType;
 
-class UpdateUserRequest extends FormRequest
+class UpdateTrainingTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required',
-            'department_id' => 'required'
-        ];
-
+        $rules = TrainingType::$rules;
+        
         return $rules;
     }
 }

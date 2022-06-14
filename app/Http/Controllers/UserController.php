@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Flash;
 use Response;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\DataTables\UserDataTable;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\RoleRepository;
+use App\Repositories\ToolRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\TrainingRepository;
 use App\Repositories\DepartmentRepository;
 use App\Http\Controllers\AppBaseController;
 
@@ -21,8 +26,14 @@ class UserController extends AppBaseController
     private $departmentRepository;
     /** @var RoleRepository $roleRepository*/
     private $roleRepository;
-    public function __construct(RoleRepository $roleRepo,DepartmentRepository $departmentRepo,UserRepository $userRepo)
+    /** @var ToolRepository $toolRepository*/
+    private $toolRepository;
+    /** @var TrainingRepository $trainingRepository*/
+    private $trainingRepository;
+    public function __construct(TrainingRepository $trainingRepo,ToolRepository $toolRepo,RoleRepository $roleRepo,DepartmentRepository $departmentRepo,UserRepository $userRepo)
     {
+        $this->trainingRepository = $trainingRepo;
+        $this->toolRepository = $toolRepo;
         $this->roleRepository = $roleRepo;
         $this->departmentRepository = $departmentRepo;
         $this->userRepository = $userRepo;
@@ -64,7 +75,9 @@ class UserController extends AppBaseController
         $input = $request->all();
         $input['password'] = bcrypt($request->password);
         // dd( $input );
-
+        if (isset($input['files'])) {
+            $input['photo']=Storage::disk('public')->putFile('post_image', $input['files']);
+        }
         $user = $this->userRepository->create($input);
         $role = $this->roleRepository->find($request->role_id);
         $user->assignRole($role);
@@ -83,14 +96,15 @@ class UserController extends AppBaseController
     public function show($id)
     {
         $user = $this->userRepository->find($id);
-
+        $tools=$this->toolRepository->pluck('name','id');
+        $trainings=$this->trainingRepository->pluck('name','id');
         if (empty($user)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
         }
 
-        return view('users.show')->with('user', $user);
+        return view('users.show',compact('tools','trainings'))->with('user', $user);
     }
 
     /**
@@ -137,6 +151,9 @@ class UserController extends AppBaseController
         }else {
             $input['password']=$user->password;
         }
+        if (isset($input['files'])) {
+            $input['photo']=Storage::disk('public')->putFile('post_image', $input['files']);
+        }
 
         $user = $this->userRepository->update($input, $id);
         if (isset($input['role_id'])) {
@@ -170,5 +187,103 @@ class UserController extends AppBaseController
         Flash::success('User deleted successfully.');
 
         return redirect(route('users.index'));
+    }
+    public function addTools(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+                $user = $this->userRepository->find($request->user_id);
+                if (!$user->tools()->where('tool_id',$request->tool_id)->exists()) {
+                    $user->tools()->attach($request->tool_id);
+                }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+       return response()->json($user->tools->toArray(), 200);
+    }
+    public function removeTools(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = $this->userRepository->find($request->user_id);
+            $user->tools()->detach($request->tool_id);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+
+        return response()->json($user->tools->toArray(), 200);
+    }
+
+    public function addTraining(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+                $user = $this->userRepository->find($request->user_id);
+                if (!$user->trainings()->where('training_id',$request->training_id)->exists()) {
+                    $user->trainings()->attach($request->training_id);
+                }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+       return response()->json($user->trainings->toArray(), 200);
+    }
+    public function removeTraining(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = $this->userRepository->find($request->user_id);
+            $user->trainings()->detach($request->training_id);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+
+        return response()->json($user->trainings->toArray(), 200);
+    }
+
+    public function addGools(Request $request)
+    {
+        // try {
+        //     DB::beginTransaction();
+        // dd($request->all());
+                $user = $this->userRepository->find($request->user_id);
+                // if (!$user->tools()->where('tool_id',$request->tool_id)->exists()) {
+                    $user->gools()->create([
+                        'name'=>$request->name,
+                        'cost'=>$request->cost,
+                        'from'=>$request->from,
+                        'to'=>$request->to,
+                    ]);
+                // }
+
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        // }
+
+       return response()->json($user->gools->toArray(), 200);
+    }
+    public function removeGools(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = $this->userRepository->find($request->user_id);
+            $user->gools()->find($request->gool_id)->delete();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+
+
+        return response()->json($user->gools->toArray(), 200);
     }
 }

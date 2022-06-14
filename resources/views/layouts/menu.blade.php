@@ -333,3 +333,15 @@
         <span>Gools</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('trainingTypes*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('trainingTypes.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Training Types</span>
+    </a>
+</li>
+<li class="nav-item {{ Request::is('trainings*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('trainings.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Trainings</span>
+    </a>
+</li>

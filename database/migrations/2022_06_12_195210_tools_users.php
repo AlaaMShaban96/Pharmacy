@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGoolsTable extends Migration
+class ToolsUsers extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,15 +13,10 @@ class CreateGoolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gools', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('name');
-            $table->date('from');
-            $table->date('to');
-            $table->float('cost');
+        Schema::create('tools_users', function (Blueprint $table) {
             $table->foreignId('user_id');
+            $table->foreignId('tool_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -33,6 +27,6 @@ class CreateGoolsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('gools');
+        //
     }
 }

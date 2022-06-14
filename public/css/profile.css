@@ -9,8 +9,11 @@
     text-align: center;
 }
 .profile-img img{
-    width: 70%;
+    width: 37%;
     height: 100%;
+}
+#myTabContent{
+    border: 0px;
 }
 .profile-img .file {
     position: relative;

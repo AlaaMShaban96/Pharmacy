@@ -17,7 +17,7 @@ class CreatePermissionRolesCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:CreatePermissionRolesCommand';
+    protected $signature = 'route:save';
     protected $except=['logout','home','register','login','password.','permissions.','api.','debugbar.','generated::CIkxnYur6hV3Z9cC','generated::8SRveb5QEUlAFgCS','generated::MXCH89Pg6paZ7vdX','swaggervel.','requestApprove','visitStore','storeFilter','cityFilter','dashboard-get-products','get-orders','getProducts','create','addstore','thanks'];
 
     /**

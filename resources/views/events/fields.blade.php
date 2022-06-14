@@ -1,106 +1,130 @@
+
+@if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin|Pro')  )
 <div class="row">
+
     <!-- Name Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('name', 'Name:') !!}
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder'=>"Name"]) !!}
     </div>
     <!-- Name Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('name', 'Supplier:') !!}
-        {!! Form::text('supplier_name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('supplier_name', null, ['class' => 'form-control', 'placeholder'=>"Supplier"]) !!}
     </div>
     <!-- Event Specialty Id Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_specialty_id', 'Event Specialty :') !!}
-        {!! Form::select('event_specialty_id',$eventSpecialties, null, ['class' => 'form-control']) !!}
+        {!! Form::select('event_specialty_id',$eventSpecialties, null, ['class' => 'form-control', 'placeholder'=>"Event Specialty"]) !!}
     </div>
 
     <!-- Event Location Id Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_location_id', 'Event Location :') !!}
-        {!! Form::select('event_location_id',$eventLocations,null, ['class' => 'form-control']) !!}
+        {!! Form::select('event_location_id',$eventLocations,null, ['class' => 'form-control', 'placeholder'=>"Event Location"]) !!}
     </div>
 
     <!-- Event Number Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_number', 'Event Number:') !!}
-        {!! Form::number('event_number', null, ['class' => 'form-control']) !!}
+        {!! Form::number('event_number', null, ['class' => 'form-control', 'placeholder'=>"Event Number"]) !!}
     </div>
 
     <!-- Event Date Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_date', 'Event Date:') !!}
-        {!! Form::text('event_date', null, ['class' => 'form-control','id'=>'event_date']) !!}
+        {!! Form::text('event_date', null, ['class' => 'form-control', 'placeholder'=>"Event Date",'id'=>'event_date']) !!}
     </div>
      <!-- Event Date Field -->
      <div class="form-group col-sm-6">
-        {!! Form::label('event_start', 'Event Start:') !!}
-        {!! Form::text('event_start', null, ['class' => 'form-control','id'=>'event_start']) !!}
+        {!! Form::text('event_start', null, ['class' => 'form-control', 'placeholder'=>"Event Start",'id'=>'event_start']) !!}
     </div>
      <!-- Event Date Field -->
      <div class="form-group col-sm-6">
-        {!! Form::label('event_close', 'Event Close:') !!}
-        {!! Form::text('event_close', null, ['class' => 'form-control','id'=>'event_close']) !!}
+        {!! Form::text('event_close', null, ['class' => 'form-control', 'placeholder'=>"Event Close",'id'=>'event_close']) !!}
     </div>
     <!-- Event Date Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_time', 'Event Time:') !!}
-        {!! Form::text('event_time', null, ['class' => 'form-control','id'=>'event_time']) !!}
+        {!! Form::text('event_time', null, ['class' => 'form-control', 'placeholder'=>"Event Time",'id'=>'event_time']) !!}
     </div>
 
 
 
     <!-- Visitors Number Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('visitors_number', 'Visitors Number:') !!}
-        {!! Form::number('visitors_number', null, ['class' => 'form-control']) !!}
+        {!! Form::number('visitors_number', null, ['class' => 'form-control', 'placeholder'=>"Visitors Number"]) !!}
     </div>
      <!-- Visitors Number Field -->
      <div class="form-group col-sm-6">
-        {!! Form::label('event_cost', 'Event cost:') !!}
-        {!! Form::number('event_cost', null, ['class' => 'form-control']) !!}
+        {!! Form::number('event_cost', null, ['class' => 'form-control', 'placeholder'=>"Event cost"]) !!}
     </div>
     <!-- Event Food Location Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_food_location', 'Event Food Location:') !!}
-        {!! Form::text('event_food_location', null, ['class' => 'form-control']) !!}
+        {!! Form::text('event_food_location', null, ['class' => 'form-control', 'placeholder'=>"Event Food Location"]) !!}
     </div>
 
     <!-- Event Spicy Food Location Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_spicy_food_location', 'Event Spicy Food Location:') !!}
-        {!! Form::text('event_spicy_food_location', null, ['class' => 'form-control']) !!}
+        {!! Form::text('event_spicy_food_location', null, ['class' => 'form-control', 'placeholder'=>"Event Spicy Food Location"]) !!}
     </div>
 
     <!-- Event Sweet Food Location Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('event_sweet_food_location', 'Event Sweet Food Location:') !!}
-        {!! Form::text('event_sweet_food_location', null, ['class' => 'form-control']) !!}
+        {!! Form::text('event_sweet_food_location', null, ['class' => 'form-control', 'placeholder'=>"Event Sweet Food Location"]) !!}
     </div>
 
     <!-- Media Company Id Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('media_company_id', 'Media Company :') !!}
-        {!! Form::select('media_company_id',$companies, null, ['class' => 'form-control']) !!}
+        {!! Form::select('media_company_id',$companies, null, ['class' => 'form-control', 'placeholder'=>"Media Company"]) !!}
     </div>
 
     <!-- Decoration Company Id Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('decoration_company_id', 'Decoration Company :') !!}
-        {!! Form::select('decoration_company_id',$companies, null, ['class' => 'form-control']) !!}
+        {!! Form::select('decoration_company_id',$companies, null, ['class' => 'form-control', 'placeholder'=>"Decoration Company"]) !!}
     </div>
 
-    <!-- Medical Representative Field -->
+    {{-- <!-- Medical Representative Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('medical_representative', 'Medical Representative:') !!}
-        {!! Form::text('medical_representative', null, ['class' => 'form-control']) !!}
-    </div>
+        {!! Form::text('medical_representative', null, ['class' => 'form-control', 'placeholder'=>"Medical Representative"]) !!}
+    </div> --}}
 
     <!-- User Id Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('user_id', 'User:') !!}
-        {!! Form::select('user_id',$users, null, ['class' => 'form-control']) !!}
+        {!! Form::select('user_id',$users, null, ['class' => 'form-control', 'placeholder'=>"Medical Representative"]) !!}
     </div>
+</div>
+@else
+<div class="row">
+
+    <!-- Name Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder'=>"Name"]) !!}
+    </div>
+
+    <!-- Event Specialty Id Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::select('event_specialty_id',$eventSpecialties, null, ['class' => 'form-control', 'placeholder'=>"Event Specialty"]) !!}
+    </div>
+
+    <!-- Event Location Id Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::select('event_location_id',$eventLocations,null, ['class' => 'form-control', 'placeholder'=>"Event Location"]) !!}
+    </div>
+
+
+    <!-- Event Date Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::text('event_date', null, ['class' => 'form-control', 'placeholder'=>"Event Date",'id'=>'event_date']) !!}
+    </div>
+
+     <!-- Visitors Number Field -->
+     <div class="form-group col-sm-6">
+        {!! Form::number('event_cost', null, ['class' => 'form-control', 'placeholder'=>"Event cost"]) !!}
+    </div>
+
+
+    <!-- User Id Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::select('user_id',$users, null, ['class' => 'form-control', 'placeholder'=>"Medical Representative"]) !!}
+    </div>
+</div>
+@endif
 
 
 <!-- Submit Field -->

@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use App\Models\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -24,9 +27,9 @@ class Gool extends Model
     use HasFactory;
 
     public $table = 'gools';
-    
 
-    protected $dates = ['deleted_at'];
+
+    protected $dates = ['deleted_at','from','to'];
 
 
 
@@ -61,6 +64,25 @@ class Gool extends Model
         'cost' => 'required',
         'user_id' => 'required'
     ];
+    public function getFromAttribute()
+    {
+        $date= Carbon::parse($this->attributes['from']);
+        return  $date->format('Y-m-d');
+        // return $this->attributes['from']->format('Y-m-d');
+    }
+    public function getToAttribute()
+    {
+        $date= Carbon::parse($this->attributes['to']);
+        return  $date->format('Y-m-d');
+    }
+    /**
+     * Get the user that owns the Gool
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
-    
 }

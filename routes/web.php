@@ -20,9 +20,7 @@ Route::get('/language/{locale}', function ($locale) {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/profile', function () {
-    return view('profile.index');
-});
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');;
 
 Auth::routes();
 
@@ -63,9 +61,16 @@ Route::middleware(['auth','language'])->group(function () {
 
     Route::resource('suppliers', App\Http\Controllers\LaboratoryController::class ,['names' => 'suppliers']);
 
+    Route::post('addTools', [App\Http\Controllers\UserController::class,'addTools'])->name('addToolsToUser');
+    Route::post('removeTools', [App\Http\Controllers\UserController::class,'removeTools'])->name('removeToolsToUser');
+
+    Route::post('addGools', [App\Http\Controllers\UserController::class,'addGools'])->name('addGoolsToUser');
+    Route::post('removeGools', [App\Http\Controllers\UserController::class,'removeGools'])->name('removeGoolsToUser');
+
+    Route::post('addTraining', [App\Http\Controllers\UserController::class,'addTraining'])->name('addTrainingToUser');
+    Route::post('removeTraining', [App\Http\Controllers\UserController::class,'removeTraining'])->name('removeTrainingToUser');
 
     Route::resource('users', App\Http\Controllers\UserController::class);
-
 
     // Route::resource('financialCovenants', App\Http\Controllers\FinancialCovenantController::class);
 
@@ -156,3 +161,9 @@ Route::resource('tools', App\Http\Controllers\ToolController::class);
 
 
 Route::resource('gools', App\Http\Controllers\GoolController::class);
+
+
+Route::resource('trainingTypes', App\Http\Controllers\TrainingTypeController::class);
+
+
+Route::resource('trainings', App\Http\Controllers\TrainingController::class);

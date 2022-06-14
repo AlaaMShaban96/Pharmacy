@@ -31,13 +31,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
     <style>
-        body {
+        /* body {
             font-family: 'Tajawal', sans-serif;
             font-size: 18px;
-        }
+        } */
         #collapseOne > .card-body{
            overflow: scroll;
         }
+        .table{
+            overflow: scroll;
+        }
+
     </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -78,7 +82,7 @@
                 <div class="dropdown-header text-center">
                     <strong>@lang('app.settings')</strong>
                 </div>
-                <a class="dropdown-item" href="{{route('users.edit',auth()->user()->id)}}">
+                <a class="dropdown-item" href="{{url('/profile')}}">
                     <i class="fa fa-user"></i>@lang('app.profile') </a>
                 <a class="dropdown-item" href="#">
                     <i class="fa fa-wrench"></i>@lang('app.settings') </a>
