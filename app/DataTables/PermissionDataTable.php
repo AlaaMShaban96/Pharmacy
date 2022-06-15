@@ -18,7 +18,9 @@ class PermissionDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'permissions.datatables_actions');
+        return $dataTable->addColumn('action', function ($permission) {
+             return view('permissions.datatables_actions',compact('permission'))->with('rolePermissions',$this->rolePermissions)->with('role',$this->role);
+        });
     }
 
     /**
@@ -29,7 +31,7 @@ class PermissionDataTable extends DataTable
      */
     public function query(Permission $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('id');
     }
 
     /**
@@ -48,8 +50,8 @@ class PermissionDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    // ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                    // ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],

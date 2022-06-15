@@ -21,7 +21,9 @@
                                  @include('roles.show_fields')
                                  <div class="row">
                                     <h4>permissions</h4>
-                                    @include('roles.table_permissions')
+                                    @include('permissions.table')
+
+                                    {{-- @include('roles.table_permissions') --}}
                                 </div>
                              </div>
 

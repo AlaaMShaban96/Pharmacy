@@ -282,6 +282,58 @@
     @endcan
 </div>
 
+@can('Users')
+    <li class="nav-item{{ (Request::is('sampleReceiveds*')||Request::is('doctors*')||Request::is('orders*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="false" aria-controls="collapseExample">
+        <a class="nav-link" href="#">
+            <i class="nav-icon icon-settings "></i>
+            <span> @lang('app.users')  </span>
+        </a>
+    </li>
+@endcan
+
+<div style="background-color: #070d13;" class="collapse {{ (Request::is('users*')||Request::is('tools*')||Request::is('trainingTypes*')||Request::is('trainings*'))? 'show ' : ''}}" id="collapseUsers">
+    @can('users.index')
+        <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('users.index') }}">
+                <i class="nav-icon icon-cursor "></i>
+                <span>@lang('app.Users')</span>
+            </a>
+        </li>
+    @endcan
+    @can('tools.index')
+        <li class="nav-item {{ Request::is('tools*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('tools.index') }}">
+                <i class="nav-icon icon-cursor"></i>
+                <span>Tools</span>
+            </a>
+        </li>
+    @endcan
+    @can('trainingTypes.index')
+        <li class="nav-item {{ Request::is('trainingTypes*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('trainingTypes.index') }}">
+                <i class="nav-icon icon-cursor"></i>
+                <span>Training Types</span>
+            </a>
+        </li>
+    @endcan
+    @can('trainings.index')
+        <li class="nav-item {{ Request::is('trainings*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('trainings.index') }}">
+                <i class="nav-icon icon-cursor"></i>
+                <span>Trainings</span>
+            </a>
+        </li>
+    @endcan
+    {{-- <li class="nav-item {{ Request::is('gools*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('gools.index') }}">
+            <i class="nav-icon icon-cursor"></i>
+            <span>Gools</span>
+        </a>
+    </li> --}}
+
+
+</div>
+
 @can('Settings')
     <li class="nav-item{{ (Request::is('sampleReceiveds*')||Request::is('doctors*')||Request::is('orders*'))? 'active ' : ''}}" type="button" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="false" aria-controls="collapseExample">
         <a class="nav-link" href="#">
@@ -291,16 +343,9 @@
     </li>
 @endcan
 
-<div style="background-color: #070d13;" class="collapse {{ (Request::is('users*')||Request::is('currencies*')||Request::is('roles*'))? 'show ' : ''}}" id="collapseSettings">
+<div style="background-color: #070d13;" class="collapse {{ (Request::is('currencies*')||Request::is('roles*'))? 'show ' : ''}}" id="collapseSettings">
 
-    @can('users.index')
-        <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('users.index') }}">
-                <i class="nav-icon icon-cursor "></i>
-                <span>@lang('app.Users')</span>
-            </a>
-        </li>
-    @endcan
+
     @can('currencies.index')
         <li class="nav-item {{ Request::is('currencies*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('currencies.index') }}">
@@ -321,27 +366,4 @@
 
 
 
-<li class="nav-item {{ Request::is('tools*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('tools.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Tools</span>
-    </a>
-</li>
-<li class="nav-item {{ Request::is('gools*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('gools.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Gools</span>
-    </a>
-</li>
-<li class="nav-item {{ Request::is('trainingTypes*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('trainingTypes.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Training Types</span>
-    </a>
-</li>
-<li class="nav-item {{ Request::is('trainings*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('trainings.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Trainings</span>
-    </a>
-</li>
+

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\DataTables\RoleDataTable;
 use Spatie\Permission\Models\Role;
 use App\Repositories\RoleRepository;
+use App\DataTables\PermissionDataTable;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use Spatie\Permission\Models\Permission;
@@ -73,8 +74,9 @@ class RoleController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(PermissionDataTable $permissionDataTable,$id)
     {
+
         $role = $this->roleRepository->find($id);
         $permissions = $this->permissionRepository->all();
         $rolePermissions=$role->permissions->pluck('id')->toArray();
@@ -83,8 +85,8 @@ class RoleController extends AppBaseController
 
             return redirect(route('roles.index'));
         }
-
-        return view('roles.show',compact('permissions','rolePermissions'))->with('role', $role);
+        return $permissionDataTable->with(['rolePermissions'=>$rolePermissions,'role'=>$role])->render('roles.show',compact('permissions','rolePermissions','role'));
+        // return view('roles.show',compact('permissions','rolePermissions'))->with('role', $role);
     }
 
     /**

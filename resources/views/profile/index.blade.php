@@ -6,7 +6,11 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="{{Storage::url($user->photo)}}" alt=""/>
+                        @if (isset($user->photo))
+                            <img src="{{Storage::url($user->photo)}}" alt=""/>
+                        @else
+                            <img src="{{asset('image-not-found.jpg')}}" alt=""/>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-6">

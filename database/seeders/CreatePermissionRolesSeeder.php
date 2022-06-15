@@ -25,13 +25,13 @@ class CreatePermissionRolesSeeder extends Seeder
                 ['name' => 'Moderator|Pro','guard_name'=>'web'],
                 ['name' => 'User|Pro','guard_name'=>'web'],
 
-                ['name' => 'Admin|War','guard_name'=>'web'],
-                ['name' => 'Moderator|War','guard_name'=>'web'],
-                ['name' => 'User|War','guard_name'=>'web'],
+                // ['name' => 'Admin|War','guard_name'=>'web'],
+                // ['name' => 'Moderator|War','guard_name'=>'web'],
+                // ['name' => 'User|War','guard_name'=>'web'],
 
-                ['name' => 'Admin|supplier','guard_name'=>'web'],
-                ['name' => 'Moderator|supplier','guard_name'=>'web'],
-                ['name' => 'User|supplier','guard_name'=>'web'],
+                // ['name' => 'Admin|supplier','guard_name'=>'web'],
+                // ['name' => 'Moderator|supplier','guard_name'=>'web'],
+                // ['name' => 'User|supplier','guard_name'=>'web'],
             ];
             $user=User::create([
                 'name'=>'Super Admin',

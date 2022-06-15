@@ -13,6 +13,7 @@ return [
     'events'=>'Events',
     'repository'=>'Repository',
     'samples'=>'Samples',
+    'users'=>'Users',
 
     //under health
     'Drugs'=>'Drugs',
