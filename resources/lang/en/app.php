@@ -29,12 +29,12 @@ return [
     'Departments'=>'Departments',
     //under event
     'Events'=>'Events',
-    'Event_Specialties'=>'Event_Specialties',
-    'Event_Types'=>'Event_Types',
-    'Event_Locations'=>'Event_Locations',
+    'Event_Specialties'=>'Event Specialties',
+    'Event_Types'=>'Event Types',
+    'Event_Locations'=>'Event Locations',
     'Companies'=>'Companies',
     'Speakers'=>'Speakers',
-    'Event_Materials'=>'Event_Materials',
+    'Event_Materials'=>'Event Materials',
     // under repository
     'Receives'=>'Receives',
     'Inventory'=>'Inventory',

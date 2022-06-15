@@ -35,18 +35,23 @@
             font-family: 'Tajawal', sans-serif;
             font-size: 18px;
         } */
-        #collapseOne > .card-body{
+        .card-body{
            overflow: scroll;
         }
         .table{
             overflow: scroll;
+        }
+        @media (max-width: 991.98px){
+            .app-body {
+                margin-top: 0px;
+            }
         }
 
     </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 <header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto " type="button" id="sidebar_show">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
@@ -84,15 +89,15 @@
                 </div>
                 <a class="dropdown-item" href="{{url('/profile')}}">
                     <i class="fa fa-user"></i>@lang('app.profile') </a>
-                <a class="dropdown-item" href="#">
+                {{--<a class="dropdown-item" href="#">
                     <i class="fa fa-wrench"></i>@lang('app.settings') </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ url('/language/en') }}">
+                 <a class="dropdown-item" href="{{ url('/language/en') }}">
                     <i class="fa fa-shield"></i>@lang('app.en')
                 </a>
                 <a class="dropdown-item" href="{{ url('/language/ar') }}">
                     <i class="fa fa-shield"></i>@lang('app.ar')
-                </a>
+                </a> --}}
                 <a href="{{ url('/logout') }}" class="dropdown-item btn btn-default btn-flat"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa fa-lock"></i> @lang('app.logout')
@@ -105,7 +110,7 @@
     </ul>
 </header>
 
-<div class="app-body">
+<div id="app-body" class="app-body">
     @include('layouts.sidebar')
     <main class="main">
         @yield('content')
@@ -143,6 +148,10 @@
             $('.select_search').selectize({
                 sortField: 'text'
             });
+            $( "#sidebar_show" ).click(function() {
+                $("#app-body").toggleClass("sidebar-show");
+            });
         });
+
 </script>
 </html>

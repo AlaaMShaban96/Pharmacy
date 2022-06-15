@@ -1,5 +1,5 @@
 
-@if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin|Pro')  )
+@if (auth()->user()->hasRole('Super-Admin') ||auth()->user()->hasRole('Admin-Pro')  )
 <div class="row">
 
     <!-- Name Field -->

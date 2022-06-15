@@ -79,7 +79,7 @@ class CreatePermissionRolesCommand extends Command
                 }
 
                 $permissions=Permission::pluck('id');
-                $role=Role::where('name','like','%Super Admin%')->first();
+                $role=Role::where('name','like','%Super-Admin%')->first();
                 $role->syncPermissions($permissions);
                 Artisan::call('cache:clear');
                 $this->output->progressFinish();

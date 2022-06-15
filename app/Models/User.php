@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Doctor;
 use App\Models\Training;
 use App\Models\Department;
+use App\Models\FinancialCovenant;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -117,5 +118,14 @@ class User extends Authenticatable
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
+    }
+    /**
+     * Get all of the  financialCovenants for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function  financialCovenants(): HasMany
+    {
+        return $this->hasMany( FinancialCovenant::class);
     }
 }

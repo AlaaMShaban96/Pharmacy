@@ -43,7 +43,7 @@ class EventDataTable extends DataTable
      */
     public function query(Event $model)
     {
-        if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin|Pro')) {
+        if (auth()->user()->can('Super-Admin') ||auth()->user()->can('Admin-Pro')) {
             return $model->newQuery();
         } else {
             return $model->newQuery()->where('user_id',auth()->user()->id);
@@ -68,7 +68,7 @@ class EventDataTable extends DataTable
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'excel', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -83,7 +83,7 @@ class EventDataTable extends DataTable
      */
     protected function getColumns()
     {
-        if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin|Pro')) {
+        if (auth()->user()->can('Super Admin') ||auth()->user()->can('Admin-Pro')) {
             return [
                 'name',
                 // 'event_specialty_id',

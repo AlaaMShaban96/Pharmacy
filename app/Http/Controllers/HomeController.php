@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\EventRepository;
+use App\Repositories\FinancialCovenantRepository;
 
 class HomeController extends Controller
 {
@@ -11,8 +13,15 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    /** @var EventRepository $eventRepository*/
+    private $eventRepository;
+    /** @var FinancialCovenantRepository $financialCovenantRepository*/
+    private $financialCovenantRepository;
+    public function __construct(FinancialCovenantRepository $financialCovenantRepo,EventRepository $eventRepo)
     {
+        $this->financialCovenantRepository = $financialCovenantRepo;
+        $this->eventRepository = $eventRepo;
+
         $this->middleware('auth');
     }
 
@@ -23,6 +32,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        dd(auth()->user()->hasRole('Super-Admin') );
+        if (auth()->user()->hasRole('Super-Admin') ||auth()->user()->hasRole('Admin-Pro')) {
+            $eventRepository=$this->eventRepository->all();
+            $financialCovenantRepository=$this->financialCovenantRepository->all();
+
+        } else {
+            $eventRepository=auth()->user()->events;
+            $financialCovenantRepository=auth()->user()->financialCovenants;
+        }
+        return view('home',compact('eventRepository','financialCovenantRepository'));
     }
 }

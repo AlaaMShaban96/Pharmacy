@@ -19,11 +19,11 @@ class CreatePermissionRolesSeeder extends Seeder
         DB::transaction(function () {
             Role::whereNotNull('id')->delete();
             $roles=[
-                ['name' => 'Super Admin','guard_name'=>'web'],
+                ['name' => 'Super-Admin','guard_name'=>'web'],
 
-                ['name' => 'Admin|Pro','guard_name'=>'web'],
-                ['name' => 'Moderator|Pro','guard_name'=>'web'],
-                ['name' => 'User|Pro','guard_name'=>'web'],
+                ['name' => 'Admin-Pro','guard_name'=>'web'],
+                ['name' => 'Moderator-Pro','guard_name'=>'web'],
+                ['name' => 'User-Pro','guard_name'=>'web'],
 
                 // ['name' => 'Admin|War','guard_name'=>'web'],
                 // ['name' => 'Moderator|War','guard_name'=>'web'],
@@ -39,7 +39,7 @@ class CreatePermissionRolesSeeder extends Seeder
                 'password'=>bcrypt('admin@email.com')
             ]);
             Role::insert($roles);
-            $role=Role::where('name','like','%Super Admin%')->first();
+            $role=Role::where('name','like','%Super-Admin%')->first();
             $user->assignRole($role);
 
         });

@@ -15,10 +15,10 @@
                              Departments
                              <a class="pull-right" href="{{ route('departments.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
-                         <div class="card-body">
+                         <div class="card-body" style="overflow: scroll">
                              @include('departments.table')
                               <div class="pull-right mr-3">
-                                     
+
                               </div>
                          </div>
                      </div>

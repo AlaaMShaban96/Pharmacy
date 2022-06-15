@@ -15,7 +15,7 @@
         {!! Form::number('mobile', null, ['class' => 'form-control','placeholder'=>'Mobile','required'=>true]) !!}
     </div>
 
-    @hasrole('Super Admin')
+    @hasrole('Super-Admin')
     <div class="form-group col-sm-6">
         {{-- {!! Form::label('name', 'Role:') !!} --}}
         {!! Form::select('role_id', $roles,null, ['class' => 'form-control','placeholder'=>'Role']) !!}

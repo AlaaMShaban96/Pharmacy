@@ -2,9 +2,10 @@
 
 namespace App\DataTables;
 
+use Barryvdh\DomPDF\PDF;
 use App\Models\FinancialCovenantType;
-use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class FinancialCovenantTypeDataTable extends DataTable
 {
@@ -53,7 +54,7 @@ class FinancialCovenantTypeDataTable extends DataTable
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     // ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'excel', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -87,5 +88,15 @@ class FinancialCovenantTypeDataTable extends DataTable
     protected function filename()
     {
         return 'financial_covenant_types_datatable_' . time();
+    }
+        /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
     }
 }

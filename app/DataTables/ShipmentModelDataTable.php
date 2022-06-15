@@ -2,9 +2,10 @@
 
 namespace App\DataTables;
 
+use Barryvdh\DomPDF\PDF;
 use App\Models\ShipmentModel;
-use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ShipmentModelDataTable extends DataTable
 {
@@ -49,7 +50,7 @@ class ShipmentModelDataTable extends DataTable
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'excel', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -87,5 +88,15 @@ class ShipmentModelDataTable extends DataTable
     protected function filename()
     {
         return 'shipment_models_datatable_' . time();
+    }
+        /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
     }
 }

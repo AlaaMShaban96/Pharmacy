@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use Barryvdh\DomPDF\PDF;
 use Yajra\DataTables\EloquentDataTable;
 use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Services\DataTable;
@@ -51,7 +52,7 @@ class PermissionDataTable extends DataTable
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     // ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    // ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    // ['extend' => 'excel', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -80,5 +81,15 @@ class PermissionDataTable extends DataTable
     protected function filename()
     {
         return 'permissions_datatable_' . time();
+    }
+        /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
     }
 }

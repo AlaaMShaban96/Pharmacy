@@ -3,8 +3,9 @@
 namespace App\DataTables;
 
 use App\Models\Order;
-use Yajra\DataTables\Services\DataTable;
+use Barryvdh\DomPDF\PDF;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class OrderDataTable extends DataTable
 {
@@ -55,7 +56,7 @@ class OrderDataTable extends DataTable
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
                     ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ['extend' => 'excel', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -86,5 +87,15 @@ class OrderDataTable extends DataTable
     protected function filename()
     {
         return 'orders_datatable_' . time();
+    }
+        /**
+     * Export PDF using DOMPDF
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $data = $this->getDataForPrint();
+        $pdf = PDF::loadView($this->printPreview, compact('data'));
+        return $pdf->download($this->filename() . '.pdf');
     }
 }
