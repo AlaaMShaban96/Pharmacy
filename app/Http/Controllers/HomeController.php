@@ -32,7 +32,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(auth()->user()->hasRole('Super-Admin') );
         if (auth()->user()->hasRole('Super-Admin') ||auth()->user()->hasRole('Admin-Pro')) {
             $eventRepository=$this->eventRepository->all();
             $financialCovenantRepository=$this->financialCovenantRepository->all();
