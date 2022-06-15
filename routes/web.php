@@ -18,7 +18,7 @@ Route::get('/language/{locale}', function ($locale) {
     return redirect()->back();
 });
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');;
 
