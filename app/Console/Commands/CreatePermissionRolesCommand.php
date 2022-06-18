@@ -20,7 +20,8 @@ class CreatePermissionRolesCommand extends Command
     protected $signature = 'route:save';
     protected $except=['logout','home','register','login','password.','permissions.','api.','debugbar.','generated::CIkxnYur6hV3Z9cC','generated::8SRveb5QEUlAFgCS','generated::MXCH89Pg6paZ7vdX','swaggervel.','requestApprove','visitStore','storeFilter','cityFilter','dashboard-get-products','get-orders','getProducts','create','addstore','thanks'
 
-    ,'drugDosages','drugs','currencies','packages','tests','specialties','forms','suppliers','stores','receives','shipmentModels','sampleReceiveds','doctors','orders'    ];
+    // ,'drugDosages','drugs','currencies','packages','tests','specialties','forms','suppliers','stores','receives','shipmentModels','sampleReceiveds','doctors','orders'
+   ];
 
     /**
      * The console command description.
@@ -54,11 +55,11 @@ class CreatePermissionRolesCommand extends Command
                 $routeCollection = Route::getRoutes();
                 $this->output->progressStart(count($routeCollection));
                 $permission=[
-                    // ['name' => 'Health','guard_name'=>'web'],
+                    ['name' => 'Health','guard_name'=>'web'],
                     ['name' => 'PocketMoney','guard_name'=>'web'],
-                    // ['name' => 'Repository','guard_name'=>'web'],
+                    ['name' => 'Repository','guard_name'=>'web'],
                     ['name' => 'Events','guard_name'=>'web'],
-                    // ['name' => 'Samples','guard_name'=>'web'],
+                    ['name' => 'Samples','guard_name'=>'web'],
                     ['name' => 'Settings','guard_name'=>'web'],
                     ['name' => 'Users','guard_name'=>'web'],
 
