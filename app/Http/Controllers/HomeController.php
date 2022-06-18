@@ -37,8 +37,8 @@ class HomeController extends Controller
             $financialCovenantRepository=$this->financialCovenantRepository->allQuery()->latest()->take(5)->get();
 
         } else {
-            $eventRepository=auth()->user()->events->orderBy('id', 'DESC');
-            $financialCovenantRepository=auth()->user()->financialCovenants->orderBy('id', 'DESC');
+            $eventRepository=auth()->user()->events()->orderBy('id', 'DESC');
+            $financialCovenantRepository=auth()->user()->financialCovenants()->orderBy('id', 'DESC');
         }
         return view('home',compact('eventRepository','financialCovenantRepository'));
     }
