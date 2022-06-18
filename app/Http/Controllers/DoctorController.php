@@ -68,7 +68,7 @@ class DoctorController extends AppBaseController
             'password'=>bcrypt($doctor->phone_number),
             'doctor_id'=>$doctor->id
         ]);
-        $role=$this->roleRepository->where('name','User|Pro')->first();
+        $role=$this->roleRepository->where('name','User-Pro')->first();
         $user->assignRole($role);
         Flash::success('Doctor saved successfully.');
 
